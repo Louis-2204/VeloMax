@@ -11,7 +11,7 @@ const TopRowShopSection = () => {
         </label>
         <Select>
           <SelectTrigger id="select-filter-by" className="w-full">
-            <SelectValue placeholder="Theme" />
+            <SelectValue />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="pasc"> Prix (croissant)</SelectItem>
