@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-
   .dummy_hsl_selector {
     --dummy_hsl: hsl(0, 0%, 0%);
   }
@@ -13,6 +12,7 @@
     --foreground: 222.2 84% 4.9%;
 
     --vm-secondary: 82 57% 42%;
+    --vm-secondary-2: 82 57% 33%;
 
     --vm-gray: 0 0% 31%;
     --vm-gray-secondary: 0 0% 65%;
@@ -84,8 +84,8 @@
   }
 
   .categories-title {
-    text-shadow: 2px 0 #b0cb82, -2px 0 #b0cb82, 0 2px #b0cb82, 0 -2px #b0cb82,
-      1px 1px #b0cb82, -1px -1px #b0cb82, 1px -1px #b0cb82, -1px 1px #b0cb82;
+    text-shadow: 2px 0 #b0cb82, -2px 0 #b0cb82, 0 2px #b0cb82, 0 -2px #b0cb82, 1px 1px #b0cb82, -1px -1px #b0cb82,
+      1px -1px #b0cb82, -1px 1px #b0cb82;
   }
 
   .max-w-8xl {
