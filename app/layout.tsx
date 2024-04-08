@@ -3,6 +3,7 @@ import './globals.css';
 import { Navbar } from '@/components/NavBar';
 import { createClient } from '@/utils/supabase/server';
 import { getProfileConnected } from '@/utils/getProfileConnected';
+import { ShoppingCartProvider } from '@/context/ShoppingCartContext';
 
 const defaultUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000';
 
@@ -20,10 +21,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html lang="fr" className={`${GeistSans.className} ${user ? user.app_metadata.theme : 'dark'}`}>
-      <body className="flex flex-col h-screen w-screen bg-background text-foreground antialiased transition-colors duration-500">
-        <Navbar user={user} />
-        <main className="h-full w-full flex flex-col items-center overflow-y-auto">{children}</main>
-      </body>
+      <ShoppingCartProvider>
+        <body className="flex flex-col h-screen w-screen bg-background text-foreground antialiased transition-colors duration-500 overflow-hidden">
+          <Navbar user={profileConnected} />
+          <main className="h-full w-full flex flex-col items-center overflow-y-auto">{children}</main>
+        </body>
+      </ShoppingCartProvider>
     </html>
   );
 }
