@@ -1,9 +1,5 @@
 'use client';
 
-import Link from 'next/link';
-import { headers } from 'next/headers';
-import { createClient } from '@/utils/supabase/server';
-import { redirect } from 'next/navigation';
 import { SubmitButton } from './submit-button';
 import Image from 'next/image';
 import loginImage from '@/public/login.png';
@@ -11,50 +7,10 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { signUp } from '@/utils/signUp';
+import { signIn } from '@/utils/signIn';
 
 export default function Login({ searchParams }: { searchParams: { message: string } }) {
-  // const signIn = async (formData: FormData) => {
-  //   "use server";
-
-  //   const email = formData.get("email") as string;
-  //   const password = formData.get("password") as string;
-  //   const supabase = createClient();
-
-  //   const { error } = await supabase.auth.signInWithPassword({
-  //     email,
-  //     password,
-  //   });
-
-  //   if (error) {
-  //     return redirect("/login?message=Could not authenticate user");
-  //   }
-
-  //   return redirect("/protected");
-  // };
-
-  // const signUp = async (formData: FormData) => {
-  //   "use server";
-
-  //   const origin = headers().get("origin");
-  //   const email = formData.get("email") as string;
-  //   const password = formData.get("password") as string;
-  //   const supabase = createClient();
-
-  //   const { error } = await supabase.auth.signUp({
-  //     email,
-  //     password,
-  //     options: {
-  //       emailRedirectTo: `${origin}/auth/callback`,
-  //     },
-  //   });
-
-  //   if (error) {
-  //     return redirect("/login?message=Could not authenticate user");
-  //   }
-
-  //   return redirect("/login?message=Check email to continue sign in process");
-  // };
-
   const [isProfessionnel, setIsProfessionnel] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
 
@@ -99,6 +55,7 @@ export default function Login({ searchParams }: { searchParams: { message: strin
                 <Input
                   type="text"
                   id="nom"
+                  name="nom"
                   placeholder="Entrez votre nom"
                   className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
                 />
@@ -111,6 +68,7 @@ export default function Login({ searchParams }: { searchParams: { message: strin
                 <Input
                   type="text"
                   id="prenom"
+                  name="prenom"
                   placeholder="Entrez votre prénom"
                   className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
                 />
@@ -123,6 +81,7 @@ export default function Login({ searchParams }: { searchParams: { message: strin
                 <Input
                   type="email"
                   id="email"
+                  name="email"
                   placeholder="Entrez votre email"
                   className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
                 />
@@ -135,6 +94,7 @@ export default function Login({ searchParams }: { searchParams: { message: strin
                 <Input
                   type="password"
                   id="password"
+                  name="password"
                   placeholder="Entrez votre mot de passe"
                   className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
                 />
@@ -147,6 +107,7 @@ export default function Login({ searchParams }: { searchParams: { message: strin
                 <Input
                   type="text"
                   id="telephone"
+                  name="telephone"
                   placeholder="Entrez votre numéro de téléphone"
                   className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
                 />
@@ -159,6 +120,7 @@ export default function Login({ searchParams }: { searchParams: { message: strin
                 <Input
                   type="text"
                   id="adresse"
+                  name="adresse"
                   placeholder="Entrez votre adresse"
                   className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
                 />
@@ -172,6 +134,7 @@ export default function Login({ searchParams }: { searchParams: { message: strin
                   <Input
                     type="text"
                     id="ville"
+                    name="ville"
                     placeholder="Entrez votre ville"
                     className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
                   />
@@ -184,6 +147,7 @@ export default function Login({ searchParams }: { searchParams: { message: strin
                   <Input
                     type="text"
                     id="codePostal"
+                    name="codePostal"
                     placeholder="Entrez votre code postal"
                     className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
                   />
@@ -197,13 +161,14 @@ export default function Login({ searchParams }: { searchParams: { message: strin
                 <Input
                   type="text"
                   id="province"
+                  name="province"
                   placeholder="Entrez votre province"
                   className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
                 />
               </div>
 
               <SubmitButton
-                // formAction={signUp}
+                formAction={signUp}
                 className="text-3xl text-white w-[75%] mx-auto font-semibold rounded-md px-4 py-2 bg-[#7ca92e] my-4"
                 pendingText="Signing Up..."
               >
@@ -224,6 +189,7 @@ export default function Login({ searchParams }: { searchParams: { message: strin
                 <Input
                   type="text"
                   id="nomDeLaSociete"
+                  name="nomDeLaSociete"
                   placeholder="Entrez le nom de la société"
                   className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
                 />
@@ -236,6 +202,7 @@ export default function Login({ searchParams }: { searchParams: { message: strin
                 <Input
                   type="text"
                   id="nomDeLaPersonneDeContact"
+                  name="nomDeLaPersonneDeContact"
                   placeholder="Entrez le nom de la personne de contact"
                   className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
                 />
@@ -248,6 +215,7 @@ export default function Login({ searchParams }: { searchParams: { message: strin
                 <Input
                   type="email"
                   id="email"
+                  name="email"
                   placeholder="Entrez votre email"
                   className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
                 />
@@ -260,6 +228,7 @@ export default function Login({ searchParams }: { searchParams: { message: strin
                 <Input
                   type="password"
                   id="password"
+                  name="password"
                   placeholder="Entrez votre mot de passe"
                   className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
                 />
@@ -272,6 +241,7 @@ export default function Login({ searchParams }: { searchParams: { message: strin
                 <Input
                   type="text"
                   id="telephone"
+                  name="telephone"
                   placeholder="Entrez votre numéro de téléphone"
                   className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
                 />
@@ -284,6 +254,7 @@ export default function Login({ searchParams }: { searchParams: { message: strin
                 <Input
                   type="text"
                   id="adresse"
+                  name="adresse"
                   placeholder="Entrez votre adresse"
                   className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
                 />
@@ -297,6 +268,7 @@ export default function Login({ searchParams }: { searchParams: { message: strin
                   <Input
                     type="text"
                     id="ville"
+                    name="ville"
                     placeholder="Entrez votre ville"
                     className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
                   />
@@ -309,6 +281,7 @@ export default function Login({ searchParams }: { searchParams: { message: strin
                   <Input
                     type="text"
                     id="codePostal"
+                    name="codePostal"
                     placeholder="Entrez votre code postal"
                     className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
                   />
@@ -322,13 +295,14 @@ export default function Login({ searchParams }: { searchParams: { message: strin
                 <Input
                   type="text"
                   id="province"
+                  name="province"
                   placeholder="Entrez votre province"
                   className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
                 />
               </div>
 
               <SubmitButton
-                // formAction={signUp}
+                formAction={signUp}
                 className="text-3xl text-white w-[75%] mx-auto font-semibold rounded-md px-4 py-2 bg-[#7ca92e] my-4"
                 pendingText="Signing Up..."
               >
@@ -349,6 +323,7 @@ export default function Login({ searchParams }: { searchParams: { message: strin
                 <Input
                   type="email"
                   id="email"
+                  name="email"
                   placeholder="Entrez votre email"
                   className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
                 />
@@ -361,13 +336,14 @@ export default function Login({ searchParams }: { searchParams: { message: strin
                 <Input
                   type="password"
                   id="password"
+                  name="password"
                   placeholder="Entrez votre mot de passe"
                   className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
                 />
               </div>
 
               <SubmitButton
-                // formAction={signIn}
+                formAction={signIn}
                 className="text-3xl text-white w-[75%] mx-auto font-semibold rounded-md px-4 py-2 bg-[#7ca92e] my-4"
                 pendingText="Signing In..."
               >
