@@ -3,7 +3,7 @@ import ItemsWrapper from '@/components/shop/ItemsWrapper';
 import TopRowShopSection from '@/components/shop/TopRowShopSection';
 import { getItemsBySearchParams } from '@/utils/getItemsBySearchParams';
 
-const page = async ({ searchParams }: { searchParams: any }) => {
+const page = async ({ searchParams }: { searchParams: { prix?: string; pieces?: string; velos?: string } }) => {
   console.log(searchParams);
 
   const items = await getItemsBySearchParams(searchParams);
@@ -12,7 +12,7 @@ const page = async ({ searchParams }: { searchParams: any }) => {
   return (
     <div className="flex flex-col w-full h-full max-w-8xl">
       <div className="flex flex-col mt-8 sm:flex-row w-full h-auto gap-2">
-        <FilterSection />
+        <FilterSection searchParams={searchParams} />
         <div className="rounded-md bg-tempBgLightSecondary dark:bg-tempBgDark border border-tempLightBorder dark:border-tempDarkBorder w-full h-fit flex flex-col">
           <TopRowShopSection />
           <ItemsWrapper items={items} />
