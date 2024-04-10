@@ -12,8 +12,9 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { ShoppingCartContext } from '@/context/ShoppingCartContext';
 
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -53,6 +54,7 @@ const components: { title: string; href: string; description: string }[] = [
 export function Navbar({ user }: { user: any }) {
   const [background, setBackground] = useState('bg-transparent');
   const [theme, setTheme] = useState('');
+  const { cart } = useContext(ShoppingCartContext);
 
   const pahtname = usePathname();
 
@@ -94,7 +96,7 @@ export function Navbar({ user }: { user: any }) {
           <NavigationMenuList>
             <NavigationMenuItem>
               <NavigationMenuTrigger className="text-lg text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500">
-                Vélos
+                <Link href="/shop?velos=VTT%2CVélo+de+course%2CClassique%2CBMX">Vélos</Link>
               </NavigationMenuTrigger>
               <NavigationMenuContent className="flex flex-col items-center">
                 <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
@@ -126,7 +128,9 @@ export function Navbar({ user }: { user: any }) {
             </NavigationMenuItem>
             <NavigationMenuItem>
               <NavigationMenuTrigger className="text-lg text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500">
-                Pièces détachés
+                <Link href="/shop?pieces=Cadre%2CGuidon%2CFreins%2CSelle%2CDérailleur+Avant%2CDérailleur+Arrière%2CRoue+avant%2CRoue+arrière%2CRéflecteurs%2CPédalier%2COrdinateur%2CPanier&prix=">
+                  Pièces détachés
+                </Link>
               </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
@@ -162,16 +166,29 @@ export function Navbar({ user }: { user: any }) {
             </NavigationMenuItem>
             {user && (user.role === 'particulier' || user.role === 'professionnel') && (
               <NavigationMenuItem className="px-1">
-                <Icons.cart className="h-6 w-6 text-black dark:text-white transition-colors duration-500" />
+                <div className="relative">
+                  {cart.length > 0 && (
+                    <div className="absolute right-[-30%] top-[-30%] rounded-full bg-red-600 w-5 h-5 text-xs text-white flex justify-center items-center">
+                      {cart.map((item) => item.quantite).reduce((a, b) => a + b)}
+                    </div>
+                  )}
+                  <Link href="/shopping-cart">
+                    <Icons.cart className="h-6 w-6 text-black dark:text-white transition-colors duration-500" />
+                  </Link>
+                </div>
               </NavigationMenuItem>
             )}
             {user && (user.role === 'vendeur' || user.role === 'gerant_magasin' || user.role === 'admin') && (
               <NavigationMenuItem className="px-1">
-                <Icons.squares className="h-6 w-6 text-black dark:text-white transition-colors duration-500" />
+                <Link href="/admin">
+                  <Icons.squares className="h-6 w-6 text-black dark:text-white transition-colors duration-500" />
+                </Link>
               </NavigationMenuItem>
             )}
             <NavigationMenuItem className="px-1">
-              <Icons.profile className="h-6 w-6 text-black dark:text-white transition-colors duration-150" />
+              <Link href="/profile">
+                <Icons.profile className="h-6 w-6 text-black dark:text-white transition-colors duration-500" />
+              </Link>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
