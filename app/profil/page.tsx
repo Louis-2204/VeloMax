@@ -1,4 +1,4 @@
-import SignOutBtn from '@/components/profile/SignOutBtn';
+import SignOutBtn from '@/components/profil/SignOutBtn';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 

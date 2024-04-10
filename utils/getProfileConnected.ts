@@ -2,7 +2,7 @@
 import { User } from '@supabase/supabase-js';
 import { createClient } from './supabase/server';
 
-export async function getProfileConnected(userConnected: User | null) {
+export async function getProfileConnected(userConnected?: User | null) {
   'use server';
 
   const supabase = createClient();
