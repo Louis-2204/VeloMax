@@ -8,10 +8,9 @@ import { ShoppingCartContext } from "@/context/ShoppingCartContext";
 
 const page = () => {
 
-    const { cart } = useContext(ShoppingCartContext);
+    const { getCart } = useContext(ShoppingCartContext);
     const [state, setState] = useState('récapitulatif');
 
-    console.log(cart);
 
     return (
         <div className="w-full max-w-8xl h-full flex-col">
