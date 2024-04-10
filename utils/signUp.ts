@@ -5,8 +5,6 @@ export async function signUp(formData: FormData) {
   'use server';
   const supabase = createClient();
 
-  console.log(formData.get('email'));
-
   if (formData.get('nomDeLaSociete') !== null) {
     const { error } = await supabase.auth.signUp({
       email: formData.get('email')!.toString(),
