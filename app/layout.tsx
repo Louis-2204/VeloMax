@@ -5,7 +5,7 @@ import { createClient } from '@/utils/supabase/server';
 import { getProfileConnected } from '@/utils/getProfileConnected';
 import { ShoppingCartProvider } from '@/context/ShoppingCartContext';
 import { getUserConnected } from '@/utils/getUserConnected';
-
+import { Toaster } from '@/components/ui/sonner';
 const defaultUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000';
 
 export const metadata = {
@@ -25,6 +25,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <Navbar user={profileConnected} />
           <main className="h-full w-full flex flex-col items-center overflow-y-auto">{children}</main>
         </body>
+        <Toaster />
       </ShoppingCartProvider>
     </html>
   );

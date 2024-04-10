@@ -11,13 +11,14 @@ export type Particulier = {
 };
 
 export type Vendeur = {
-  role: 'vendeur';
   id_vendeur: string;
   nom: string;
   prenom: string;
   temps: 'partiel' | 'plein';
   date_embauche: string;
 };
+
+export type VendeurUser = Vendeur & { role: 'vendeur' };
 
 export type Professionnel = {
   role: 'professionnel';

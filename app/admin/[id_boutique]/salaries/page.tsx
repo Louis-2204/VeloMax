@@ -1,4 +1,5 @@
-import Tableau from '@/components/admin/salaries/Tableau';
+import SalariesTableau from '@/components/admin/salaries/SalariesTableau';
+import { Vendeur } from '@/types/entities';
 import { createClient } from '@/utils/supabase/server';
 
 const page = async ({ params }: { params: { id_boutique: string } }) => {
@@ -7,8 +8,8 @@ const page = async ({ params }: { params: { id_boutique: string } }) => {
   console.log(salaries);
 
   return (
-    <div>
-      <Tableau data={salaries} />
+    <div className="w-full flex justify-center">
+      <SalariesTableau salaries={salaries as Vendeur[]} />
     </div>
   );
 };
