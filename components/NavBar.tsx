@@ -55,7 +55,8 @@ const components: { title: string; href: string; description: string }[] = [
 export function Navbar({ user }: { user: any }) {
   const [background, setBackground] = useState('bg-transparent');
   const [theme, setTheme] = useState('');
-  const { cart } = useContext(ShoppingCartContext);
+  const { getCart } = useContext(ShoppingCartContext);
+  const cart = getCart();
 
   const pahtname = usePathname();
 

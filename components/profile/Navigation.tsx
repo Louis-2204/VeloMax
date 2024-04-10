@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 const Navigation = () => {
   const path = usePathname();
-  console.log(path);
   return (
     <Card className="flex flex-col w-full rounded-md overflow-hidden ">
       <CardContent className="p-0">

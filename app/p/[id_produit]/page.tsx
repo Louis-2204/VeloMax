@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 const page = async ({ params }: { params: { id_produit: string } }) => {
-  console.log(params);
   const supabase = createClient();
   let produit = null;
   const { data, error } = await supabase
@@ -17,19 +16,17 @@ const page = async ({ params }: { params: { id_produit: string } }) => {
   if (error && error.details !== 'The result contains 0 rows') {
     console.error(error);
   }
-  console.log(data);
+
   if (!data) {
     const { data, error } = await supabase.from('pieces').select('*').eq('id_piece', params.id_produit).single();
     if (error && error.details !== 'The result contains 0 rows') {
       console.error(error);
     }
-    console.log(data);
+
     produit = data;
   } else {
     produit = data;
   }
-
-  console.log(produit);
 
   if (!produit) {
     notFound();
