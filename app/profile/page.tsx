@@ -1,3 +1,4 @@
+import SignOutBtn from '@/components/profile/SignOutBtn';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
@@ -42,7 +43,7 @@ const page = () => {
       </div>
 
       <Button className="max-w-xs bg-vm_secondary hover:bg-vm_secondary_2 text-white"> Mettre à jour</Button>
-      <Button className="max-w-xs bg-red-800 hover:bg-red-900 text-white"> Déconnexion</Button>
+      <SignOutBtn />
     </div>
   );
 };
