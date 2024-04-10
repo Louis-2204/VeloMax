@@ -10,7 +10,7 @@ const AddToCartBtn = ({ item }: { item: any }) => {
         addToCart({
           id: item.id,
           nom: item.nom,
-          prix: item.prix,
+          prix: item.prix_unitaire,
           image: item.image,
         })
       }
