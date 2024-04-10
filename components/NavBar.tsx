@@ -15,6 +15,7 @@ import {
 import { useContext, useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { ShoppingCartContext } from '@/context/ShoppingCartContext';
+import { Button } from './ui/button';
 
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -82,15 +83,16 @@ export function Navbar({ user }: { user: any }) {
     }
   };
 
-  console.log('user', user);
-
   return pahtname !== '/login' ? (
     <div
       className={`flex sticky w-full min-h-20 py-4 px-16 top-0 z-50 ${background} justify-center transition-colors duration-500`}
     >
       <div className="w-full max-w-8xl flex divide-x-4 divide-[#505050]">
         <div className="flex items-center justify-center px-4">
-          <Link href={"/"} className="text-4xl font-bold text-vm_text_gray dark:text-white transition-colors duration-500">
+          <Link
+            href={'/'}
+            className="text-4xl font-bold text-vm_text_gray dark:text-white transition-colors duration-500"
+          >
             VeloMax
           </Link>
         </div>
@@ -189,9 +191,17 @@ export function Navbar({ user }: { user: any }) {
               </NavigationMenuItem>
             )}
             <NavigationMenuItem className="px-1">
-              <Link href="/profil">
-                <Icons.profil className="h-6 w-6 text-black dark:text-white transition-colors duration-500" />
-              </Link>
+              {user ? (
+                <Link href="/profil">
+                  <Icons.profil className="h-6 w-6 text-black dark:text-white transition-colors duration-500" />
+                </Link>
+              ) : (
+                <Link href="/login">
+                  <Button className="text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500">
+                    Se connecter
+                  </Button>
+                </Link>
+              )}
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
