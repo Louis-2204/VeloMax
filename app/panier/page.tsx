@@ -11,6 +11,8 @@ const page = () => {
     const { getCart } = useContext(ShoppingCartContext);
     const [state, setState] = useState('récapitulatif');
 
+    const items = getCart();
+    console.log(items)
 
     return (
         <div className="w-full max-w-8xl h-full flex-col">
@@ -51,30 +53,30 @@ const page = () => {
 
 export default page;
 
-const items = [
-    {
-        nom: 'Kilimanjaro',
-        prix: 2000,
-        image: 'https://contents.mediadecathlon.com/p2322255/k$20b3ee8829babba2ce91de43f7e68841/sq/9f1a5599-a724-4816-bba4-f1a3fa099760.jpg?format=auto&f=800x0'
-    },
-    {
-        nom: 'HBHBZHCZHI',
-        prix: 2000,
-        image: 'https://contents.mediadecathlon.com/p2322255/k$20b3ee8829babba2ce91de43f7e68841/sq/9f1a5599-a724-4816-bba4-f1a3fa099760.jpg?format=auto&f=800x0'
-    },
-    {
-        nom: 'HBHBZHCZHI',
-        prix: 2000,
-        image: 'https://contents.mediadecathlon.com/p2322255/k$20b3ee8829babba2ce91de43f7e68841/sq/9f1a5599-a724-4816-bba4-f1a3fa099760.jpg?format=auto&f=800x0'
-    },
-    {
-        nom: 'HBHBZHCZHI',
-        prix: 2000,
-        image: 'https://contents.mediadecathlon.com/p2322255/k$20b3ee8829babba2ce91de43f7e68841/sq/9f1a5599-a724-4816-bba4-f1a3fa099760.jpg?format=auto&f=800x0'
-    },
-    {
-        nom: 'HBHBZHCZHI',
-        prix: 2000,
-        image: 'https://contents.mediadecathlon.com/p2322255/k$20b3ee8829babba2ce91de43f7e68841/sq/9f1a5599-a724-4816-bba4-f1a3fa099760.jpg?format=auto&f=800x0'
-    }
-];
+// const items = [
+//     {
+//         nom: 'Kilimanjaro',
+//         prix: 2000,
+//         image: 'https://contents.mediadecathlon.com/p2322255/k$20b3ee8829babba2ce91de43f7e68841/sq/9f1a5599-a724-4816-bba4-f1a3fa099760.jpg?format=auto&f=800x0'
+//     },
+//     {
+//         nom: 'HBHBZHCZHI',
+//         prix: 2000,
+//         image: 'https://contents.mediadecathlon.com/p2322255/k$20b3ee8829babba2ce91de43f7e68841/sq/9f1a5599-a724-4816-bba4-f1a3fa099760.jpg?format=auto&f=800x0'
+//     },
+//     {
+//         nom: 'HBHBZHCZHI',
+//         prix: 2000,
+//         image: 'https://contents.mediadecathlon.com/p2322255/k$20b3ee8829babba2ce91de43f7e68841/sq/9f1a5599-a724-4816-bba4-f1a3fa099760.jpg?format=auto&f=800x0'
+//     },
+//     {
+//         nom: 'HBHBZHCZHI',
+//         prix: 2000,
+//         image: 'https://contents.mediadecathlon.com/p2322255/k$20b3ee8829babba2ce91de43f7e68841/sq/9f1a5599-a724-4816-bba4-f1a3fa099760.jpg?format=auto&f=800x0'
+//     },
+//     {
+//         nom: 'HBHBZHCZHI',
+//         prix: 2000,
+//         image: 'https://contents.mediadecathlon.com/p2322255/k$20b3ee8829babba2ce91de43f7e68841/sq/9f1a5599-a724-4816-bba4-f1a3fa099760.jpg?format=auto&f=800x0'
+//     }
+// ];

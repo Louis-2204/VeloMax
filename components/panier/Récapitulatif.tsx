@@ -36,17 +36,17 @@ const Récapitulatif = ({ items, proceedToDelivery }: { items: { nom: string, pr
                 <div className="pb-4">
                     <div className="flex justify-between items-center">
                         <div className="text-vm_text_gray font-semibold">Sous-total :</div>
-                        <div className="text-vm_text_gray font-extrabold">{items.reduce((acc, item) => acc + item.prix, 0)} €</div>
+                        <div className="text-vm_text_gray font-extrabold">{(items.reduce((acc, item) => acc + item.prix, 0)).toFixed(2).toString()} €</div>
                     </div>
                     <div className="flex justify-between items-center">
                         <div className="text-vm_text_gray font-semibold">TVA (20%) :</div>
-                        <div className="text-vm_text_gray font-extrabold">{items.reduce((acc, item) => acc + item.prix * 0.2, 0)} €</div>
+                        <div className="text-vm_text_gray font-extrabold">{(items.reduce((acc, item) => acc + item.prix * 0.2, 0)).toFixed(2).toString()} €</div>
                     </div>
                 </div>
 
                 <div className="flex justify-between p-2 bg-vm_bg_lightgray rounded-md">
                     <div className="text-vm_text_gray font-semibold">Total :</div>
-                    <div className="text-vm_text_gray font-extrabold">{items.reduce((acc, item) => acc + item.prix * 1.2, 0)} €</div>
+                    <div className="text-vm_text_gray font-extrabold">{(items.reduce((acc, item) => acc + item.prix * 1.2, 0)).toFixed(2).toString()} €</div>
                 </div>
 
                 <div className="mt-4">
