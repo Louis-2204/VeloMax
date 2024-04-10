@@ -4,6 +4,7 @@ import TopRowShopSection from '@/components/shop/TopRowShopSection';
 import { getItemsBySearchParams } from '@/utils/getItemsBySearchParams';
 
 const page = async ({ searchParams }: { searchParams: { prix?: string; pieces?: string; velos?: string } }) => {
+
   const items = await getItemsBySearchParams(searchParams);
 
   return (

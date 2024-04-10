@@ -16,17 +16,16 @@ const page = async ({ params }: { params: { id_produit: string } }) => {
   if (error && error.details !== 'The result contains 0 rows') {
     console.error(error);
   }
-
   if (!data) {
     const { data, error } = await supabase.from('pieces').select('*').eq('id_piece', params.id_produit).single();
     if (error && error.details !== 'The result contains 0 rows') {
       console.error(error);
     }
-
     produit = data;
   } else {
     produit = data;
   }
+
 
   if (!produit) {
     notFound();

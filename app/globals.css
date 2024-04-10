@@ -86,6 +86,27 @@
     --ring: 0 0% 83.1%;
   }
 
+  *::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: #676767;
+    border-radius: 0.25rem;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: #8f8f8f;
+  }
+
+  *::-webkit-scrollbar-thumb:active {
+    background: #676767;
+  }
+
   .categories-title {
     text-shadow: 2px 0 #b0cb82, -2px 0 #b0cb82, 0 2px #b0cb82, 0 -2px #b0cb82, 1px 1px #b0cb82, -1px -1px #b0cb82,
       1px -1px #b0cb82, -1px 1px #b0cb82;

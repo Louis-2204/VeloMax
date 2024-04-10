@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import Navigation from '@/components/profile/Navigation';
+import Navigation from '@/components/profil/Navigation';
 const layout = ({ children }: { children: ReactNode }) => {
   return (
     <div className="flex flex-col w-full h-full max-w-8xl">

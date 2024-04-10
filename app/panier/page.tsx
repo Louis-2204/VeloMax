@@ -1,13 +1,17 @@
 "use client";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Icons } from "@/components/icons/icons";
 import Récapitulatif from "@/components/panier/Récapitulatif";
 import Livraison from "@/components/panier/Livraison";
 import Paiement from "@/components/panier/Paiement";
+import { ShoppingCartContext } from "@/context/ShoppingCartContext";
 
 const page = () => {
 
+    const { cart } = useContext(ShoppingCartContext);
     const [state, setState] = useState('récapitulatif');
+
+    console.log(cart);
 
     return (
         <div className="w-full max-w-8xl h-full flex-col">
