@@ -15,7 +15,7 @@ export default async function Index() {
           <BackgroundBeams />
         </div>
 
-        <div className="w-full flex flex-col items-center justify-center max-w-8xl">
+        <div className="w-full flex flex-col items-center justify-center max-w-8xl z-10">
           <h1 className="text-6xl font-bold text-center text-vm_text_gray dark:text-white transition-colors duration-500">
             Votre route vers la perfection.
           </h1>

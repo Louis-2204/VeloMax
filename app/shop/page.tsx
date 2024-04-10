@@ -4,10 +4,8 @@ import TopRowShopSection from '@/components/shop/TopRowShopSection';
 import { getItemsBySearchParams } from '@/utils/getItemsBySearchParams';
 
 const page = async ({ searchParams }: { searchParams: { prix?: string; pieces?: string; velos?: string } }) => {
-  console.log(searchParams);
 
   const items = await getItemsBySearchParams(searchParams);
-  console.log(items);
 
   return (
     <div className="flex flex-col w-full h-full max-w-8xl">

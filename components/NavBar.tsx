@@ -81,6 +81,8 @@ export function Navbar({ user }: { user: any }) {
     }
   };
 
+  console.log('user', user);
+
   return pahtname !== '/login' ? (
     <div
       className={`flex sticky w-full min-h-20 py-4 px-16 top-0 z-50 ${background} justify-center transition-colors duration-500`}
@@ -172,7 +174,7 @@ export function Navbar({ user }: { user: any }) {
                       {cart.map((item) => item.quantite).reduce((a, b) => a + b)}
                     </div>
                   )}
-                  <Link href="/shopping-cart">
+                  <Link href="/panier">
                     <Icons.cart className="h-6 w-6 text-black dark:text-white transition-colors duration-500" />
                   </Link>
                 </div>
@@ -186,8 +188,8 @@ export function Navbar({ user }: { user: any }) {
               </NavigationMenuItem>
             )}
             <NavigationMenuItem className="px-1">
-              <Link href="/profile">
-                <Icons.profile className="h-6 w-6 text-black dark:text-white transition-colors duration-500" />
+              <Link href="/profil">
+                <Icons.profil className="h-6 w-6 text-black dark:text-white transition-colors duration-500" />
               </Link>
             </NavigationMenuItem>
           </NavigationMenuList>

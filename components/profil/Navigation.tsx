@@ -4,15 +4,13 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 const Navigation = () => {
   const path = usePathname();
-  console.log(path);
   return (
     <Card className="flex flex-col w-full rounded-md overflow-hidden ">
       <CardContent className="p-0">
-        <Link href="/profile">
+        <Link href="/profil">
           <div
-            className={`flex w-full py-2 px-3 gap-2 text-vm_text_gray dark:text-white font-semibold ${
-              path === '/profile' ? 'bg-[#E4E4E7] dark:bg-[#303030]' : ''
-            } hover:bg-[#E4E4E7] hover:dark:bg-[#303030]`}
+            className={`flex w-full py-2 px-3 gap-2 text-vm_text_gray dark:text-white font-semibold ${path === '/profil' ? 'bg-[#E4E4E7] dark:bg-[#303030]' : ''
+              } hover:bg-[#E4E4E7] hover:dark:bg-[#303030]`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -32,11 +30,10 @@ const Navigation = () => {
           </div>
         </Link>
 
-        <Link href="/profile/mes-commandes">
+        <Link href="/profil/mes-commandes">
           <div
-            className={`flex w-full py-2 px-3 gap-2 text-vm_text_gray dark:text-white font-semibold ${
-              path === '/profile/mes-commandes' ? 'bg-[#E4E4E7] dark:bg-[#303030]' : ''
-            } hover:bg-[#E4E4E7] hover:dark:bg-[#303030]`}
+            className={`flex w-full py-2 px-3 gap-2 text-vm_text_gray dark:text-white font-semibold ${path === '/profil/mes-commandes' ? 'bg-[#E4E4E7] dark:bg-[#303030]' : ''
+              } hover:bg-[#E4E4E7] hover:dark:bg-[#303030]`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -56,11 +53,10 @@ const Navigation = () => {
           </div>
         </Link>
 
-        <Link href="/profile/fidelo">
+        <Link href="/profil/fidelo">
           <div
-            className={`flex w-full py-2 px-3 gap-2 text-vm_text_gray dark:text-white font-semibold ${
-              path === '/profile/fidelo' ? 'bg-[#E4E4E7] dark:bg-[#303030]' : ''
-            } hover:bg-[#E4E4E7] hover:dark:bg-[#303030]`}
+            className={`flex w-full py-2 px-3 gap-2 text-vm_text_gray dark:text-white font-semibold ${path === '/profil/fidelo' ? 'bg-[#E4E4E7] dark:bg-[#303030]' : ''
+              } hover:bg-[#E4E4E7] hover:dark:bg-[#303030]`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -80,11 +76,10 @@ const Navigation = () => {
           </div>
         </Link>
 
-        <Link href="/profile/remise">
+        <Link href="/profil/remise">
           <div
-            className={`flex w-full py-2 px-3 gap-2 text-vm_text_gray dark:text-white font-semibold ${
-              path === '/profile/remise' ? 'bg-[#E4E4E7] dark:bg-[#303030]' : ''
-            } hover:bg-[#E4E4E7] hover:dark:bg-[#303030]`}
+            className={`flex w-full py-2 px-3 gap-2 text-vm_text_gray dark:text-white font-semibold ${path === '/profil/remise' ? 'bg-[#E4E4E7] dark:bg-[#303030]' : ''
+              } hover:bg-[#E4E4E7] hover:dark:bg-[#303030]`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
