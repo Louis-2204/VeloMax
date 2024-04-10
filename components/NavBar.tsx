@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-
 import { cn } from '@/lib/utils';
 import { Icons } from '@/components/icons/icons';
 import {
@@ -85,14 +84,12 @@ export function Navbar({ user }: { user: any }) {
 
   return pahtname !== '/login' ? (
     <div
-      className={`flex sticky w-full py-4 px-16 top-0 z-50 ${background} justify-center transition-colors duration-500`}
+      className={`flex sticky w-full min-h-20 py-4 px-16 top-0 z-50 ${background} justify-center transition-colors duration-500`}
     >
       <div className="w-full max-w-8xl flex divide-x-4 divide-[#505050]">
         <div className="flex items-center justify-center px-4">
-          <Link href="/">
-            <h1 className="text-4xl font-bold text-vm_text_gray dark:text-white transition-colors duration-500">
-              VeloMax
-            </h1>
+          <Link href={"/"} className="text-4xl font-bold text-vm_text_gray dark:text-white transition-colors duration-500">
+            VeloMax
           </Link>
         </div>
 

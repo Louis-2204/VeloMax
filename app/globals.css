@@ -14,10 +14,13 @@
     --vm-secondary: 82 57% 42%;
     --vm-secondary-2: 82 57% 33%;
 
-    --vm-gray: 0 0% 31%;
-    --vm-gray-secondary: 0 0% 65%;
+    --vm-text-gray: 0 0% 31%;
+    --vm-text-gray-secondary: 0 0% 65%;
 
     --vm-lightgreen: 80 37% 97%;
+
+    --vm-bg-gray: 0 0% 85%;
+    --vm-bg-lightgray: 0 0% 93%;
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
@@ -86,6 +89,16 @@
   .categories-title {
     text-shadow: 2px 0 #b0cb82, -2px 0 #b0cb82, 0 2px #b0cb82, 0 -2px #b0cb82, 1px 1px #b0cb82, -1px -1px #b0cb82,
       1px -1px #b0cb82, -1px 1px #b0cb82;
+  }
+
+  .categories-title-xs {
+    text-shadow: 1px 0 #b0cb82, -1px 0 #b0cb82, 0 1px #b0cb82, 0 -1px #b0cb82, 1px 1px #b0cb82, -1px -1px #b0cb82,
+      1px -1px #b0cb82, -1px 1px #b0cb82;
+  }
+
+  .categories-card-title {
+    text-shadow: 1px 0 #000000, -1px 0 #000000, 0 1px #000000, 0 -1px #000000, 1px 1px #000000, -1px -1px #000000,
+      1px -1px #000000, -1px 1px #000000;
   }
 
   .max-w-8xl {

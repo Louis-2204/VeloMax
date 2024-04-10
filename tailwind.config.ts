@@ -23,9 +23,11 @@ const config = {
         foreground: 'hsl(var(--foreground))',
         vm_secondary: 'hsl(var(--vm-secondary))',
         vm_secondary_2: 'hsl(var(--vm-secondary-2))',
-        vm_text_gray: 'hsl(var(--vm-gray))',
-        vm_text_gray_secondary: 'hsl(var(--vm-gray-secondary))',
+        vm_text_gray: 'hsl(var(--vm-text-gray))',
+        vm_text_gray_secondary: 'hsl(var(--vm-text-gray-secondary))',
         vm_lightgreen: 'hsl(var(--vm-lightgreen))',
+        vm_bg_gray: 'hsl(var(--vm-bg-gray))',
+        vm_bg_lightgray: 'hsl(var(--vm-bg-lightgray))',
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
