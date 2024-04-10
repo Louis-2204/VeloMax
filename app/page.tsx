@@ -10,7 +10,7 @@ import { InfiniteMovingCards } from '@/components/ui/infinite-moving-cards';
 export default async function Index() {
   return (
     <div className="flex flex-col w-full h-full">
-      <div className="flex relative min-h-screen w-full justify-center bg-background transition-colors duration-500">
+      <div className="flex relative min-h-[calc(100vh-5rem)] w-full justify-center bg-background transition-colors duration-500">
         <div className="absolute w-full h-full">
           <BackgroundBeams />
         </div>
@@ -31,38 +31,42 @@ export default async function Index() {
           Meilleurs ventes
         </h3>
 
-        <div className="w-full flex gap-12 mt-10 max-w-8xl">
-          <div className="w-1/4 aspect-square rounded-md overflow-hidden bg-gray-500">
-            <Image src="/images/bike1.jpg" width={300} height={300} alt="meilleur vente 1" />
+        <div className="w-full flex flex-col md:flex-row justify-between gap-6 md:gap-0  mt-10 max-w-8xl">
+          <div className="w-full md:w-1/2 flex justify-center gap-6">
+            <div className="w--1/2 md:w-[45%] aspect-square rounded-md overflow-hidden bg-gray-500">
+              <Image src="/images/bike1.jpg" width={300} height={300} alt="meilleur vente 1" />
+            </div>
+            <div className="w--1/2 md:w-[45%] aspect-square rounded-md overflow-hidden bg-gray-500">
+              <Image src="/images/bike2.jpg" width={300} height={300} alt="meilleur vente 2" />
+            </div>
           </div>
-          <div className="w-1/4 aspect-square rounded-md overflow-hidden bg-gray-500">
-            <Image src="/images/bike2.jpg" width={300} height={300} alt="meilleur vente 2" />
-          </div>
-          <div className="w-1/4 aspect-square rounded-md overflow-hidden bg-gray-500">
-            <Image src="/images/bike3.jpg" width={300} height={300} alt="meilleur vente 3" />
-          </div>
-          <div className="w-1/4 aspect-square rounded-md overflow-hidden bg-gray-500">
-            <Image src="/images/bike4.jpg" width={300} height={300} alt="meilleur vente 4" />
+          <div className="w-full md:w-1/2 flex justify-center gap-6">
+            <div className="w--1/2 md:w-[45%] aspect-square rounded-md overflow-hidden bg-gray-500">
+              <Image src="/images/bike3.jpg" width={300} height={300} alt="meilleur vente 3" />
+            </div>
+            <div className="w--1/2 md:w-[45%] aspect-square rounded-md overflow-hidden bg-gray-500">
+              <Image src="/images/bike4.jpg" width={300} height={300} alt="meilleur vente 4" />
+            </div>
           </div>
         </div>
       </div>
 
       <div className="w-full flex flex-col px-20 max-w-8xl mx-auto mb-80">
-        <h1 className="text-[180px] h-56 font-semibold text-left text-[#DCDCDC] categories-title">CATÉGORIES</h1>
+        <h1 className="text-[40px] sm:text-[60px] md:text-[100px] lg:text-[140px] xl:text-[180px] h-14 sm:h-20 md:h-32 lg:h-44 xl:h-56 font-semibold text-left text-[#DCDCDC] categories-title-xs sm:categories-title transition-all">CATÉGORIES</h1>
         <BentoGrid className="w-full">
           {items.map((item, i) => (
             <BentoGridItem
               key={i}
               title={item.title}
               image={item.image}
-              className={i === 1 ? 'md:row-span-2' : i === 0 ? 'md:col-span-2' : ''}
+              className={i === 0 ? 'col-span-3 lg:col-span-2' : i === 1 ? 'col-span-3 lg:col-span-1 lg:row-span-2' : 'col-span-3 lg:col-span-1'}
             />
           ))}
         </BentoGrid>
       </div>
 
       <div className="w-full flex flex-col px-20 max-w-8xl mx-auto">
-        <h1 className="text-6xl font-bold text-left text-vm_text_gray dark:text-white pb-4">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-left text-vm_text_gray dark:text-white pb-4 transition-all">
           Rejoignez la <u className="underline-offset-8 decoration-vm_secondary">communauté VeloMax !</u>
         </h1>
         <InfiniteMovingCards

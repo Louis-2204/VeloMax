@@ -32,13 +32,13 @@ export const BentoGridItem = ({
     return (
         <div
             className={cn(
-                "relative row-span-1 rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-input dark:shadow-none justify-between flex flex-col space-y-4 cursor-pointer",
+                "min-h-20 relative row-span-1 rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-input dark:shadow-none justify-between flex flex-col space-y-4 cursor-pointer",
                 className
             )}
         >
-            <Image src={image} alt={title} className="absolute w-full h-full object-cover rounded-xl" width={300} height={300} />
-            <div className="relative w-full h-full group-hover/bento:translate-x-2 transition duration-200">
-                <div className="flex absolute w-full h-full font-bold text-5xl text-center text-white justify-center items-center">
+            <Image src={image} alt={title} className="absolute w-full h-full object-cover rounded-xl" width={1000} height={1000} />
+            <div className="relative !mt-0 w-full h-full group-hover/bento:translate-x-2 transition duration-200">
+                <div className="flex absolute w-full h-full font-bold text-4xl sm:text-5xl text-center text-white justify-center items-center categories-card-title">
                     {title}
                 </div>
             </div>
