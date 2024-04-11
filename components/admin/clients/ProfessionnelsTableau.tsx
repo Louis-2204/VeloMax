@@ -21,6 +21,7 @@ const ProfessionnelsTableau = ({ professionnels }: { professionnels: Professionn
   const [alertOpen, setAlertOpen] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [selectedProfessionnel, setSelectedProfessionnel] = useState({} as ProfessionnelsTableauType);
+  const [typeDialog, setTypeDialog] = useState<'ajout' | 'modification'>('modification');
 
   const columns: ColumnDef<ProfessionnelsTableauType>[] = [
     {
@@ -118,6 +119,7 @@ const ProfessionnelsTableau = ({ professionnels }: { professionnels: Professionn
               <DropdownMenuItem
                 onClick={() => {
                   setSelectedProfessionnel(particulierRow);
+                  setTypeDialog('modification');
                   setDialogOpen(true);
                 }}
               >
@@ -145,6 +147,18 @@ const ProfessionnelsTableau = ({ professionnels }: { professionnels: Professionn
         data={professionnels}
         column_filter="nom"
         placeholder_filtre="Rechercher un client (nom compagnie)"
+        additionalButton={
+          <Button
+            variant={'outline'}
+            onClick={() => {
+              setSelectedProfessionnel({} as ProfessionnelsTableauType);
+              setTypeDialog('ajout');
+              setDialogOpen(true);
+            }}
+          >
+            Ajouter un client
+          </Button>
+        }
       />
       {alertOpen && (
         <AlertDeleteUser
@@ -159,6 +173,7 @@ const ProfessionnelsTableau = ({ professionnels }: { professionnels: Professionn
           dialogOpen={dialogOpen}
           setDialogOpen={setDialogOpen}
           selectedProfessionnel={selectedProfessionnel}
+          typeAction={typeDialog}
         />
       )}
     </div>

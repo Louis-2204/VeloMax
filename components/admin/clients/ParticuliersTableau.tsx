@@ -22,6 +22,7 @@ const ParticuliersTableau = ({ particuliers }: { particuliers: ParticulierTablea
   const [alertOpen, setAlertOpen] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [selectedParticulier, setSelectedParticulier] = useState({} as ParticulierTableau);
+  const [typeDialog, setTypeDialog] = useState<'ajout' | 'modification'>('modification');
 
   const columns: ColumnDef<ParticulierTableau>[] = [
     {
@@ -172,6 +173,7 @@ const ParticuliersTableau = ({ particuliers }: { particuliers: ParticulierTablea
               <DropdownMenuItem
                 onClick={() => {
                   setSelectedParticulier(particulierRow);
+                  setTypeDialog('modification');
                   setDialogOpen(true);
                 }}
               >
@@ -199,6 +201,18 @@ const ParticuliersTableau = ({ particuliers }: { particuliers: ParticulierTablea
         data={particuliers}
         column_filter="nom"
         placeholder_filtre="Rechercher un client (nom)"
+        additionalButton={
+          <Button
+            variant={'outline'}
+            onClick={() => {
+              setSelectedParticulier({} as ParticulierTableau);
+              setTypeDialog('ajout');
+              setDialogOpen(true);
+            }}
+          >
+            Ajouter un client
+          </Button>
+        }
       />
       {alertOpen && (
         <AlertDeleteUser
@@ -213,6 +227,7 @@ const ParticuliersTableau = ({ particuliers }: { particuliers: ParticulierTablea
           dialogOpen={dialogOpen}
           setDialogOpen={setDialogOpen}
           selectedParticulier={selectedParticulier}
+          typeAction={typeDialog}
         />
       )}
     </div>

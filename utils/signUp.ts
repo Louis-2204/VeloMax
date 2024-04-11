@@ -43,6 +43,9 @@ export async function signUp(formData: FormData) {
           ville: formData.get('ville')!.toString(),
           cp: formData.get('codePostal')!.toString(),
           province: formData.get('province')!.toString(),
+          id_fidelo: null,
+          date_souscription: null,
+          date_fin_souscription: null,
         },
       },
     });
@@ -52,18 +55,6 @@ export async function signUp(formData: FormData) {
       return redirect("/login?message=Erreur lors de l'inscription");
     }
   }
-
-  //   const email = formData.get('email') as string;
-  //   const password = formData.get('password') as string;
-
-  //   const { error } = await supabase.auth.signUp({
-  //     email,
-  //     password,
-  //   });
-
-  //   if (error) {
-  //     return redirect('/login?message=Could not authenticate user');
-  //   }
 
   return redirect('/');
 }

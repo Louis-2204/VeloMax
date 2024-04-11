@@ -10,6 +10,5 @@ export async function getAllParticuliers() {
     console.error(error);
     return [];
   }
-  console.log(particuliers);
   return particuliers;
 }

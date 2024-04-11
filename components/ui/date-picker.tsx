@@ -9,7 +9,13 @@ import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import moment from 'moment';
 
-export function DatePicker({ date, setDate }: { date: string; setDate: React.Dispatch<React.SetStateAction<string>> }) {
+export function DatePicker({
+  date,
+  setDate,
+}: {
+  date: string | undefined;
+  setDate: React.Dispatch<React.SetStateAction<string | undefined>>;
+}) {
   return (
     <Popover>
       <PopoverTrigger asChild>

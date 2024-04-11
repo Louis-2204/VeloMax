@@ -21,6 +21,7 @@ const SalariesTableau = ({ salaries }: { salaries: Vendeur[] }) => {
   const [alertOpen, setAlertOpen] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [selectedVendeur, setSelectedVendeur] = useState({} as Vendeur);
+  const [typeDialog, setTypeDialog] = useState<'ajout' | 'modification'>('modification');
 
   const columns: ColumnDef<Vendeur>[] = [
     {
@@ -88,6 +89,7 @@ const SalariesTableau = ({ salaries }: { salaries: Vendeur[] }) => {
               <DropdownMenuItem
                 onClick={() => {
                   setSelectedVendeur(vendeurRow);
+                  setTypeDialog('modification');
                   setDialogOpen(true);
                 }}
               >
@@ -115,6 +117,18 @@ const SalariesTableau = ({ salaries }: { salaries: Vendeur[] }) => {
         data={salaries}
         column_filter="nom"
         placeholder_filtre="Rechercher un vendeur (nom)"
+        additionalButton={
+          <Button
+            variant={'outline'}
+            onClick={() => {
+              setSelectedVendeur({} as Vendeur);
+              setTypeDialog('ajout');
+              setDialogOpen(true);
+            }}
+          >
+            Ajouter un vendeur
+          </Button>
+        }
       />
       {alertOpen && (
         <AlertDeleteUser
@@ -125,7 +139,12 @@ const SalariesTableau = ({ salaries }: { salaries: Vendeur[] }) => {
         />
       )}
       {dialogOpen && (
-        <DialogUpdateVendeur dialogOpen={dialogOpen} setDialogOpen={setDialogOpen} selectedVendeur={selectedVendeur} />
+        <DialogUpdateVendeur
+          dialogOpen={dialogOpen}
+          setDialogOpen={setDialogOpen}
+          selectedVendeur={selectedVendeur}
+          typeAction={typeDialog}
+        />
       )}
     </div>
   );

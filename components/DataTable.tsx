@@ -28,6 +28,7 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
   placeholder_filtre: string;
   column_filter: string;
+  additionalButton?: React.ReactNode;
 }
 
 export function DataTable<TData, TValue>({
@@ -35,6 +36,7 @@ export function DataTable<TData, TValue>({
   data,
   placeholder_filtre,
   column_filter,
+  additionalButton,
 }: DataTableProps<TData, TValue>): JSX.Element {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
@@ -65,51 +67,55 @@ export function DataTable<TData, TValue>({
           className="max-w-sm"
         />
 
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Colonnes <ChevronDown className="ml-2 h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent
-            sideOffset={5}
-            align="end"
-            className="bg-white dark:bg-[#262626] border shadow p-1 rounded-md !z-[10000000000]"
-          >
-            <div className="">
-              {table
-                .getAllColumns()
-                .filter((column) => column.getCanHide())
-                .map((column) => {
-                  return (
-                    <DropdownMenuCheckboxItem
-                      key={column.id}
-                      checked={column.getIsVisible()}
-                      onCheckedChange={(value) => column.toggleVisibility(!!value)}
-                    >
-                      <div className="flex items-center cursor-pointer rounded-md hover:bg-gray-50 dark:hover:bg-[#4c4c4c] py-1 px-2">
-                        <div className="w-6">
-                          {column.getIsVisible() && (
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              strokeWidth={1.5}
-                              stroke="currentColor"
-                              className="w-4 h-4"
-                            >
-                              <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                            </svg>
-                          )}
+        <div className="ml-auto flex gap-2">
+          {additionalButton}
+
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline">
+                Colonnes <ChevronDown className="ml-2 h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              sideOffset={5}
+              align="end"
+              className="bg-white dark:bg-[#262626] border shadow p-1 rounded-md !z-[10000000000]"
+            >
+              <div className="">
+                {table
+                  .getAllColumns()
+                  .filter((column) => column.getCanHide())
+                  .map((column) => {
+                    return (
+                      <DropdownMenuCheckboxItem
+                        key={column.id}
+                        checked={column.getIsVisible()}
+                        onCheckedChange={(value) => column.toggleVisibility(!!value)}
+                      >
+                        <div className="flex items-center cursor-pointer rounded-md hover:bg-gray-50 dark:hover:bg-[#4c4c4c] py-1 px-2">
+                          <div className="w-6">
+                            {column.getIsVisible() && (
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth={1.5}
+                                stroke="currentColor"
+                                className="w-4 h-4"
+                              >
+                                <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                              </svg>
+                            )}
+                          </div>
+                          <p className="text-sm"> {column.id}</p>
                         </div>
-                        <p className="text-sm"> {column.id}</p>
-                      </div>
-                    </DropdownMenuCheckboxItem>
-                  );
-                })}
-            </div>
-          </DropdownMenuContent>
-        </DropdownMenu>
+                      </DropdownMenuCheckboxItem>
+                    );
+                  })}
+              </div>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
 
       <div className="rounded-md border">
