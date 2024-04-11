@@ -76,3 +76,8 @@ export type ParticulierTableau = {
   total_articles: number;
   total_prix: number;
 };
+
+export type ProfessionnelsTableau = Professionnel & {
+  total_articles: number;
+  total_prix: number;
+};

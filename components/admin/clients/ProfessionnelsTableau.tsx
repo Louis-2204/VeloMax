@@ -11,18 +11,18 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { DataTable } from '@/components/DataTable';
 import { useState } from 'react';
-import { Professionnel } from '@/types/entities';
 import dynamic from 'next/dynamic';
 import { Badge } from '@/components/ui/badge';
+import { ProfessionnelsTableau as ProfessionnelsTableauType } from '@/types/entities';
 const AlertDeleteUser = dynamic(() => import('../AlertDeleteUser'));
 const DialogUpdateProfessionnel = dynamic(() => import('./DialogUpdateProfessionnel'));
 
-const ProfessionnelsTableau = ({ professionnels }: { professionnels: Professionnel[] }) => {
+const ProfessionnelsTableau = ({ professionnels }: { professionnels: ProfessionnelsTableauType[] }) => {
   const [alertOpen, setAlertOpen] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [selectedProfessionnel, setSelectedProfessionnel] = useState({} as Professionnel);
+  const [selectedProfessionnel, setSelectedProfessionnel] = useState({} as ProfessionnelsTableauType);
 
-  const columns: ColumnDef<Professionnel>[] = [
+  const columns: ColumnDef<ProfessionnelsTableauType>[] = [
     {
       accessorKey: 'nom_compagnie',
       header: ({ column }) => {
@@ -73,6 +73,30 @@ const ProfessionnelsTableau = ({ professionnels }: { professionnels: Professionn
         const professionnel = row.original;
         return <Badge>{professionnel.remise_commerciale ? professionnel.remise_commerciale : 'Aucune'}</Badge>;
       },
+    },
+    {
+      accessorKey: 'total_articles',
+      header: ({ column }) => {
+        return (
+          <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+            Total articles
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        );
+      },
+      id: 'Total articles',
+    },
+    {
+      accessorKey: 'total_prix',
+      header: ({ column }) => {
+        return (
+          <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+            Total prix
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        );
+      },
+      id: 'Total prix',
     },
     {
       id: 'actions',
