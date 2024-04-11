@@ -1,5 +1,6 @@
+// data type in DB
+
 export type Particulier = {
-  role: 'particulier';
   id_particulier: string;
   nom: string;
   prenom: string;
@@ -8,6 +9,9 @@ export type Particulier = {
   cp: string;
   province: string;
   telephone: string;
+  id_fidelo: string;
+  date_souscription: string;
+  date_fin_souscription: string;
 };
 
 export type Vendeur = {
@@ -18,10 +22,7 @@ export type Vendeur = {
   date_embauche: string;
 };
 
-export type VendeurUser = Vendeur & { role: 'vendeur' };
-
 export type Professionnel = {
-  role: 'professionnel';
   id_professionnel: string;
   nom_compagnie: string;
   adresse: string;
@@ -34,7 +35,6 @@ export type Professionnel = {
 };
 
 export type Gerant = {
-  role: 'gerant';
   id_gerant: string;
   nom: string;
   prenom: string;
@@ -42,8 +42,38 @@ export type Gerant = {
 };
 
 export type Admin = {
-  role: 'admin';
   id_admin: string;
   nom: string;
   prenom: string;
+};
+
+// data type for user
+
+export type ParticulierUser = Particulier & { role: 'particulier' };
+
+export type VendeurUser = Vendeur & { role: 'vendeur' };
+
+export type ProfessionnelUser = Professionnel & { role: 'professionnel' };
+
+export type GerantUser = Gerant & { role: 'gerant' };
+
+export type AdminUser = Admin & { role: 'admin' };
+
+//other data type
+
+export type ParticulierTableau = {
+  id_particulier: string;
+  nom: string;
+  prenom: string;
+  adresse: string;
+  ville: string;
+  cp: string;
+  province: string;
+  telephone: string;
+  date_souscription: string;
+  date_fin_souscription: string;
+  fidelo: {
+    id_fidelo: string;
+    nom: string;
+  } | null;
 };

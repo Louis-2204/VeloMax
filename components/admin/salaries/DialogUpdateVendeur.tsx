@@ -6,7 +6,7 @@ import { DatePicker } from '@/components/ui/date-picker';
 import { Button } from '@/components/ui/button';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { Vendeur } from '@/types/entities';
-import { updateVendeur } from '@/utils/updateVendeur';
+import { updateRowWhere } from '@/utils/updateRowWhere';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 const DialogUpdateVendeur = ({
@@ -34,7 +34,7 @@ const DialogUpdateVendeur = ({
       temps: newTemps,
       date_embauche: selectedDate,
     };
-    const isUpdated = await updateVendeur(data, selectedVendeur.id_vendeur);
+    const isUpdated = await updateRowWhere(data, 'vendeurs', 'id_vendeur', selectedVendeur.id_vendeur);
     setDialogOpen(false);
     if (isUpdated) {
       toast.success('Vendeur modifié avec succès');

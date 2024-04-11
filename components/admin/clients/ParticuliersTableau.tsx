@@ -11,18 +11,18 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { DataTable } from '@/components/DataTable';
 import { useState } from 'react';
-import { Vendeur } from '@/types/entities';
+import { ParticulierTableau } from '@/types/entities';
+import { Badge } from '@/components/ui/badge';
 import dynamic from 'next/dynamic';
-
 const AlertDeleteUser = dynamic(() => import('../AlertDeleteUser'));
-const DialogUpdateVendeur = dynamic(() => import('./DialogUpdateVendeur'));
+const DialogUpdateParticulier = dynamic(() => import('./DialogUpdateParticulier'));
 
-const SalariesTableau = ({ salaries }: { salaries: Vendeur[] }) => {
+const ParticuliersTableau = ({ particuliers }: { particuliers: ParticulierTableau[] }) => {
   const [alertOpen, setAlertOpen] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [selectedVendeur, setSelectedVendeur] = useState({} as Vendeur);
+  const [selectedParticulier, setSelectedParticulier] = useState({} as ParticulierTableau);
 
-  const columns: ColumnDef<Vendeur>[] = [
+  const columns: ColumnDef<ParticulierTableau>[] = [
     {
       accessorKey: 'nom',
       header: ({ column }) => {
@@ -48,24 +48,53 @@ const SalariesTableau = ({ salaries }: { salaries: Vendeur[] }) => {
       id: 'prenom',
     },
     {
-      accessorKey: 'temps',
-      header: ({ column }) => {
-        return (
-          <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-            Temps
-            <ArrowUpDown className="ml-2 h-4 w-4" />
-          </Button>
-        );
-      },
-      id: 'temps',
+      accessorKey: 'adresse',
+      header: 'Adresse',
+      id: 'adresse',
     },
     {
-      accessorKey: 'date_embauche',
-      header: "Date d'embauche",
-      id: 'date_embauche',
+      accessorKey: 'ville',
+      header: 'Ville',
+      id: 'ville',
+    },
+    {
+      accessorKey: 'cp',
+      header: 'Code postal',
+      id: 'cp',
+    },
+    {
+      accessorKey: 'province',
+      header: 'Province',
+      id: 'province',
+    },
+    {
+      accessorKey: 'telephone',
+      header: 'Téléphone',
+      id: 'telephone',
+    },
+    {
+      accessorKey: 'fidelo.nom',
+      header: 'Fidelo',
+      id: 'fidelo.nom',
       cell: ({ row }) => {
-        const vendeur = row.original;
-        return new Date(vendeur.date_embauche).toLocaleDateString();
+        const particulier = row.original;
+        if (!particulier.fidelo) return <Badge className="bg-gray-400 hover:bg-gray-400">Aucun</Badge>;
+        let color;
+        switch (particulier.fidelo.nom) {
+          case 'Fidélo Or':
+            color = 'bg-yellow-500';
+            break;
+          case 'Fidélo Platine':
+            color = 'bg-blue-500';
+            break;
+          case 'Fidélo Max':
+            color = 'bg-red-500';
+            break;
+          default:
+            color = 'bg-primary';
+            break;
+        }
+        return <Badge className={`${color} hover:${color}`}>{particulier.fidelo.nom}</Badge>;
       },
     },
     {
@@ -73,7 +102,7 @@ const SalariesTableau = ({ salaries }: { salaries: Vendeur[] }) => {
       enableHiding: false,
       header: '',
       cell: ({ row }) => {
-        const vendeurRow = row.original;
+        const particulierRow = row.original;
 
         return (
           <DropdownMenu>
@@ -87,19 +116,19 @@ const SalariesTableau = ({ salaries }: { salaries: Vendeur[] }) => {
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuItem
                 onClick={() => {
-                  setSelectedVendeur(vendeurRow);
+                  setSelectedParticulier(particulierRow);
                   setDialogOpen(true);
                 }}
               >
-                Modifier le vendeur
+                Modifier le client
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={() => {
-                  setSelectedVendeur(vendeurRow);
+                  setSelectedParticulier(particulierRow);
                   setAlertOpen(true);
                 }}
               >
-                Supprimer le vendeur
+                Supprimer le client
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -112,23 +141,27 @@ const SalariesTableau = ({ salaries }: { salaries: Vendeur[] }) => {
     <div className="w-full max-w-[1200px]">
       <DataTable
         columns={columns}
-        data={salaries}
+        data={particuliers}
         column_filter="nom"
-        placeholder_filtre="Rechercher un vendeur (nom)"
+        placeholder_filtre="Rechercher un client (nom)"
       />
       {alertOpen && (
         <AlertDeleteUser
           alertOpen={alertOpen}
           setAlertOpen={setAlertOpen}
-          selectedUser={selectedVendeur}
-          label="vendeur"
+          selectedUser={selectedParticulier}
+          label="client"
         />
       )}
       {dialogOpen && (
-        <DialogUpdateVendeur dialogOpen={dialogOpen} setDialogOpen={setDialogOpen} selectedVendeur={selectedVendeur} />
+        <DialogUpdateParticulier
+          dialogOpen={dialogOpen}
+          setDialogOpen={setDialogOpen}
+          selectedParticulier={selectedParticulier}
+        />
       )}
     </div>
   );
 };
 
-export default SalariesTableau;
+export default ParticuliersTableau;

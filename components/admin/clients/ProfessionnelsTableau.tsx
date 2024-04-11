@@ -11,61 +11,67 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { DataTable } from '@/components/DataTable';
 import { useState } from 'react';
-import { Vendeur } from '@/types/entities';
+import { Professionnel } from '@/types/entities';
 import dynamic from 'next/dynamic';
-
+import { Badge } from '@/components/ui/badge';
 const AlertDeleteUser = dynamic(() => import('../AlertDeleteUser'));
-const DialogUpdateVendeur = dynamic(() => import('./DialogUpdateVendeur'));
+const DialogUpdateProfessionnel = dynamic(() => import('./DialogUpdateProfessionnel'));
 
-const SalariesTableau = ({ salaries }: { salaries: Vendeur[] }) => {
+const ProfessionnelsTableau = ({ professionnels }: { professionnels: Professionnel[] }) => {
   const [alertOpen, setAlertOpen] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [selectedVendeur, setSelectedVendeur] = useState({} as Vendeur);
+  const [selectedProfessionnel, setSelectedProfessionnel] = useState({} as Professionnel);
 
-  const columns: ColumnDef<Vendeur>[] = [
+  const columns: ColumnDef<Professionnel>[] = [
     {
-      accessorKey: 'nom',
+      accessorKey: 'nom_compagnie',
       header: ({ column }) => {
         return (
           <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-            Nom
+            Nom de la compagnie
             <ArrowUpDown className="ml-2 h-4 w-4" />
           </Button>
         );
       },
-      id: 'nom',
+      id: 'nom_compagnie',
     },
     {
-      accessorKey: 'prenom',
-      header: ({ column }) => {
-        return (
-          <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-            Prénom
-            <ArrowUpDown className="ml-2 h-4 w-4" />
-          </Button>
-        );
-      },
-      id: 'prenom',
+      accessorKey: 'nom_contact',
+      header: 'Nom du contact',
+      id: 'nom_contact',
     },
     {
-      accessorKey: 'temps',
-      header: ({ column }) => {
-        return (
-          <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-            Temps
-            <ArrowUpDown className="ml-2 h-4 w-4" />
-          </Button>
-        );
-      },
-      id: 'temps',
+      accessorKey: 'adresse',
+      header: 'Adresse',
+      id: 'adresse',
     },
     {
-      accessorKey: 'date_embauche',
-      header: "Date d'embauche",
-      id: 'date_embauche',
+      accessorKey: 'ville',
+      header: 'Ville',
+      id: 'ville',
+    },
+    {
+      accessorKey: 'cp',
+      header: 'Code postal',
+      id: 'cp',
+    },
+    {
+      accessorKey: 'province',
+      header: 'Province',
+      id: 'province',
+    },
+    {
+      accessorKey: 'telephone',
+      header: 'Téléphone',
+      id: 'telephone',
+    },
+    {
+      accessorKey: 'remise_commerciale',
+      header: 'Remise (en %)',
+      id: 'remise_commerciale',
       cell: ({ row }) => {
-        const vendeur = row.original;
-        return new Date(vendeur.date_embauche).toLocaleDateString();
+        const professionnel = row.original;
+        return <Badge>{professionnel.remise_commerciale ? professionnel.remise_commerciale : 'Aucune'}</Badge>;
       },
     },
     {
@@ -73,7 +79,7 @@ const SalariesTableau = ({ salaries }: { salaries: Vendeur[] }) => {
       enableHiding: false,
       header: '',
       cell: ({ row }) => {
-        const vendeurRow = row.original;
+        const particulierRow = row.original;
 
         return (
           <DropdownMenu>
@@ -87,19 +93,19 @@ const SalariesTableau = ({ salaries }: { salaries: Vendeur[] }) => {
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuItem
                 onClick={() => {
-                  setSelectedVendeur(vendeurRow);
+                  setSelectedProfessionnel(particulierRow);
                   setDialogOpen(true);
                 }}
               >
-                Modifier le vendeur
+                Modifier le client
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={() => {
-                  setSelectedVendeur(vendeurRow);
+                  setSelectedProfessionnel(particulierRow);
                   setAlertOpen(true);
                 }}
               >
-                Supprimer le vendeur
+                Supprimer le client
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -112,23 +118,27 @@ const SalariesTableau = ({ salaries }: { salaries: Vendeur[] }) => {
     <div className="w-full max-w-[1200px]">
       <DataTable
         columns={columns}
-        data={salaries}
+        data={professionnels}
         column_filter="nom"
-        placeholder_filtre="Rechercher un vendeur (nom)"
+        placeholder_filtre="Rechercher un client (nom compagnie)"
       />
       {alertOpen && (
         <AlertDeleteUser
           alertOpen={alertOpen}
           setAlertOpen={setAlertOpen}
-          selectedUser={selectedVendeur}
-          label="vendeur"
+          selectedUser={selectedProfessionnel}
+          label="client"
         />
       )}
       {dialogOpen && (
-        <DialogUpdateVendeur dialogOpen={dialogOpen} setDialogOpen={setDialogOpen} selectedVendeur={selectedVendeur} />
+        <DialogUpdateProfessionnel
+          dialogOpen={dialogOpen}
+          setDialogOpen={setDialogOpen}
+          selectedProfessionnel={selectedProfessionnel}
+        />
       )}
     </div>
   );
 };
 
-export default SalariesTableau;
+export default ProfessionnelsTableau;

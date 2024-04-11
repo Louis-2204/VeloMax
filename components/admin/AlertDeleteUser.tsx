@@ -9,28 +9,35 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
-import { deleteVendeur } from '@/utils/deleteVendeur';
+import { deleteUser } from '@/utils/deleteUser';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
-import { Vendeur } from '@/types/entities';
+import { ParticulierTableau, Professionnel, Vendeur } from '@/types/entities';
 import { Dispatch, SetStateAction } from 'react';
-const AlertDeleteVendeur = ({
+const AlertDeleteUser = ({
   alertOpen,
   setAlertOpen,
-  selectedVendeur,
+  selectedUser,
+  label,
 }: {
   alertOpen: boolean;
   setAlertOpen: Dispatch<SetStateAction<boolean>>;
-  selectedVendeur: Vendeur;
+  selectedUser: Vendeur | ParticulierTableau | Professionnel;
+  label: string;
 }) => {
   const router = useRouter();
   const handleDeleteVendeur = async () => {
-    const isDeleted = await deleteVendeur(selectedVendeur.id_vendeur);
+    let id;
+    if ('id_vendeur' in selectedUser) id = selectedUser.id_vendeur;
+    if ('id_particulier' in selectedUser) id = selectedUser.id_particulier;
+    if ('id_professionnel' in selectedUser) id = selectedUser.id_professionnel;
+    if (!id) return;
+    const isDeleted = await deleteUser(id);
     setAlertOpen(false);
     if (isDeleted) {
-      toast.success('Vendeur supprimé avec succès');
+      toast.success(`${label} supprimé avec succès`);
     } else {
-      toast.error('Erreur lors de la suppression du vendeur');
+      toast.error(`Erreur lors de la suppression du ${label}`);
     }
     router.refresh();
   };
@@ -38,7 +45,7 @@ const AlertDeleteVendeur = ({
     <AlertDialog open={alertOpen}>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Etes-vous sûr de vouloir supprimer ce vendeur ?</AlertDialogTitle>
+          <AlertDialogTitle>Etes-vous sûr de vouloir supprimer ce {label} ?</AlertDialogTitle>
           <AlertDialogDescription>Cette action est irréversible.</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
@@ -50,4 +57,4 @@ const AlertDeleteVendeur = ({
   );
 };
 
-export default AlertDeleteVendeur;
+export default AlertDeleteUser;
