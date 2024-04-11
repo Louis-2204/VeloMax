@@ -183,7 +183,7 @@ export function Navbar({ user }: { user: any }) {
                 </div>
               </NavigationMenuItem>
             )}
-            {user && (user.role === 'vendeur' || user.role === 'gerant_magasin' || user.role === 'admin') && (
+            {user && (user.role === 'vendeur' || user.role === 'gerant' || user.role === 'admin') && (
               <NavigationMenuItem className="px-1">
                 <Link href="/admin">
                   <Icons.squares className="h-6 w-6 text-black dark:text-white transition-colors duration-500" />
