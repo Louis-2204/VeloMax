@@ -43,7 +43,7 @@ const ProfessionnelsTableau = ({ professionnels }: { professionnels: Professionn
     {
       accessorKey: 'adresse',
       header: 'Adresse',
-      id: 'adresse',
+      id: 'Adresse',
     },
     {
       accessorKey: 'ville',
