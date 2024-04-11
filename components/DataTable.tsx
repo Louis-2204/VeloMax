@@ -68,10 +68,14 @@ export function DataTable<TData, TValue>({
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
-              Columns <ChevronDown className="ml-2 h-4 w-4" />
+              Colonnes <ChevronDown className="ml-2 h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="bg-red-100 !z-[10000000000]">
+          <DropdownMenuContent
+            sideOffset={5}
+            align="end"
+            className="bg-white dark:bg-[#262626] border shadow p-1 rounded-md !z-[10000000000]"
+          >
             <div className="">
               {table
                 .getAllColumns()
@@ -80,11 +84,26 @@ export function DataTable<TData, TValue>({
                   return (
                     <DropdownMenuCheckboxItem
                       key={column.id}
-                      className="capitalize"
                       checked={column.getIsVisible()}
                       onCheckedChange={(value) => column.toggleVisibility(!!value)}
                     >
-                      {column.id}
+                      <div className="flex items-center cursor-pointer rounded-md hover:bg-gray-50 dark:hover:bg-[#4c4c4c] py-1 px-2">
+                        <div className="w-6">
+                          {column.getIsVisible() && (
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth={1.5}
+                              stroke="currentColor"
+                              className="w-4 h-4"
+                            >
+                              <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                            </svg>
+                          )}
+                        </div>
+                        <p className="text-sm"> {column.id}</p>
+                      </div>
                     </DropdownMenuCheckboxItem>
                   );
                 })}

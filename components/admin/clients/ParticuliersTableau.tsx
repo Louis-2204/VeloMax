@@ -33,7 +33,7 @@ const ParticuliersTableau = ({ particuliers }: { particuliers: ParticulierTablea
           </Button>
         );
       },
-      id: 'nom',
+      id: 'Nom',
     },
     {
       accessorKey: 'prenom',
@@ -45,37 +45,37 @@ const ParticuliersTableau = ({ particuliers }: { particuliers: ParticulierTablea
           </Button>
         );
       },
-      id: 'prenom',
+      id: 'Prénom',
     },
     {
       accessorKey: 'adresse',
       header: 'Adresse',
-      id: 'adresse',
+      id: 'Adresse',
     },
     {
       accessorKey: 'ville',
       header: 'Ville',
-      id: 'ville',
+      id: 'Ville',
     },
     {
       accessorKey: 'cp',
       header: 'Code postal',
-      id: 'cp',
+      id: 'Code postal',
     },
     {
       accessorKey: 'province',
       header: 'Province',
-      id: 'province',
+      id: 'Province',
     },
     {
       accessorKey: 'telephone',
       header: 'Téléphone',
-      id: 'telephone',
+      id: 'Téléphone',
     },
     {
       accessorKey: 'fidelo.nom',
       header: 'Fidelo',
-      id: 'fidelo.nom',
+      id: 'Fidélo',
       cell: ({ row }) => {
         const particulier = row.original;
         if (!particulier.fidelo) return <Badge className="bg-gray-400 hover:bg-gray-400">Aucun</Badge>;

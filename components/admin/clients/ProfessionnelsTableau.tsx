@@ -33,12 +33,12 @@ const ProfessionnelsTableau = ({ professionnels }: { professionnels: Professionn
           </Button>
         );
       },
-      id: 'nom_compagnie',
+      id: 'Nom de la compagnie',
     },
     {
       accessorKey: 'nom_contact',
       header: 'Nom du contact',
-      id: 'nom_contact',
+      id: 'Nom du contact',
     },
     {
       accessorKey: 'adresse',
@@ -48,27 +48,27 @@ const ProfessionnelsTableau = ({ professionnels }: { professionnels: Professionn
     {
       accessorKey: 'ville',
       header: 'Ville',
-      id: 'ville',
+      id: 'Ville',
     },
     {
       accessorKey: 'cp',
       header: 'Code postal',
-      id: 'cp',
+      id: 'Code postal',
     },
     {
       accessorKey: 'province',
       header: 'Province',
-      id: 'province',
+      id: 'Province',
     },
     {
       accessorKey: 'telephone',
       header: 'Téléphone',
-      id: 'telephone',
+      id: 'Téléphone',
     },
     {
       accessorKey: 'remise_commerciale',
       header: 'Remise (en %)',
-      id: 'remise_commerciale',
+      id: 'Remise',
       cell: ({ row }) => {
         const professionnel = row.original;
         return <Badge>{professionnel.remise_commerciale ? professionnel.remise_commerciale : 'Aucune'}</Badge>;

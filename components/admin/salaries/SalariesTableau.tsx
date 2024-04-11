@@ -33,7 +33,7 @@ const SalariesTableau = ({ salaries }: { salaries: Vendeur[] }) => {
           </Button>
         );
       },
-      id: 'nom',
+      id: 'Nom',
     },
     {
       accessorKey: 'prenom',
@@ -45,7 +45,7 @@ const SalariesTableau = ({ salaries }: { salaries: Vendeur[] }) => {
           </Button>
         );
       },
-      id: 'prenom',
+      id: 'Prénom',
     },
     {
       accessorKey: 'temps',
@@ -57,12 +57,12 @@ const SalariesTableau = ({ salaries }: { salaries: Vendeur[] }) => {
           </Button>
         );
       },
-      id: 'temps',
+      id: 'Temps',
     },
     {
       accessorKey: 'date_embauche',
       header: "Date d'embauche",
-      id: 'date_embauche',
+      id: "Date d'embauche",
       cell: ({ row }) => {
         const vendeur = row.original;
         return new Date(vendeur.date_embauche).toLocaleDateString();
