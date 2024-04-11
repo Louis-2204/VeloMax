@@ -70,10 +70,9 @@ export type ParticulierTableau = {
   cp: string;
   province: string;
   telephone: string;
-  date_souscription: string;
-  date_fin_souscription: string;
-  fidelo: {
-    id_fidelo: string;
-    nom: string;
-  } | null;
+  date_souscription?: string;
+  date_fin_souscription?: string;
+  fidelo_nom?: string;
+  total_articles: number;
+  total_prix: number;
 };
