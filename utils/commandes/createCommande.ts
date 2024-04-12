@@ -1,15 +1,12 @@
 'use server';
 
-import { createClient } from '@supabase/supabase-js';
+import { createClient } from "../supabase/server";
 import { getUserConnected } from '../getUserConnected';
 
 export async function createCommande(infos: { items: { id: string; nom: string; quantite: number; prix: number; image: string; type: "vélo" | "pièce" }[]; nom: string; prenom: string; adresse: string; ville: string; codePostal: string }) {
     'use server';
 
-    const supabase = createClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
-    );
+    const supabase = createClient();
 
     const user = await getUserConnected();
 

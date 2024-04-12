@@ -81,3 +81,12 @@ export type ProfessionnelsTableau = Professionnel & {
   total_articles: number;
   total_prix: number;
 };
+
+export type CommandesTableau = {
+  id_commande: string;
+  adresse: string;
+  ville: string;
+  cp: string;
+  created_at: string;
+  status: "En attente de traitement" | "En attente de restockage" | "En traitement" | "Envoyée";
+};

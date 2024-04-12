@@ -6,7 +6,7 @@ import Livraison from '@/components/panier/Livraison';
 import Paiement from '@/components/panier/Paiement';
 import { ShoppingCartContext } from '@/context/ShoppingCartContext';
 import { useToast } from '@/components/ui/use-toast';
-import { createCommande } from '@/utils/commandes/createCommand';
+import { createCommande } from '@/utils/commandes/createCommande';
 import { useRouter } from 'next/navigation';
 
 const page = () => {
