@@ -1,4 +1,4 @@
-import { ParticulierTableau, Professionnel } from '@/types/entities';
+import { ParticulierTableau, ProfessionnelsTableau as ProfessionnelsTableauType } from '@/types/entities';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import ParticuliersTableau from '@/components/admin/clients/ParticuliersTableau';
 import ProfessionnelsTableau from '@/components/admin/clients/ProfessionnelsTableau';
@@ -21,7 +21,7 @@ const page = async () => {
           <ParticuliersTableau particuliers={particuliers as unknown as ParticulierTableau[]} />
         </TabsContent>
         <TabsContent value="professionnels">
-          <ProfessionnelsTableau professionnels={professionnels as unknown as Professionnel[]} />
+          <ProfessionnelsTableau professionnels={professionnels as unknown as ProfessionnelsTableauType[]} />
         </TabsContent>
       </Tabs>
     </div>
