@@ -12,6 +12,20 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu';
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
 import { useContext, useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { ShoppingCartContext } from '@/context/ShoppingCartContext';
@@ -83,22 +97,113 @@ export function Navbar({ user }: { user: any }) {
     }
   };
 
+  const closeSheet = () => {
+    (document.getElementsByClassName('closeSheetButton')[0] as HTMLElement)?.click();
+  }
+
   return pahtname !== '/login' ? (
     <div
-      className={`flex sticky w-full min-h-20 py-4 px-16 top-0 z-50 ${background} justify-center transition-colors duration-500`}
+      className={`flex sticky w-full min-h-20 py-4 px-2 sm:px-4 md:px-8 lg:px-16 top-0 z-50 ${background} justify-center transition-all duration-500`}
     >
-      <div className="w-full max-w-8xl flex divide-x-4 divide-[#505050]">
-        <div className="flex items-center justify-center px-4">
+      <div className="w-full max-w-8xl flex divide-x-0 md:divide-x-4 divide-[#505050]">
+        <div className="flex items-center justify-center px-4 divide-x-4 md:divide-x-0 divide-[#505050]">
+          <Sheet>
+            <SheetTrigger>
+              <Icons.menubar className="mr-4 h-7 w-7 cursor-pointer text-vm_text_gray dark:text-white transition-colors duration-500 flex md:hidden" />
+            </SheetTrigger>
+            <SheetContent side={'left'} className="w-[300px] !max-w-[100vw] sm:w-[300px] md:w-[400px] transition-all duration-500">
+              <SheetHeader>
+                <SheetTitle>
+                  <div
+                    className="pl-4 md:pl-0 text-4xl h-full font-bold text-vm_text_gray dark:text-white transition-all duration-500 flex items-center"
+                  >
+                    VeloMax
+                  </div>
+                </SheetTitle>
+                <SheetDescription>
+                  <Accordion type="single" collapsible>
+                    <AccordionItem value="Vélos">
+                      <AccordionTrigger className="font-semibold text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500">
+                        Vélos
+                      </AccordionTrigger>
+                      <AccordionContent className='text-start flex flex-col gap-2'>
+                        <Link href="/shop" className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
+                          BMX
+                        </Link>
+                        <Link href="/contact" className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
+                          Classique
+                        </Link>
+                        <Link href="/contact" className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
+                          VTT
+                        </Link>
+                        <Link href="/contact" className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
+                          Course
+                        </Link>
+                      </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="Pièces détachés" className='mb-4'>
+                      <AccordionTrigger className="font-semibold text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500">
+                        Pièces détachés
+                      </AccordionTrigger>
+                      <AccordionContent className='text-start flex flex-col gap-2'>
+                        <Link href="/contact" className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
+                          Cadre
+                        </Link>
+                        <Link href="/contact" className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
+                          Guidon
+                        </Link>
+                        <Link href="/contact" className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
+                          Freins
+                        </Link>
+                        <Link href="/contact" className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
+                          Selle
+                        </Link>
+                        <Link href="/contact" className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
+                          Dérailleur avant
+                        </Link>
+                        <Link href="/contact" className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
+                          Dérailleur arrière
+                        </Link>
+                        <Link href="/contact" className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
+                          Roue avant
+                        </Link>
+                        <Link href="/contact" className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
+                          Roue arrière
+                        </Link>
+                        <Link href="/contact" className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
+                          Réflecteurs
+                        </Link>
+                        <Link href="/contact" className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
+                          Pédalier
+                        </Link>
+                        <Link href="/contact" className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
+                          Ordinateur
+                        </Link>
+                        <Link href="/contact" className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
+                          Panier
+                        </Link>
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+                  <div className="w-full text-start">
+                    <Link href="/contact" className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
+                      Contact
+                    </Link>
+                  </div>
+                </SheetDescription>
+              </SheetHeader>
+            </SheetContent>
+          </Sheet>
           <Link
             href={'/'}
-            className="text-4xl font-bold text-vm_text_gray dark:text-white transition-colors duration-500"
+            className="pl-4 md:pl-0 text-xl sm:text-2xl md:text-3xl lg:text-4xl h-full font-bold text-vm_text_gray dark:text-white transition-all duration-500 flex items-center"
           >
             VeloMax
           </Link>
         </div>
 
         <NavigationMenu className="max-w-full flex items-center justify-between w-full">
-          <NavigationMenuList>
+          <NavigationMenuList className='hidden md:flex'>
             <NavigationMenuItem>
               <NavigationMenuTrigger className="text-lg text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500">
                 <Link href="/shop?velos=VTT%2CVélo+de+course%2CClassique%2CBMX">Vélos</Link>
@@ -206,7 +311,7 @@ export function Navbar({ user }: { user: any }) {
           </NavigationMenuList>
         </NavigationMenu>
       </div>
-    </div>
+    </div >
   ) : null;
 }
 
