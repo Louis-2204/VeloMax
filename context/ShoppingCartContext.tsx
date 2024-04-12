@@ -3,16 +3,16 @@ import { createContext, ReactNode, useEffect, useState } from 'react';
 
 export const ShoppingCartContext = createContext({
   getCart: () => {
-    return [] as { id: string; nom: string; quantite: number; prix: number; image: string }[];
+    return [] as { id: string; nom: string; quantite: number; prix: number; image: string; type: 'vélo' | 'pièce' }[];
   },
-  addToCart: (product: { id: string; nom: string; prix: number; image: string }) => { },
+  addToCart: (product: { id: string; nom: string; prix: number; image: string, type: 'vélo' | 'pièce' }) => { },
   removeFromCart: (id: string) => { },
   clearCart: () => { },
 });
 
 
 export const ShoppingCartProvider = ({ children }: { children: ReactNode }) => {
-  const [cart, setCart] = useState<{ id: string; nom: string; quantite: number; prix: number; image: string }[]>([]);
+  const [cart, setCart] = useState<{ id: string; nom: string; quantite: number; prix: number; image: string, type: 'vélo' | 'pièce' }[]>([]);
   const [isInit, setIsInit] = useState(false);
 
   useEffect(() => {
@@ -31,12 +31,12 @@ export const ShoppingCartProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
 
-  const addToCart = ({ id, nom, prix, image }: { id: string; nom: string; prix: number; image: string }) => {
+  const addToCart = ({ id, nom, prix, image, type }: { id: string; nom: string; prix: number; image: string, type: 'vélo' | 'pièce' }) => {
     const existingProduct = cart.find((product) => product.id === id);
     if (existingProduct) {
       setCart(cart.map((product) => (product.id === id ? { ...product, quantite: product.quantite + 1 } : product)));
     } else {
-      setCart([...cart, { id, nom, quantite: 1, prix, image }]);
+      setCart([...cart, { id, nom, quantite: 1, prix, image, type }]);
     }
   };
 

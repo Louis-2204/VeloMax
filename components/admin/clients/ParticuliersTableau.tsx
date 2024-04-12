@@ -105,9 +105,9 @@ const ParticuliersTableau = ({ particuliers }: { particuliers: ParticulierTablea
         }
         return (
           <Badge
-            title={`${moment(particulier.date_souscription).format('L')} - ${moment(
+            title={`${moment(particulier.date_souscription).format('DD/MM/YYYY')} - ${moment(
               particulier.date_fin_souscription
-            ).format('L')}`}
+            ).format('DD/MM/YYYY')}`}
             className={`${color} hover:${color} gap-2`}
           >
             {particulier.fidelo_nom}

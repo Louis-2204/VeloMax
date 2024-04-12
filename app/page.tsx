@@ -1,7 +1,8 @@
 import { BackgroundBeams } from '@/components/ui/background-beams';
 import { BentoGrid, BentoGridItem } from '@/components/ui/bento-grid';
 import BMX from '@/public/BMX.png';
-import Courses from '@/public/Courses.png';
+import Course from '@/public/Course.png';
+import Classique from '@/public/Classique.png';
 import VTT from '@/public/VTT.png';
 import Pieces_detachees from '@/public/Pièces détachées.png';
 import Image from 'next/image';
@@ -59,7 +60,7 @@ export default async function Index() {
               key={i}
               title={item.title}
               image={item.image}
-              className={i === 0 ? 'col-span-3 lg:col-span-2' : i === 1 ? 'col-span-3 lg:col-span-1 lg:row-span-2' : 'col-span-3 lg:col-span-1'}
+              className={i === 0 ? 'col-span-3 lg:col-span-2' : 'col-span-3 lg:col-span-1'}
             />
           ))}
         </BentoGrid>
@@ -140,7 +141,7 @@ const items = [
   },
   {
     title: 'COURSES',
-    image: Courses.src,
+    image: Course.src,
   },
   {
     title: 'Pièces détachées',
@@ -149,5 +150,9 @@ const items = [
   {
     title: 'BMX',
     image: BMX.src,
+  },
+  {
+    title: 'Classique',
+    image: Classique.src,
   },
 ];

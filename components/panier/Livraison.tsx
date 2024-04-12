@@ -1,10 +1,30 @@
-import React from 'react';
+"use client";
 import { Separator } from '../ui/separator';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
-import { SubmitButton } from '@/app/login/submit-button';
+import { useState } from 'react';
+import { useToast } from '../ui/use-toast';
 
-const Livraison = ({ items, proceedToPayment }: { items: { nom: string, prix: number, image: string }[], proceedToPayment: () => void }) => {
+const Livraison = ({ items, proceedToPayment }: { items: { nom: string, prix: number, image: string, quantite: number }[], proceedToPayment: (nom: string, prenom: string, adresse: string, ville: string, codePostal: string) => void }) => {
+
+    const { toast } = useToast();
+
+    const checkProceedToPayment = () => {
+        if (nom === '' || prenom === '' || adresseDeLivraison === '' || ville === '' || codePostal === '') {
+            return toast({
+                title: 'Erreur',
+                description: 'Veuillez renseigner tous les champs',
+            });
+        }
+        proceedToPayment(nom, prenom, adresseDeLivraison, ville, codePostal);
+    }
+
+    const [nom, setNom] = useState('');
+    const [prenom, setPrenom] = useState('');
+    const [adresseDeLivraison, setAdresseDeLivraison] = useState('');
+    const [ville, setVille] = useState('');
+    const [codePostal, setCodePostal] = useState('');
+
     return (
         <div className="flex flex-col-reverse lg:flex-row gap-4 justify-between w-full px-16">
 
@@ -22,6 +42,8 @@ const Livraison = ({ items, proceedToPayment }: { items: { nom: string, prix: nu
                                 name='nom'
                                 placeholder="Entrez votre nom"
                                 className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
+                                value={nom}
+                                onChange={(e) => setNom(e.target.value)}
                             />
                         </div>
 
@@ -35,6 +57,8 @@ const Livraison = ({ items, proceedToPayment }: { items: { nom: string, prix: nu
                                 name='prenom'
                                 placeholder="Entrez votre prénom"
                                 className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
+                                value={prenom}
+                                onChange={(e) => setPrenom(e.target.value)}
                             />
                         </div>
                     </div>
@@ -49,6 +73,8 @@ const Livraison = ({ items, proceedToPayment }: { items: { nom: string, prix: nu
                             name='adresseDeLivraison'
                             placeholder="Entrez l'adresse de livraison"
                             className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
+                            value={adresseDeLivraison}
+                            onChange={(e) => setAdresseDeLivraison(e.target.value)}
                         />
                     </div>
 
@@ -63,6 +89,8 @@ const Livraison = ({ items, proceedToPayment }: { items: { nom: string, prix: nu
                                 name='ville'
                                 placeholder="Entrez la ville de livraison"
                                 className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
+                                value={ville}
+                                onChange={(e) => setVille(e.target.value)}
                             />
                         </div>
 
@@ -76,6 +104,8 @@ const Livraison = ({ items, proceedToPayment }: { items: { nom: string, prix: nu
                                 name='codePostal'
                                 placeholder="Entrez le code postal de livraison"
                                 className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
+                                value={codePostal}
+                                onChange={(e) => setCodePostal(e.target.value)}
                             />
                         </div>
                     </div>
@@ -90,21 +120,21 @@ const Livraison = ({ items, proceedToPayment }: { items: { nom: string, prix: nu
                     <div className="pb-4">
                         <div className="flex justify-between items-center">
                             <div className="text-vm_text_gray font-semibold">Sous-total :</div>
-                            <div className="text-vm_text_gray font-extrabold">{(items.reduce((acc, item) => acc + item.prix, 0)).toFixed(2).toString()} €</div>
+                            <div className="text-vm_text_gray font-extrabold">{(items.reduce((acc, item) => acc + item.prix * item.quantite, 0)).toFixed(2).toString()} €</div>
                         </div>
                         <div className="flex justify-between items-center">
                             <div className="text-vm_text_gray font-semibold">TVA (20%) :</div>
-                            <div className="text-vm_text_gray font-extrabold">{(items.reduce((acc, item) => acc + item.prix * 0.2, 0)).toFixed(2).toString()} €</div>
+                            <div className="text-vm_text_gray font-extrabold">{((items.reduce((acc, item) => acc + item.prix * item.quantite, 0)) * 0.2).toFixed(2).toString()} €</div>
                         </div>
                     </div>
 
                     <div className="flex justify-between p-2 bg-vm_bg_lightgray rounded-md">
                         <div className="text-vm_text_gray font-semibold">Total :</div>
-                        <div className="text-vm_text_gray font-extrabold">{(items.reduce((acc, item) => acc + item.prix * 1.2, 0)).toFixed(2).toString()} €</div>
+                        <div className="text-vm_text_gray font-extrabold">{((items.reduce((acc, item) => acc + item.prix * item.quantite, 0)) * 1.2).toFixed(2).toString()} €</div>
                     </div>
 
                     <div className="mt-4">
-                        <button className="w-full bg-vm_secondary rounded-md py-1 text-white font-bold" onClick={() => proceedToPayment()}>
+                        <button className="w-full bg-vm_secondary rounded-md py-1 text-white font-bold" onClick={() => checkProceedToPayment()}>
                             Passer au paiement
                         </button>
                     </div>
