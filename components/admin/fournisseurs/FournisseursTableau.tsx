@@ -31,6 +31,7 @@ const FournisseursTableau = ({
   const [alertOpen, setAlertOpen] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [drawerUpdateOpen, setDrawerUpdateOpen] = useState(false);
+  const [drawerType, setDrawerType] = useState<'ajout' | 'modification'>('ajout');
   const [selectedFournisseur, setSelectedFournisseur] = useState({} as FournisseurTableau);
 
   const showDrawerUpdate = () => {
@@ -121,6 +122,7 @@ const FournisseursTableau = ({
               <DropdownMenuItem
                 onClick={() => {
                   setSelectedFournisseur(fournisseurRow);
+                  setDrawerType('modification');
                   showDrawerUpdate();
                 }}
               >
@@ -153,6 +155,7 @@ const FournisseursTableau = ({
             variant={'outline'}
             onClick={() => {
               setSelectedFournisseur({} as FournisseurTableau);
+              setDrawerType('ajout');
               showDrawerUpdate();
             }}
           >
@@ -175,6 +178,7 @@ const FournisseursTableau = ({
           onClose={onCloseDrawerUpdate}
           fournisseur={selectedFournisseur}
           pieces={pieces}
+          actionType={drawerType}
         />
       )}
 
