@@ -125,6 +125,25 @@
   .max-w-8xl {
     max-width: 90rem;
   }
+
+
+  @keyframes emptyCircle {
+    0% {
+      stroke-dashoffset: 0;
+    }
+
+    100% {
+      stroke-dashoffset: 251.2;
+    }
+
+  }
+
+  .progress-ring__circle {
+    animation: emptyCircle 5.1s linear forwards;
+    transition: stroke-dashoffset 0.35s;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+  }
 }
 
 @layer base {

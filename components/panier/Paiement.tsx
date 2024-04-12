@@ -1,9 +1,37 @@
+"use client";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Separator } from "../ui/separator";
 import { Icons } from "../icons/icons";
+import { useState } from "react";
+import { useToast } from '../ui/use-toast';
+import { useRouter } from 'next/navigation';
 
-const Paiement = ({ items, pay }: { items: { nom: string, prix: number, image: string }[], pay: () => void }) => {
+const Paiement = ({ items, confirmCommand }: { items: { nom: string, prix: number, image: string, quantite: number }[], confirmCommand: () => void }) => {
+
+    const { toast } = useToast();
+
+    const router = useRouter();
+
+    router.prefetch('/profil/mes-commandes');
+
+
+    const [nomSurLaCarte, setNomSurLaCarte] = useState('');
+    const [numeroDeCarte, setNumeroDeCarte] = useState('');
+    const [moisExpiration, setMoisExpiration] = useState('');
+    const [anneeExpiration, setAnneeExpiration] = useState('');
+    const [CVV, setCVV] = useState('');
+
+    const checkConfirmCommand = () => {
+        if (nomSurLaCarte === '' || numeroDeCarte === '' || moisExpiration === '' || anneeExpiration === '' || CVV === '') {
+            return toast({
+                title: 'Erreur',
+                description: 'Veuillez renseigner tous les champs',
+            });
+        }
+        confirmCommand();
+    }
+
     return (
         <div className="flex flex-col-reverse lg:flex-row gap-4 justify-between w-full px-16">
 
@@ -20,6 +48,8 @@ const Paiement = ({ items, pay }: { items: { nom: string, prix: number, image: s
                             name='nomSurLaCarte'
                             placeholder="Entrez le nom sur la carte"
                             className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
+                            value={nomSurLaCarte}
+                            onChange={(e) => setNomSurLaCarte(e.target.value)}
                         />
                     </div>
 
@@ -33,6 +63,8 @@ const Paiement = ({ items, pay }: { items: { nom: string, prix: number, image: s
                             name='numeroDeCarte'
                             placeholder="Entrez les 16 chiffres de la carte"
                             className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
+                            value={numeroDeCarte}
+                            onChange={(e) => setNumeroDeCarte(e.target.value)}
                         />
                     </div>
 
@@ -51,6 +83,8 @@ const Paiement = ({ items, pay }: { items: { nom: string, prix: number, image: s
                                 name='moisExpiration'
                                 placeholder="Mois (XX)"
                                 className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
+                                value={moisExpiration}
+                                onChange={(e) => setMoisExpiration(e.target.value)}
                             />
                         </div>
 
@@ -64,6 +98,8 @@ const Paiement = ({ items, pay }: { items: { nom: string, prix: number, image: s
                                 name='anneeExpiration'
                                 placeholder="Année (XXXX)"
                                 className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
+                                value={anneeExpiration}
+                                onChange={(e) => setAnneeExpiration(e.target.value)}
                             />
                         </div>
 
@@ -80,6 +116,8 @@ const Paiement = ({ items, pay }: { items: { nom: string, prix: number, image: s
                                 name='CVV'
                                 placeholder="CVV"
                                 className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
+                                value={CVV}
+                                onChange={(e) => setCVV(e.target.value)}
                             />
                         </div>
                     </div>
@@ -94,21 +132,21 @@ const Paiement = ({ items, pay }: { items: { nom: string, prix: number, image: s
                     <div className="pb-4">
                         <div className="flex justify-between items-center">
                             <div className="text-vm_text_gray font-semibold">Sous-total :</div>
-                            <div className="text-vm_text_gray font-extrabold">{(items.reduce((acc, item) => acc + item.prix, 0)).toFixed(2).toString()} €</div>
+                            <div className="text-vm_text_gray font-extrabold">{(items.reduce((acc, item) => acc + item.prix * item.quantite, 0)).toFixed(2).toString()} €</div>
                         </div>
                         <div className="flex justify-between items-center">
                             <div className="text-vm_text_gray font-semibold">TVA (20%) :</div>
-                            <div className="text-vm_text_gray font-extrabold">{(items.reduce((acc, item) => acc + item.prix * 0.2, 0)).toFixed(2).toString()} €</div>
+                            <div className="text-vm_text_gray font-extrabold">{((items.reduce((acc, item) => acc + item.prix * item.quantite, 0)) * 0.2).toFixed(2).toString()} €</div>
                         </div>
                     </div>
 
                     <div className="flex justify-between p-2 bg-vm_bg_lightgray rounded-md">
                         <div className="text-vm_text_gray font-semibold">Total :</div>
-                        <div className="text-vm_text_gray font-extrabold">{(items.reduce((acc, item) => acc + item.prix * 1.2, 0)).toFixed(2).toString()} €</div>
+                        <div className="text-vm_text_gray font-extrabold">{((items.reduce((acc, item) => acc + item.prix * item.quantite, 0)) * 1.2).toFixed(2).toString()} €</div>
                     </div>
 
                     <div className="mt-4">
-                        <button className="w-full bg-vm_secondary rounded-md py-1 text-white font-bold" onClick={() => pay()}>
+                        <button className="w-full bg-vm_secondary rounded-md py-1 text-white font-bold" onClick={() => checkConfirmCommand()}>
                             Payer
                         </button>
                     </div>

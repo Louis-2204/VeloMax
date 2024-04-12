@@ -4,6 +4,10 @@ import * as React from 'react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { Icons } from '@/components/icons/icons';
+import BMX from '@/public/BMX.png';
+import Course from '@/public/Course.png';
+import Classique from '@/public/Classique.png';
+import VTT from '@/public/VTT.png';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -30,6 +34,7 @@ import { useContext, useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { ShoppingCartContext } from '@/context/ShoppingCartContext';
 import { Button } from './ui/button';
+import Image from 'next/image';
 
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -209,30 +214,37 @@ export function Navbar({ user }: { user: any }) {
                 <Link href="/shop?velos=VTT%2CVélo+de+course%2CClassique%2CBMX">Vélos</Link>
               </NavigationMenuTrigger>
               <NavigationMenuContent className="flex flex-col items-center">
-                <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+                <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                   <li className="row-span-3">
-                    <NavigationMenuLink asChild>
-                      <a
-                        className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                        href="/"
-                      >
-                        <div className="mb-2 mt-4 text-lg font-medium">shadcn/ui</div>
-                        <p className="text-sm leading-tight text-muted-foreground">
-                          Beautifully designed components that you can copy and paste into your apps. Accessible.
-                          Customizable. Open Source.
-                        </p>
-                      </a>
-                    </NavigationMenuLink>
+                    <Link
+                      className="group/card min-h-[60px] relative flex justify-center items-center h-full w-full select-none flex-col rounded-md bg-gradient-to-b from-muted/50 to-muted no-underline outline-none focus:shadow-md"
+                      href="/contact"
+                    >
+                      <div className="group-hover/card:translate-x-2 font-bold text-white categories-card-title text-4xl z-10 transition-all duration-200">VTT</div>
+                      <Image src={VTT} alt={"VTT"} className="absolute w-full h-full object-cover rounded-xl" width={500} height={500} />
+                    </Link>
                   </li>
-                  <ListItem href="/docs" title="Introduction">
-                    Re-usable components built using Radix UI and Tailwind CSS.
-                  </ListItem>
-                  <ListItem href="/docs/installation" title="Installation">
-                    How to install dependencies and structure your app.
-                  </ListItem>
-                  <ListItem href="/docs/primitives/typography" title="Typography">
-                    Styles for headings, paragraphs, lists...etc
-                  </ListItem>
+                  <Link
+                    className="group/card min-h-[60px] relative flex justify-center items-center h-full w-full select-none flex-col rounded-md bg-gradient-to-b from-muted/50 to-muted no-underline outline-none focus:shadow-md"
+                    href="/contact"
+                  >
+                    <div className="group-hover/card:translate-x-2 font-bold text-white categories-card-title text-4xl z-10 transition-all duration-200">BMX</div>
+                    <Image src={BMX} alt={"BMX"} className="absolute w-full h-full object-cover rounded-xl" width={500} height={500} />
+                  </Link>
+                  <Link
+                    className="group/card min-h-[60px] relative flex justify-center items-center h-full w-full select-none flex-col rounded-md bg-gradient-to-b from-muted/50 to-muted no-underline outline-none focus:shadow-md"
+                    href="/contact"
+                  >
+                    <div className="group-hover/card:translate-x-2 font-bold text-white categories-card-title text-4xl z-10 transition-all duration-200">Course</div>
+                    <Image src={Course} alt={"Course"} className="absolute w-full h-full object-cover rounded-xl" width={500} height={500} />
+                  </Link>
+                  <Link
+                    className="group/card min-h-[60px] relative flex justify-center items-center h-full w-full select-none flex-col rounded-md bg-gradient-to-b from-muted/50 to-muted no-underline outline-none focus:shadow-md"
+                    href="/contact"
+                  >
+                    <div className="group-hover/card:translate-x-2 font-bold text-white categories-card-title text-4xl z-10 transition-all duration-200">Classique</div>
+                    <Image src={Classique} alt={"Classique"} className="absolute w-full h-full object-cover rounded-xl" width={500} height={500} />
+                  </Link>
                 </ul>
               </NavigationMenuContent>
             </NavigationMenuItem>
