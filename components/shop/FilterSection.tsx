@@ -1,11 +1,11 @@
 'use client';
-import { useState } from 'react';
 import { Button } from '../ui/button';
 import { CheckBoxInRow } from '../ui/CheckBoxInRow';
 import { Separator } from '../ui/separator';
 import { useRouter } from 'next/navigation';
 const FilterSection = ({ searchParams }: { searchParams: { prix?: string; pieces?: string; velos?: string } }) => {
   const router = useRouter();
+
   const handleSubmit = (formData: FormData) => {
     let velosParams = [];
     if (formData.get('VTT')) velosParams.push('VTT');

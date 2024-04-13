@@ -4,7 +4,7 @@ import { useFormStatus } from "react-dom";
 import { type ComponentProps } from "react";
 
 type Props = ComponentProps<"button"> & {
-  pendingText?: string;
+  pendingText?: any;
 };
 
 export function SubmitButton({ children, pendingText, ...props }: Props) {

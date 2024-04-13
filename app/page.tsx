@@ -28,7 +28,7 @@ export default async function Index() {
       </div>
 
       <div className="flex flex-col bg-vm_lightgreen items-center py-10 mb-80 px-10 transition-colors duration-500">
-        <h3 className="text-4xl font-semibold text-center text-vm_text_gray dark:text-white max-w-8xl">
+        <h3 className="text-4xl font-semibold text-center text-vm_text_gray dark:text-white transition-colors duration-500 max-w-8xl">
           Meilleurs ventes
         </h3>
 
@@ -60,6 +60,7 @@ export default async function Index() {
               key={i}
               title={item.title}
               image={item.image}
+              href={item.href}
               className={i === 0 ? 'col-span-3 lg:col-span-2' : 'col-span-3 lg:col-span-1'}
             />
           ))}
@@ -67,7 +68,7 @@ export default async function Index() {
       </div>
 
       <div className="w-full flex flex-col px-20 max-w-8xl mx-auto">
-        <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-left text-vm_text_gray dark:text-white pb-4 transition-all">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-left text-vm_text_gray dark:text-white pb-4 transition-all duration-500">
           Rejoignez la <u className="underline-offset-8 decoration-vm_secondary">communauté VeloMax !</u>
         </h1>
         <InfiniteMovingCards
@@ -138,21 +139,26 @@ const items = [
   {
     title: 'VTT',
     image: VTT.src,
+    href: '/shop?velos=VTT',
   },
   {
     title: 'COURSES',
     image: Course.src,
+    href: '/shop?velos=Vélo+de+course',
   },
   {
     title: 'Pièces détachées',
     image: Pieces_detachees.src,
+    href: '/shop?pieces=Cadre%2CGuidon%2CFreins%2CSelle%2CDérailleur+Avant%2CDérailleur+Arrière%2CRoue+avant%2CRoue+arrière%2CRéflecteurs%2CPédalier%2COrdinateur%2CPanier',
   },
   {
     title: 'BMX',
     image: BMX.src,
+    href: '/shop?velos=BMX',
   },
   {
     title: 'Classique',
     image: Classique.src,
+    href: '/shop?velos=Classique',
   },
 ];

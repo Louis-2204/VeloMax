@@ -132,16 +132,24 @@ export function Navbar({ user }: { user: any }) {
                         Vélos
                       </AccordionTrigger>
                       <AccordionContent className='text-start flex flex-col gap-2'>
-                        <Link href="/shop" className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
+                        <Link
+                          href="/shop?velos=BMX"
+                          className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
                           BMX
                         </Link>
-                        <Link href="/contact" className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
+                        <Link
+                          href="/shop?velos=Classique"
+                          className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
                           Classique
                         </Link>
-                        <Link href="/contact" className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
+                        <Link
+                          href="/shop?velos=VTT"
+                          className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
                           VTT
                         </Link>
-                        <Link href="/contact" className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
+                        <Link
+                          href="/shop?velos=Vélo+de+course"
+                          className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
                           Course
                         </Link>
                       </AccordionContent>
@@ -151,40 +159,64 @@ export function Navbar({ user }: { user: any }) {
                         Pièces détachés
                       </AccordionTrigger>
                       <AccordionContent className='text-start flex flex-col gap-2'>
-                        <Link href="/contact" className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
+                        <Link
+                          href="/shop?pieces=Cadre"
+                          className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
                           Cadre
                         </Link>
-                        <Link href="/contact" className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
+                        <Link
+                          href="/shop?pieces=Guidon"
+                          className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
                           Guidon
                         </Link>
-                        <Link href="/contact" className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
+                        <Link
+                          href="/shop?pieces=Freins"
+                          className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
                           Freins
                         </Link>
-                        <Link href="/contact" className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
+                        <Link
+                          href="/shop?pieces=Selle"
+                          className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
                           Selle
                         </Link>
-                        <Link href="/contact" className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
+                        <Link
+                          href="/shop?pieces=Dérailleur+Avant"
+                          className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
                           Dérailleur avant
                         </Link>
-                        <Link href="/contact" className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
+                        <Link
+                          href="/shop?pieces=Dérailleur+Arrière"
+                          className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
                           Dérailleur arrière
                         </Link>
-                        <Link href="/contact" className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
+                        <Link
+                          href="/shop?pieces=Roue+avant"
+                          className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
                           Roue avant
                         </Link>
-                        <Link href="/contact" className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
+                        <Link
+                          href="/shop?pieces=Roue+arrière"
+                          className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
                           Roue arrière
                         </Link>
-                        <Link href="/contact" className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
+                        <Link
+                          href="/shop?pieces=Réflecteurs"
+                          className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
                           Réflecteurs
                         </Link>
-                        <Link href="/contact" className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
+                        <Link
+                          href="/shop?pieces=Pédalier"
+                          className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
                           Pédalier
                         </Link>
-                        <Link href="/contact" className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
+                        <Link
+                          href="/shop?pieces=Ordinateur"
+                          className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
                           Ordinateur
                         </Link>
-                        <Link href="/contact" className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
+                        <Link
+                          href="/shop?pieces=Panier"
+                          className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
                           Panier
                         </Link>
                       </AccordionContent>
@@ -218,7 +250,7 @@ export function Navbar({ user }: { user: any }) {
                   <li className="row-span-3">
                     <Link
                       className="group/card min-h-[60px] relative flex justify-center items-center h-full w-full select-none flex-col rounded-md bg-gradient-to-b from-muted/50 to-muted no-underline outline-none focus:shadow-md"
-                      href="/contact"
+                      href="/shop?velos=VTT"
                     >
                       <div className="group-hover/card:translate-x-2 font-bold text-white categories-card-title text-4xl z-10 transition-all duration-200">VTT</div>
                       <Image src={VTT} alt={"VTT"} className="absolute w-full h-full object-cover rounded-xl" width={500} height={500} />
@@ -226,21 +258,21 @@ export function Navbar({ user }: { user: any }) {
                   </li>
                   <Link
                     className="group/card min-h-[60px] relative flex justify-center items-center h-full w-full select-none flex-col rounded-md bg-gradient-to-b from-muted/50 to-muted no-underline outline-none focus:shadow-md"
-                    href="/contact"
+                    href="/shop?velos=BMX"
                   >
                     <div className="group-hover/card:translate-x-2 font-bold text-white categories-card-title text-4xl z-10 transition-all duration-200">BMX</div>
                     <Image src={BMX} alt={"BMX"} className="absolute w-full h-full object-cover rounded-xl" width={500} height={500} />
                   </Link>
                   <Link
                     className="group/card min-h-[60px] relative flex justify-center items-center h-full w-full select-none flex-col rounded-md bg-gradient-to-b from-muted/50 to-muted no-underline outline-none focus:shadow-md"
-                    href="/contact"
+                    href="/shop?velos=Vélo+de+course"
                   >
                     <div className="group-hover/card:translate-x-2 font-bold text-white categories-card-title text-4xl z-10 transition-all duration-200">Course</div>
                     <Image src={Course} alt={"Course"} className="absolute w-full h-full object-cover rounded-xl" width={500} height={500} />
                   </Link>
                   <Link
                     className="group/card min-h-[60px] relative flex justify-center items-center h-full w-full select-none flex-col rounded-md bg-gradient-to-b from-muted/50 to-muted no-underline outline-none focus:shadow-md"
-                    href="/contact"
+                    href="/shop?velos=Classique"
                   >
                     <div className="group-hover/card:translate-x-2 font-bold text-white categories-card-title text-4xl z-10 transition-all duration-200">Classique</div>
                     <Image src={Classique} alt={"Classique"} className="absolute w-full h-full object-cover rounded-xl" width={500} height={500} />
