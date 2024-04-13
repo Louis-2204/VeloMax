@@ -65,10 +65,7 @@ const ItemStock = ({ item }: { item: PieceStock | VeloStock }) => {
       <div className="flex flex-col w-full items-center gap-1">
         <p className="text-black dark:text-white transition-colors duration-500">{item.nom}</p>
         {'id_velo' in item ? (
-          <Button
-            variant={'outline'}
-            className="w-full cursor-auto py-2 h-fit gap-1 bg-black dark:bg-white text-white dark:text-black transition-colors duration-500"
-          >
+          <Button variant={'outline'} className="w-full cursor-auto py-2 h-fit gap-1  transition-colors duration-500">
             {item.quantite + ' '}
             en stock
           </Button>
