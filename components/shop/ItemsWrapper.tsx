@@ -32,7 +32,7 @@ const ItemShop = ({ item }: { item: any }) => {
           <Image src={item.image} alt={item.nom} fill sizes="299px" className="rounded-md" />
         </div>
         <div className="flex flex-col w-full items-center gap-1">
-          <p className='text-black dark:text-white transition-colors duration-500'>{item.nom}</p>
+          <p className="text-black dark:text-white transition-colors duration-500">{item.nom}</p>
           <Button className="w-full py-2 h-fit gap-1 bg-black dark:bg-white text-white dark:text-black transition-colors duration-500">
             <span className="text-xs"> {item.prix_unitaire}€</span>
             <svg
@@ -63,16 +63,19 @@ const ItemStock = ({ item }: { item: PieceStock | VeloStock }) => {
         <Image src={item.image} alt={item.nom} fill sizes="299px" className="rounded-md" />
       </div>
       <div className="flex flex-col w-full items-center gap-1">
-        <p className='text-black dark:text-white transition-colors duration-500'>{item.nom}</p>
+        <p className="text-black dark:text-white transition-colors duration-500">{item.nom}</p>
         {'id_velo' in item ? (
-          <Button variant={'outline'} className="w-full cursor-auto py-2 h-fit gap-1 bg-black dark:bg-white text-white dark:text-black transition-colors duration-500">
+          <Button
+            variant={'outline'}
+            className="w-full cursor-auto py-2 h-fit gap-1 bg-black dark:bg-white text-white dark:text-black transition-colors duration-500"
+          >
             {item.quantite + ' '}
             en stock
           </Button>
         ) : (
           <Popover>
-            <PopoverTrigger className="w-full transition-colors duration-500">
-              <div className="cursor-pointer transition-colors duration-500 hover:bg-[#f1f5f9] dark:hover:bg-[#262626] inline-flex hover items-center justify-between whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:text-accent-foreground h-10 px-4 py-2 w-full text-xs">
+            <PopoverTrigger className="w-full">
+              <div className=" cursor-pointer hover:bg-[#f1f5f9] dark:hover:bg-[#262626] inline-flex hover items-center justify-between whitespace-nowrap rounded-md font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:text-accent-foreground h-10 px-4 py-2 w-full text-xs">
                 {item.fournisseurs.reduce((acc: number, current: any) => acc + current.quantite, 0) + ' en stock'}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -86,7 +89,7 @@ const ItemStock = ({ item }: { item: PieceStock | VeloStock }) => {
                 </svg>
               </div>
             </PopoverTrigger>
-            <PopoverContent className="p-2 flex flex-col gap-2 w-fit transition-colors duration-500">
+            <PopoverContent className="p-2 flex flex-col gap-2 w-fit">
               {item.fournisseurs.map((fournisseur: any) => (
                 <div key={fournisseur.nom_fournisseur}>
                   <p className="text-xs text-black dark:text-white">
