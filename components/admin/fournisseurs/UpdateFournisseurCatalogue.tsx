@@ -1,7 +1,6 @@
 'use client';
 import { Card } from '@/components/ui/card';
 import { FournisseurTableau, ItemCatalogue } from '@/types/entities';
-import { Drawer } from 'antd';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import PieceFournisseurCard from './PieceFournisseurCard';
@@ -11,7 +10,8 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { createFournisseurPiece } from '@/utils/createFournisseurPiece';
+import { createFournisseurPiece } from '@/utils/fournisseurs/createFournisseurPiece';
+import { toast } from 'sonner';
 const UpdateFournisseurCatalogue = ({ fournisseur, pieces }: { fournisseur: FournisseurTableau; pieces: any }) => {
   const [catalogue, setCatalogue] = useState<ItemCatalogue[]>();
   const [triggerUpdate, setTriggerUpdate] = useState(0);
@@ -44,7 +44,7 @@ const UpdateFournisseurCatalogue = ({ fournisseur, pieces }: { fournisseur: Four
         return;
       }
       if (fournisseurs) {
-        setCatalogue(fournisseurs.catalogue);
+        setCatalogue(fournisseurs.catalogue as unknown as ItemCatalogue[]);
       }
     };
     getData();
@@ -60,9 +60,9 @@ const UpdateFournisseurCatalogue = ({ fournisseur, pieces }: { fournisseur: Four
       fournisseur.id_fournisseur
     );
     if (!isCreated) {
-      alert("Une erreur est survenue lors de l'ajout");
+      toast.error("Une erreur est survenue lors de l'ajout");
     } else {
-      alert("L'ajout a été effectué avec succès");
+      toast.success("L'ajout a été effectué avec succès");
       setTriggerUpdate((old) => old + 1);
       setNewDelaiApprovisionnement(undefined);
       setNewNumeroCatalogue(undefined);
@@ -154,6 +154,7 @@ const UpdateFournisseurCatalogue = ({ fournisseur, pieces }: { fournisseur: Four
             catalogue.length > 0 &&
             catalogue.map((catalogueItem) => (
               <PieceFournisseurCard
+                canDelete={catalogue.length > 1}
                 catalogueItem={catalogueItem}
                 id_fournisseur={fournisseur.id_fournisseur}
                 setTriggerUpdate={setTriggerUpdate}

@@ -4,14 +4,18 @@ import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { ItemCatalogue } from '@/types/entities';
-import { updateFournisseurItem } from '@/utils/updateFournisseurItem';
+import { deleteFournisseurPiece } from '@/utils/fournisseurs/deleteFournisseurPiece';
+import { updateFournisseurItem } from '@/utils/fournisseurs/updateFournisseurItem';
 import Image from 'next/image';
 import { Dispatch, SetStateAction, useState } from 'react';
+import { toast } from 'sonner';
 const PieceFournisseurCard = ({
+  canDelete,
   catalogueItem,
   id_fournisseur,
   setTriggerUpdate,
 }: {
+  canDelete: boolean;
   catalogueItem: ItemCatalogue;
   id_fournisseur: string;
   setTriggerUpdate: Dispatch<SetStateAction<number>>;
@@ -36,9 +40,9 @@ const PieceFournisseurCard = ({
       id_fournisseur
     );
     if (!is_updated) {
-      alert('Une erreur est survenue lors de la modification');
+      toast.error('Une erreur est survenue lors de la modification');
     } else {
-      alert('La modification a été effectuée avec succès');
+      toast.success('La modification a été effectuée avec succès');
       setTriggerUpdate((old) => old + 1);
     }
     setShowUpdate(false);
@@ -49,6 +53,17 @@ const PieceFournisseurCard = ({
     setNewNumeroCatalogue(catalogueItem.numero_catalogue);
     setNewPrixFournisseur(catalogueItem.prix_fournisseur);
     setNewDelaiApprovisionnement(catalogueItem.delai_approvisionnement);
+  };
+
+  const handleDelete = async () => {
+    if (!canDelete) return;
+    const is_deleted = await deleteFournisseurPiece(catalogueItem.pieces_infos.id_piece, id_fournisseur);
+    if (!is_deleted) {
+      toast.error('Une erreur est survenue lors de la suppression');
+    } else {
+      toast.success('La suppression a été effectuée avec succès');
+      setTriggerUpdate((old) => old + 1);
+    }
   };
 
   return (
@@ -93,7 +108,9 @@ const PieceFournisseurCard = ({
             />
           </div>
           <div className="flex justify-around mt-2">
-            <Button variant={'destructive'}>Supprimer</Button>
+            <Button variant={'destructive'} disabled={!canDelete} onClick={() => handleDelete()}>
+              Supprimer
+            </Button>
             <Button variant={'outline'} onClick={() => triggerAnnuler()}>
               Annuler
             </Button>

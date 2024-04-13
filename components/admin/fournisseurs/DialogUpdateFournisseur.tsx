@@ -25,6 +25,7 @@ const DialogUpdateFournisseur = ({
 }) => {
   const [newNomEntreprise, setNewNomEntreprise] = useState(selectedFournisseur.nom_entreprise);
   const [newNomContact, setNewNomContact] = useState(selectedFournisseur.nom_contact);
+  const [newSiret, setNewSiret] = useState(selectedFournisseur.siret);
   const [newAdresse, setNewAdresse] = useState(selectedFournisseur.adresse);
   const [newVille, setNewVille] = useState(selectedFournisseur.ville);
   const [newCp, setNewCp] = useState(selectedFournisseur.cp);
@@ -55,7 +56,7 @@ const DialogUpdateFournisseur = ({
   };
 
   const isDisabled = () => {
-    return !newNomEntreprise || !newNomContact || !newAdresse || !newVille || !newCp;
+    return !newNomEntreprise || !newNomContact || !newAdresse || !newVille || !newCp || !newSiret;
   };
 
   return (
@@ -86,6 +87,18 @@ const DialogUpdateFournisseur = ({
               placeholder="Nom du contact"
               value={newNomContact}
               onChange={(e) => setNewNomContact(e.target.value)}
+              className="col-span-3"
+            />
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="siret" className="text-right">
+              Siret
+            </Label>
+            <Input
+              id="siret"
+              placeholder="Siret"
+              value={newSiret}
+              onChange={(e) => setNewSiret(e.target.value)}
               className="col-span-3"
             />
           </div>
