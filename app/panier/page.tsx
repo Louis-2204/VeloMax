@@ -147,7 +147,7 @@ const page = () => {
     </div>
   ) : (
     <div className="flex flex-col items-center justify-center h-full">
-      <h1 className="text-2xl font-bold text-vm_text_gray dark:text-white">Votre panier est vide</h1>
+      <h1 className="text-2xl font-bold text-vm_text_gray dark:text-white transition-colors duration-500">Votre panier est vide</h1>
     </div>
   );
 };

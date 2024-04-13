@@ -36,38 +36,73 @@ import { ShoppingCartContext } from '@/context/ShoppingCartContext';
 import { Button } from './ui/button';
 import Image from 'next/image';
 
-const components: { title: string; href: string; description: string }[] = [
+const pieces: { title: string; href: string }[] = [
   {
-    title: 'Alert Dialog',
-    href: '/docs/primitives/alert-dialog',
-    description: 'A modal dialog that interrupts the user with important content and expects a response.',
+    title: 'Cadre',
+    href: '/shop?pieces=Cadre',
   },
   {
-    title: 'Hover Card',
-    href: '/docs/primitives/hover-card',
-    description: 'For sighted users to preview content available behind a link.',
+    title: 'Guidon',
+    href: '/shop?pieces=Guidon',
   },
   {
-    title: 'Progress',
-    href: '/docs/primitives/progress',
-    description:
-      'Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.',
+    title: 'Freins',
+    href: '/shop?pieces=Freins',
   },
   {
-    title: 'Scroll-area',
-    href: '/docs/primitives/scroll-area',
-    description: 'Visually or semantically separates content.',
+    title: 'Selle',
+    href: '/shop?pieces=Selle',
   },
   {
-    title: 'Tabs',
-    href: '/docs/primitives/tabs',
-    description: 'A set of layered sections of content—known as tab panels—that are displayed one at a time.',
+    title: 'Dérailleur Avant',
+    href: '/shop?pieces=Dérailleur+Avant',
   },
   {
-    title: 'Tooltip',
-    href: '/docs/primitives/tooltip',
-    description:
-      'A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.',
+    title: 'Dérailleur Arrière',
+    href: '/shop?pieces=Dérailleur+Arrière',
+  },
+  {
+    title: 'Roue avant',
+    href: '/shop?pieces=Roue+avant',
+  },
+  {
+    title: 'Roue arrière',
+    href: '/shop?pieces=Roue+arrière',
+  },
+  {
+    title: 'Réflecteurs',
+    href: '/shop?pieces=Réflecteurs',
+  },
+  {
+    title: 'Pédalier',
+    href: '/shop?pieces=Pédalier',
+  },
+  {
+    title: 'Ordinateur',
+    href: '/shop?pieces=Ordinateur',
+  },
+  {
+    title: 'Panier',
+    href: '/shop?pieces=Panier',
+  },
+];
+
+const velos: { title: string; href: string }[] = [
+  {
+    title: 'BMX',
+    href: '/shop?velos=BMX',
+  },
+  {
+    title: 'Classique',
+    href: '/shop?velos=Classique',
+  },
+  {
+    title: 'VTT',
+    href: '/shop?velos=VTT',
+  },
+  {
+    title: 'Vélo de course',
+    href: '/shop?velos=Vélo+de+course',
   },
 ];
 
@@ -95,9 +130,11 @@ export function Navbar({ user }: { user: any }) {
   const ToggleTheme = () => {
     if (theme === 'light') {
       document.querySelector('html')?.classList.add('dark');
+      document.querySelector('html')?.classList.remove('light');
       setTheme('dark');
     } else {
       document.querySelector('html')?.classList.remove('dark');
+      document.querySelector('html')?.classList.add('light');
       setTheme('light');
     }
   };
@@ -132,26 +169,11 @@ export function Navbar({ user }: { user: any }) {
                         Vélos
                       </AccordionTrigger>
                       <AccordionContent className='text-start flex flex-col gap-2'>
-                        <Link
-                          href="/shop?velos=BMX"
-                          className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
-                          BMX
-                        </Link>
-                        <Link
-                          href="/shop?velos=Classique"
-                          className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
-                          Classique
-                        </Link>
-                        <Link
-                          href="/shop?velos=VTT"
-                          className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
-                          VTT
-                        </Link>
-                        <Link
-                          href="/shop?velos=Vélo+de+course"
-                          className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
-                          Course
-                        </Link>
+                        {velos.map((velo) => (
+                          <Link key={velo.title} href={velo.href} className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
+                            {velo.title}
+                          </Link>
+                        ))}
                       </AccordionContent>
                     </AccordionItem>
                     <AccordionItem value="Pièces détachés" className='mb-4'>
@@ -159,66 +181,11 @@ export function Navbar({ user }: { user: any }) {
                         Pièces détachés
                       </AccordionTrigger>
                       <AccordionContent className='text-start flex flex-col gap-2'>
-                        <Link
-                          href="/shop?pieces=Cadre"
-                          className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
-                          Cadre
-                        </Link>
-                        <Link
-                          href="/shop?pieces=Guidon"
-                          className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
-                          Guidon
-                        </Link>
-                        <Link
-                          href="/shop?pieces=Freins"
-                          className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
-                          Freins
-                        </Link>
-                        <Link
-                          href="/shop?pieces=Selle"
-                          className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
-                          Selle
-                        </Link>
-                        <Link
-                          href="/shop?pieces=Dérailleur+Avant"
-                          className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
-                          Dérailleur avant
-                        </Link>
-                        <Link
-                          href="/shop?pieces=Dérailleur+Arrière"
-                          className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
-                          Dérailleur arrière
-                        </Link>
-                        <Link
-                          href="/shop?pieces=Roue+avant"
-                          className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
-                          Roue avant
-                        </Link>
-                        <Link
-                          href="/shop?pieces=Roue+arrière"
-                          className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
-                          Roue arrière
-                        </Link>
-                        <Link
-                          href="/shop?pieces=Réflecteurs"
-                          className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
-                          Réflecteurs
-                        </Link>
-                        <Link
-                          href="/shop?pieces=Pédalier"
-                          className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
-                          Pédalier
-                        </Link>
-                        <Link
-                          href="/shop?pieces=Ordinateur"
-                          className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
-                          Ordinateur
-                        </Link>
-                        <Link
-                          href="/shop?pieces=Panier"
-                          className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
-                          Panier
-                        </Link>
+                        {pieces.map((piece) => (
+                          <Link key={piece.title} href={piece.href} className="hover:underline text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500" onClick={() => { closeSheet() }}>
+                            {piece.title}
+                          </Link>
+                        ))}
                       </AccordionContent>
                     </AccordionItem>
                   </Accordion>
@@ -245,38 +212,20 @@ export function Navbar({ user }: { user: any }) {
               <NavigationMenuTrigger className="text-lg text-vm_secondary hover:text-vm_secondary bg-transparent transition-colors duration-500">
                 <Link href="/shop?velos=VTT%2CVélo+de+course%2CClassique%2CBMX">Vélos</Link>
               </NavigationMenuTrigger>
-              <NavigationMenuContent className="flex flex-col items-center">
+              <NavigationMenuContent className="hidden md:flex flex-col items-center">
                 <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-                  <li className="row-span-3">
-                    <Link
-                      className="group/card min-h-[60px] relative flex justify-center items-center h-full w-full select-none flex-col rounded-md bg-gradient-to-b from-muted/50 to-muted no-underline outline-none focus:shadow-md"
-                      href="/shop?velos=VTT"
-                    >
-                      <div className="group-hover/card:translate-x-2 font-bold text-white categories-card-title text-4xl z-10 transition-all duration-200">VTT</div>
-                      <Image src={VTT} alt={"VTT"} className="absolute w-full h-full object-cover rounded-xl" width={500} height={500} />
-                    </Link>
-                  </li>
-                  <Link
-                    className="group/card min-h-[60px] relative flex justify-center items-center h-full w-full select-none flex-col rounded-md bg-gradient-to-b from-muted/50 to-muted no-underline outline-none focus:shadow-md"
-                    href="/shop?velos=BMX"
-                  >
-                    <div className="group-hover/card:translate-x-2 font-bold text-white categories-card-title text-4xl z-10 transition-all duration-200">BMX</div>
-                    <Image src={BMX} alt={"BMX"} className="absolute w-full h-full object-cover rounded-xl" width={500} height={500} />
-                  </Link>
-                  <Link
-                    className="group/card min-h-[60px] relative flex justify-center items-center h-full w-full select-none flex-col rounded-md bg-gradient-to-b from-muted/50 to-muted no-underline outline-none focus:shadow-md"
-                    href="/shop?velos=Vélo+de+course"
-                  >
-                    <div className="group-hover/card:translate-x-2 font-bold text-white categories-card-title text-4xl z-10 transition-all duration-200">Course</div>
-                    <Image src={Course} alt={"Course"} className="absolute w-full h-full object-cover rounded-xl" width={500} height={500} />
-                  </Link>
-                  <Link
-                    className="group/card min-h-[60px] relative flex justify-center items-center h-full w-full select-none flex-col rounded-md bg-gradient-to-b from-muted/50 to-muted no-underline outline-none focus:shadow-md"
-                    href="/shop?velos=Classique"
-                  >
-                    <div className="group-hover/card:translate-x-2 font-bold text-white categories-card-title text-4xl z-10 transition-all duration-200">Classique</div>
-                    <Image src={Classique} alt={"Classique"} className="absolute w-full h-full object-cover rounded-xl" width={500} height={500} />
-                  </Link>
+                  <ListItem title="VTT" href="/shop?velos=VTT" className='w-full h-full'>
+                    VTT - Pour les terrains accidentés
+                  </ListItem>
+                  <ListItem title="BMX" href="/shop?velos=BMX" className='w-full h-full'>
+                    BMX - Pour les sauts et les acrobaties
+                  </ListItem>
+                  <ListItem title="Vélo de course" href="/shop?velos=Vélo+de+course" className='w-full h-full'>
+                    Vélo de course - Pour la vitesse sur route
+                  </ListItem>
+                  <ListItem title="Classique" href="/shop?velos=Classique" className='w-full h-full'>
+                    Vélo Classique - Pour les trajets quotidiens et le loisir
+                  </ListItem>
                 </ul>
               </NavigationMenuContent>
             </NavigationMenuItem>
@@ -287,11 +236,11 @@ export function Navbar({ user }: { user: any }) {
                 </Link>
               </NavigationMenuTrigger>
               <NavigationMenuContent>
-                <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                  {components.map((component) => (
-                    <ListItem key={component.title} title={component.title} href={component.href}>
-                      {component.description}
-                    </ListItem>
+                <ul className="grid w-[650px] gap-3 p-4 md:grid-cols-4">
+                  {pieces.map((piece) => (
+                    <Link key={piece.title} href={piece.href}>
+                      <ListItem title={`• ${piece.title}`} />
+                    </Link>
                   ))}
                 </ul>
               </NavigationMenuContent>
@@ -322,7 +271,7 @@ export function Navbar({ user }: { user: any }) {
               <NavigationMenuItem className="px-1">
                 <div className="relative">
                   {cart.length > 0 && (
-                    <div className="absolute right-[-30%] top-[-30%] rounded-full bg-red-600 w-5 h-5 text-xs text-white flex justify-center items-center">
+                    <div className="absolute right-[-30%] top-[-30%] rounded-full bg-red-600 px-1 w-fit min-w-5 h-5 text-xs text-white flex justify-center items-center">
                       {cart.map((item) => item.quantite).reduce((a, b) => a + b)}
                     </div>
                   )}
@@ -362,21 +311,19 @@ export function Navbar({ user }: { user: any }) {
 const ListItem = React.forwardRef<React.ElementRef<'a'>, React.ComponentPropsWithoutRef<'a'>>(
   ({ className, title, children, ...props }, ref) => {
     return (
-      <li>
-        <NavigationMenuLink asChild>
-          <a
-            ref={ref}
-            className={cn(
-              'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
-              className
-            )}
-            {...props}
-          >
-            <div className="text-sm font-medium leading-none">{title}</div>
-            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">{children}</p>
-          </a>
-        </NavigationMenuLink>
-      </li>
+      <NavigationMenuLink asChild>
+        <a
+          ref={ref}
+          className={cn(
+            'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
+            className
+          )}
+          {...props}
+        >
+          <div className="text-sm font-medium leading-none">{title}</div>
+          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">{children}</p>
+        </a>
+      </NavigationMenuLink>
     );
   }
 );

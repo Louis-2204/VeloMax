@@ -108,7 +108,7 @@ export type ItemCatalogue = {
   prix_fournisseur: number;
   delai_approvisionnement: number;
 };
-export type CommandesTableau = {
+export type CommandesTableauType = {
   id_commande: string;
   adresse: string;
   ville: string;

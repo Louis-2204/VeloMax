@@ -29,6 +29,7 @@ interface DataTableProps<TData, TValue> {
   placeholder_filtre: string;
   column_filter: string;
   additionalButton?: React.ReactNode;
+  emptyMessage?: string;
 }
 
 export function DataTable<TData, TValue>({
@@ -37,6 +38,7 @@ export function DataTable<TData, TValue>({
   placeholder_filtre,
   column_filter,
   additionalButton,
+  emptyMessage,
 }: DataTableProps<TData, TValue>): JSX.Element {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
@@ -59,20 +61,20 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-      <div className="flex items-center py-4">
+      <div className="flex items-center justify-between gap-2 py-4">
         <Input
           placeholder={placeholder_filtre}
           value={(table.getColumn(column_filter)?.getFilterValue() as string) ?? ''}
           onChange={(event) => table.getColumn(column_filter)?.setFilterValue(event.target.value)}
-          className="max-w-sm"
+          className="max-w-sm bg-background transition-colors duration-500"
         />
 
-        <div className="ml-auto flex gap-2">
+        <div className="flex gap-2">
           {additionalButton}
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline">
+              <Button variant="outline" className='bg-background text-black dark:text-white transition-colors duration-500'>
                 Colonnes <ChevronDown className="ml-2 h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
@@ -144,8 +146,8 @@ export function DataTable<TData, TValue>({
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center">
-                  Aucun résultat
+                <TableCell colSpan={columns.length} className="h-24 text-center text-black dark:text-white transition-colors duration-500">
+                  {emptyMessage ?? 'Aucun résultat'}
                 </TableCell>
               </TableRow>
             )}

@@ -10,7 +10,7 @@ const page = async ({ searchParams }: { searchParams: { prix?: string; pieces?: 
     <div className="flex flex-col w-full h-full max-w-8xl">
       <div className="flex flex-col mt-8 sm:flex-row w-full h-auto gap-2">
         <FilterSection key={JSON.stringify(searchParams)} searchParams={searchParams} content="shop" />
-        <div className="rounded-md bg-tempBgLightSecondary dark:bg-tempBgDark border border-tempLightBorder dark:border-tempDarkBorder w-full h-fit flex flex-col">
+        <div className="rounded-md bg-tempBgLightSecondary dark:bg-tempBgDark border border-tempLightBorder dark:border-tempDarkBorder w-full h-fit flex flex-col transition-colors duration-500">
           <TopRowShopSection />
           <ItemsWrapper items={items} content="shop" />
         </div>

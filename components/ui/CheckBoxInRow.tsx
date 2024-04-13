@@ -6,7 +6,7 @@ export function CheckBoxInRow({ id, text, defaultChecked }: { id: string; text: 
       <Checkbox name={id} defaultChecked={defaultChecked} id={id} />
       <label
         htmlFor={id}
-        className="text-sm text-vm_text_gray dark:text-white font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+        className="text-sm text-vm_text_gray dark:text-white font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 transition-colors duration-500"
       >
         {text}
       </label>
