@@ -14,6 +14,7 @@ import { useState } from 'react';
 import { FournisseurTableau, Vendeur } from '@/types/entities';
 import dynamic from 'next/dynamic';
 import SheetFournisseur from './DrawerFournisseur';
+import { useRouter } from 'next/navigation';
 
 const AlertDeleteFournisseur = dynamic(() => import('@/components/admin/fournisseurs/AlertDeleteFournisseur'));
 const DialogUpdateFournisseur = dynamic(() => import('./DialogUpdateFournisseur'));
@@ -32,13 +33,14 @@ const FournisseursTableau = ({
   const [drawerUpdateOpen, setDrawerUpdateOpen] = useState(false);
   const [drawerType, setDrawerType] = useState<'ajout' | 'modification'>('ajout');
   const [selectedFournisseur, setSelectedFournisseur] = useState({} as FournisseurTableau);
-
-  const showDrawerUpdate = () => {
+  const router = useRouter();
+  const showDrawer = () => {
     setDrawerUpdateOpen(true);
   };
 
-  const onCloseDrawerUpdate = () => {
+  const onCloseDrawer = () => {
     setDrawerUpdateOpen(false);
+    router.refresh();
   };
 
   const columns: ColumnDef<FournisseurTableau>[] = [
@@ -127,7 +129,7 @@ const FournisseursTableau = ({
                 onClick={() => {
                   setSelectedFournisseur(fournisseurRow);
                   setDrawerType('modification');
-                  showDrawerUpdate();
+                  showDrawer();
                 }}
               >
                 Modifier le catalogue
@@ -160,7 +162,7 @@ const FournisseursTableau = ({
             onClick={() => {
               setSelectedFournisseur({} as FournisseurTableau);
               setDrawerType('ajout');
-              showDrawerUpdate();
+              showDrawer();
             }}
           >
             Ajouter un fournisseur
@@ -178,7 +180,7 @@ const FournisseursTableau = ({
       {drawerUpdateOpen && (
         <SheetFournisseur
           open={drawerUpdateOpen}
-          onClose={onCloseDrawerUpdate}
+          onClose={onCloseDrawer}
           fournisseur={selectedFournisseur}
           pieces={pieces}
           actionType={drawerType}
