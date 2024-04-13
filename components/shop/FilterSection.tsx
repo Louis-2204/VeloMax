@@ -3,7 +3,16 @@ import { Button } from '../ui/button';
 import { CheckBoxInRow } from '../ui/CheckBoxInRow';
 import { Separator } from '../ui/separator';
 import { useRouter } from 'next/navigation';
-const FilterSection = ({ searchParams }: { searchParams: { prix?: string; pieces?: string; velos?: string } }) => {
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+const FilterSection = ({
+  searchParams,
+  content,
+  fournisseurs,
+}: {
+  searchParams: { prix?: string; pieces?: string; velos?: string; fournisseur?: string };
+  content: 'stock' | 'shop';
+  fournisseurs?: { nom_entreprise: string; id_fournisseur: string }[];
+}) => {
   const router = useRouter();
 
   const handleSubmit = (formData: FormData) => {
@@ -36,10 +45,14 @@ const FilterSection = ({ searchParams }: { searchParams: { prix?: string; pieces
     if (formData.get('700-1000')) priceParams.push('700-1000');
     if (formData.get('1000+')) priceParams.push('1000+');
 
+    let fournisseurParams = [];
+    if (formData.get('fournisseur')) fournisseurParams.push(formData.get('fournisseur'));
+
     const url = new URL(window.location.href);
     url.searchParams.set('velos', velosParams.join(','));
     url.searchParams.set('pieces', piecesParams.join(','));
     url.searchParams.set('prix', priceParams.join(','));
+    if (content === 'stock') url.searchParams.set('fournisseur', fournisseurParams.join(','));
 
     router.push(url.toString());
   };
@@ -89,17 +102,40 @@ const FilterSection = ({ searchParams }: { searchParams: { prix?: string; pieces
         <CheckBoxInRow defaultChecked={shouldBeChecked('Ordinateur')} id="Ordinateur" text="Ordinateur" />
         <CheckBoxInRow defaultChecked={shouldBeChecked('Panier')} id="Panier" text="Panier" />
       </div>
-      <div className="flex flex-col w-full gap-2">
-        <Separator className="bg-vm_secondary" />
-        <h4 className="text-lg text-vm_text_gray dark:text-white font-semibold">Prix</h4>
-        <CheckBoxInRow defaultChecked={shouldBeChecked('0-50')} id="0-50" text="0€ - 50€" />
-        <CheckBoxInRow defaultChecked={shouldBeChecked('50-100')} id="50-100" text="50€ - 100€" />
-        <CheckBoxInRow defaultChecked={shouldBeChecked('100-200')} id="100-200" text="100€ - 200€" />
-        <CheckBoxInRow defaultChecked={shouldBeChecked('200-400')} id="200-400" text="200€ - 400€" />
-        <CheckBoxInRow defaultChecked={shouldBeChecked('400-700')} id="400-700" text="400€ - 700€" />
-        <CheckBoxInRow defaultChecked={shouldBeChecked('700-1000')} id="700-1000" text="700€ - 1000€" />
-        <CheckBoxInRow defaultChecked={shouldBeChecked('1000+')} id="1000+" text="+1000€" />
-      </div>
+
+      {content === 'shop' && (
+        <div className="flex flex-col w-full gap-2">
+          <Separator className="bg-vm_secondary" />
+          <h4 className="text-lg text-vm_text_gray dark:text-white font-semibold">Prix</h4>
+          <CheckBoxInRow defaultChecked={shouldBeChecked('0-50')} id="0-50" text="0€ - 50€" />
+          <CheckBoxInRow defaultChecked={shouldBeChecked('50-100')} id="50-100" text="50€ - 100€" />
+          <CheckBoxInRow defaultChecked={shouldBeChecked('100-200')} id="100-200" text="100€ - 200€" />
+          <CheckBoxInRow defaultChecked={shouldBeChecked('200-400')} id="200-400" text="200€ - 400€" />
+          <CheckBoxInRow defaultChecked={shouldBeChecked('400-700')} id="400-700" text="400€ - 700€" />
+          <CheckBoxInRow defaultChecked={shouldBeChecked('700-1000')} id="700-1000" text="700€ - 1000€" />
+          <CheckBoxInRow defaultChecked={shouldBeChecked('1000+')} id="1000+" text="+1000€" />
+        </div>
+      )}
+
+      {content === 'stock' && (
+        <div className="flex flex-col w-full gap-2">
+          <Separator className="bg-vm_secondary" />
+          <h4 className="text-lg text-vm_text_gray dark:text-white font-semibold">Fournisseur</h4>
+          <Select name="fournisseur" defaultValue={searchParams.fournisseur}>
+            <SelectTrigger>
+              <SelectValue placeholder="Selectionner un fournisseur" />
+            </SelectTrigger>
+            <SelectContent>
+              {fournisseurs?.map((fournisseur) => (
+                <SelectItem key={fournisseur.id_fournisseur} value={fournisseur.id_fournisseur}>
+                  {fournisseur.nom_entreprise}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+      )}
+
       <div className="flex flex-col w-full gap-2">
         <Button
           type="submit"

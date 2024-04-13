@@ -116,3 +116,28 @@ export type CommandesTableau = {
   created_at: string;
   status: 'En attente de traitement' | 'En attente de restockage' | 'En traitement' | 'Envoyée';
 };
+
+export type PieceStock = {
+  id_piece: string;
+  nom: string;
+  type: string;
+  image: string;
+  description: string;
+  prix_unitaire: number;
+  date_introduction_marche: string;
+  date_discontinuation_production: string;
+  fournisseurs: { nom_fournisseur: string; quantite: number }[];
+};
+
+export type VeloStock = {
+  id_velo: string;
+  nom: string;
+  type: string;
+  image: string;
+  grandeur: string;
+  description: string;
+  prix_unitaire: number;
+  date_introduction_marche: string;
+  date_discontinuation_production: string;
+  quantite: number;
+};

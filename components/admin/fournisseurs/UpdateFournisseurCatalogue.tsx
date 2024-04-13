@@ -37,8 +37,6 @@ const UpdateFournisseurCatalogue = ({ fournisseur, pieces }: { fournisseur: Four
         )
         .eq('id_fournisseur', fournisseur.id_fournisseur)
         .single();
-      console.log(fournisseurs);
-      console.log(error);
       if (error) {
         console.log(error);
         return;
