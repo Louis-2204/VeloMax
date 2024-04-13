@@ -5,12 +5,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useState } from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { createFournisseur } from '@/utils/createFournisseur';
+import { createFournisseur } from '@/utils/fournisseurs/createFournisseur';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 const CreateFournisseur = ({ pieces, onClose }: { pieces: any; onClose: () => void }) => {
   const router = useRouter();
   const [newNomEntreprise, setNewNomEntreprise] = useState('');
   const [newNomContact, setNewNomContact] = useState('');
+  const [newSiret, setNewSiret] = useState('');
   const [newAdresse, setNewAdresse] = useState('');
   const [newVille, setNewVille] = useState('');
   const [newCp, setNewCp] = useState('');
@@ -44,7 +46,7 @@ const CreateFournisseur = ({ pieces, onClose }: { pieces: any; onClose: () => vo
   };
 
   const triggerAjouter = () => {
-    if (!newDelaiApprovisionnement || !newNumeroCatalogue || !newPrixFournisseur || !newPiece) return;
+    if (!newDelaiApprovisionnement || !newNumeroCatalogue || !newPrixFournisseur || !newPiece || !newSiret) return;
     setNewCatalogue([
       ...newCatalogue,
       {
@@ -82,9 +84,9 @@ const CreateFournisseur = ({ pieces, onClose }: { pieces: any; onClose: () => vo
       }))
     );
     if (!isCreated) {
-      alert("Une erreur est survenue lors de l'ajout");
+      toast.error("Une erreur est survenue lors de l'ajout");
     } else {
-      alert("L'ajout a été effectué avec succès");
+      toast.success("L'ajout a été effectué avec succès");
       setNewNomEntreprise('');
       setNewNomContact('');
       setNewAdresse('');
@@ -117,6 +119,16 @@ const CreateFournisseur = ({ pieces, onClose }: { pieces: any; onClose: () => vo
           type="text"
           value={newNomContact}
           onChange={(e) => setNewNomContact(e.target.value)}
+        />
+      </div>
+      <div className="flex flex-col gap-2 w-full">
+        <Label htmlFor="siret">Siret</Label>
+        <Input
+          placeholder="Siret"
+          id="siret"
+          type="text"
+          value={newSiret}
+          onChange={(e) => setNewSiret(e.target.value)}
         />
       </div>
       <div className="flex flex-col gap-2 w-full">
@@ -270,7 +282,13 @@ const CreateFournisseur = ({ pieces, onClose }: { pieces: any; onClose: () => vo
         </Card>
         <Button
           disabled={
-            !newNomEntreprise || !newNomContact || !newAdresse || !newVille || !newCp || newCatalogue.length === 0
+            !newNomEntreprise ||
+            !newNomContact ||
+            !newAdresse ||
+            !newVille ||
+            !newCp ||
+            !newSiret ||
+            newCatalogue.length === 0
           }
           className="w-full bg-vm_secondary hover:bg-vm_secondary_2 text-white hover:text-white"
           onClick={() => handleCreateFournisseur()}

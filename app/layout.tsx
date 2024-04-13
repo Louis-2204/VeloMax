@@ -7,6 +7,7 @@ import { ShoppingCartProvider } from '@/context/ShoppingCartContext';
 import { getUserConnected } from '@/utils/getUserConnected';
 import { Toaster } from '@/components/ui/toaster';
 import NextTopLoader from 'nextjs-toploader';
+import { Toaster as Sonner } from '@/components/ui/sonner';
 const defaultUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000';
 
 export const metadata = {
@@ -30,6 +31,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <Navbar user={profileConnected} />
           <main className="h-full w-full flex flex-col items-center overflow-y-auto">{children}</main>
           <Toaster />
+          <Sonner />
         </body>
       </ShoppingCartProvider>
     </html>

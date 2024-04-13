@@ -86,6 +86,7 @@ export type FournisseurTableau = {
   id_fournisseur: string;
   nom_entreprise: string;
   nom_contact: string;
+  siret: string;
   adresse: string;
   ville: string;
   cp: string;
@@ -113,5 +114,5 @@ export type CommandesTableau = {
   ville: string;
   cp: string;
   created_at: string;
-  status: "En attente de traitement" | "En attente de restockage" | "En traitement" | "Envoyée";
+  status: 'En attente de traitement' | 'En attente de restockage' | 'En traitement' | 'Envoyée';
 };

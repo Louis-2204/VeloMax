@@ -1,8 +1,7 @@
 'use server';
+import { createClient } from '../supabase/server';
 
-import { createClient } from './supabase/server';
-
-export async function createFournisseurPiece(
+export async function updateFournisseurItem(
   numero_catalogue: number,
   prix_fournisseur: number,
   delai_approvisionnement: number,
@@ -13,8 +12,10 @@ export async function createFournisseurPiece(
   const supabase = createClient();
   const { error } = await supabase
     .from('fournisseurs_pieces')
-    .insert({ numero_catalogue, prix_fournisseur, delai_approvisionnement, id_piece, id_fournisseur });
-  console.log(error);
+    .update({ numero_catalogue, prix_fournisseur, delai_approvisionnement })
+    .eq('id_piece', id_piece)
+    .eq('id_fournisseur', id_fournisseur);
+
   if (error) {
     console.log(error);
     return false;

@@ -13,11 +13,10 @@ import { DataTable } from '@/components/DataTable';
 import { useState } from 'react';
 import { FournisseurTableau, Vendeur } from '@/types/entities';
 import dynamic from 'next/dynamic';
-import DialogUpdateFournisseur from './DialogUpdateFournisseur';
 import SheetFournisseur from './DrawerFournisseur';
 
-// const AlertDeleteUser = dynamic(() => import('../AlertDeleteUser'));
-// const DialogUpdateVendeur = dynamic(() => import('./DialogUpdateVendeur'));
+const AlertDeleteFournisseur = dynamic(() => import('@/components/admin/fournisseurs/AlertDeleteFournisseur'));
+const DialogUpdateFournisseur = dynamic(() => import('./DialogUpdateFournisseur'));
 
 const FournisseursTableau = ({
   fournisseurs,
@@ -66,6 +65,11 @@ const FournisseursTableau = ({
         );
       },
       id: 'Nom du contact',
+    },
+    {
+      accessorKey: 'siret',
+      header: 'Siret',
+      id: 'Siret',
     },
     {
       accessorKey: 'adresse',
@@ -163,14 +167,13 @@ const FournisseursTableau = ({
           </Button>
         }
       />
-      {/* {alertOpen && (
-        <AlertDeleteUser
+      {alertOpen && (
+        <AlertDeleteFournisseur
           alertOpen={alertOpen}
           setAlertOpen={setAlertOpen}
-          selectedUser={selectedVendeur}
-          label="vendeur"
+          selectedFournisseur={selectedFournisseur}
         />
-      )} */}
+      )}
 
       {drawerUpdateOpen && (
         <SheetFournisseur

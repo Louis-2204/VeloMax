@@ -1,5 +1,5 @@
 'use server';
-import { createClient } from './supabase/server';
+import { createClient } from '../supabase/server';
 
 export async function createFournisseur(
   nom_entreprise: string,
