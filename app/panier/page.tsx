@@ -54,7 +54,7 @@ const page = () => {
                 fill="transparent"
               ></circle>
               <circle
-                className="text-indigo-500  progress-ring__circle stroke-current"
+                className="text-vm_secondary progress-ring__circle stroke-current"
                 strokeWidth="10"
                 strokeLinecap="round"
                 cx="50"

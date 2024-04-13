@@ -5,16 +5,10 @@ import { Separator } from "../ui/separator";
 import { Icons } from "../icons/icons";
 import { useState } from "react";
 import { useToast } from '../ui/use-toast';
-import { useRouter } from 'next/navigation';
 
 const Paiement = ({ items, confirmCommand }: { items: { nom: string, prix: number, image: string, quantite: number }[], confirmCommand: () => void }) => {
 
     const { toast } = useToast();
-
-    const router = useRouter();
-
-    router.prefetch('/profil/mes-commandes');
-
 
     const [nomSurLaCarte, setNomSurLaCarte] = useState('');
     const [numeroDeCarte, setNumeroDeCarte] = useState('');

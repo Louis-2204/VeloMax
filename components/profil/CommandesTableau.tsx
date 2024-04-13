@@ -10,14 +10,21 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { DataTable } from '@/components/DataTable';
-import { useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import { CommandesTableauType } from '@/types/entities';
 import moment from 'moment';
 import { Badge } from '../ui/badge';
+import { useRouter } from 'next/navigation';
 
 const CommandesTableau = ({ commandes }: { commandes: CommandesTableauType[] }) => {
     const [dialogOpen, setDialogOpen] = useState(false);
     const [selectedCommande, setSelectedCommande] = useState({} as CommandesTableauType);
+
+    const router = useRouter();
+
+    useLayoutEffect(() => {
+        router.refresh();
+    }, []);
 
     const columns: ColumnDef<CommandesTableauType>[] = [
         {

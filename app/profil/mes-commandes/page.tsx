@@ -7,7 +7,7 @@ const page = async () => {
   const user = await getUserConnected();
   const commandes = await getCommande(user?.id as string);
 
-  return (
+  return commandes && (
     <div className="w-full flex justify-center">
       <CommandesTableau commandes={commandes as any[]} />
     </div>
