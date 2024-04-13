@@ -22,7 +22,9 @@ const Récapitulatif = ({ items, proceedToDelivery }: { items: { id: string, nom
                                 <Image alt="produit" src={item.image} width={100} height={100} className="rounded-md w-[6.5rem] h-[6.5rem] border p-1 overflow-hidden" />
                                 <div className="h-full justify-between flex flex-col">
                                     <div className="font-extrabold text-lg text-vm_text_gray">{item.nom}</div>
-                                    <div className="text-vm_text_gray_secondary">Retirer</div>
+                                    <div className="text-vm_text_gray_secondary hover:underline cursor-pointer" onClick={() => removeFromCart(item.id, true)}>
+                                        Retirer
+                                    </div>
                                 </div>
                             </div>
                             <div className="h-full justify-between flex flex-col items-end">

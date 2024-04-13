@@ -6,7 +6,7 @@ export const ShoppingCartContext = createContext({
     return [] as { id: string; nom: string; quantite: number; prix: number; image: string; type: 'vélo' | 'pièce' }[];
   },
   addToCart: (product: { id: string; nom: string; prix: number; image: string, type: 'vélo' | 'pièce' }) => { },
-  removeFromCart: (id: string) => { },
+  removeFromCart: (id: string, all?: boolean) => { },
   clearCart: () => { },
 });
 
@@ -40,9 +40,9 @@ export const ShoppingCartProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const removeFromCart = (id: string) => {
+  const removeFromCart = (id: string, all?: boolean) => {
     const existingProduct = cart.find((product) => product.id === id);
-    if (existingProduct?.quantite === 1) {
+    if (existingProduct?.quantite === 1 || all) {
       setCart(cart.filter((product) => product.id !== id));
     } else {
       setCart(cart.map((product) => (product.id === id ? { ...product, quantite: product.quantite - 1 } : product)));

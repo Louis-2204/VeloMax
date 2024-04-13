@@ -1,7 +1,6 @@
 import { GeistSans } from 'geist/font/sans';
 import './globals.css';
 import { Navbar } from '@/components/NavBar';
-import { createClient } from '@/utils/supabase/server';
 import { getProfileConnected } from '@/utils/getProfileConnected';
 import { ShoppingCartProvider } from '@/context/ShoppingCartContext';
 import { getUserConnected } from '@/utils/getUserConnected';
@@ -16,7 +15,6 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const supabase = createClient();
   const user = await getUserConnected();
   const profileConnected = await getProfileConnected(user);
 
@@ -29,7 +27,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             showSpinner={false}
           />
           <Navbar user={profileConnected} />
-          <main className="h-full w-full flex flex-col items-center overflow-y-auto">{children}</main>
+          <main className="h-full w-full px-4 flex flex-col items-center overflow-y-auto">{children}</main>
           <Toaster />
           <Sonner />
         </body>

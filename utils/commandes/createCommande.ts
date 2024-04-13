@@ -15,8 +15,8 @@ export async function createCommande(infos: { items: { id: string; nom: string; 
         .from('commandes')
         .insert([
             {
-                //nom: infos.nom,
-                //prenom: infos.prenom,
+                nom: infos.nom,
+                prenom: infos.prenom,
                 adresse: infos.adresse,
                 ville: infos.ville,
                 cp: infos.codePostal,

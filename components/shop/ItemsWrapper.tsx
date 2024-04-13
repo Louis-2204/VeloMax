@@ -11,13 +11,15 @@ const ItemsWrapper = ({ items }: { items: any }) => {
             href={`/p/${item.id_velo ? item.id_velo : item.id_piece}`}
             key={item.id_velo ? item.id_velo : item.id_piece}
           >
-            <div className="w-[140px] bg-white dark:bg-black border rounded-md flex flex-col items-center shadow p-2">
+            <div className="w-[140px] bg-white dark:bg-black border rounded-md flex flex-col items-center shadow p-2 transition-colors duration-500">
               <div className="w-[90%] aspect-square relative">
-                <Image src={item.image} alt={item.nom} fill sizes="299px" className="rounded-md" />
+                <Image src={item.image} alt={item.nom} fill sizes="299px" className="rounded-md object-scale-down" />
               </div>
               <div className="flex flex-col w-full items-center gap-1">
-                <p>{item.nom}</p>
-                <Button className="w-full py-2 h-fit gap-1">
+                <p className='text-black dark:text-white transition-colors duration-500'>
+                  {item.nom}
+                </p>
+                <Button className="w-full py-2 h-fit gap-1 bg-black dark:bg-white text-white dark:text-black transition-colors duration-500">
                   <span className="text-xs"> {item.prix_unitaire}€</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

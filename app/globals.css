@@ -126,6 +126,11 @@
     max-width: 90rem;
   }
 
+  div.rounded-md.border:has(>div>table),
+  thead[class*="[&_tr]:border-b"] tr {
+    transition: all 0.5s;
+  }
+
 
   @keyframes emptyCircle {
     0% {

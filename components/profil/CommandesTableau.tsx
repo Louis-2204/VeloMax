@@ -11,31 +11,36 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { DataTable } from '@/components/DataTable';
 import { useState } from 'react';
-import { CommandesTableau, Vendeur } from '@/types/entities';
+import { CommandesTableauType } from '@/types/entities';
 import moment from 'moment';
 import { Badge } from '../ui/badge';
 
-const CommandesTableau = ({ commandes }: { commandes: CommandesTableau[] }) => {
+const CommandesTableau = ({ commandes }: { commandes: CommandesTableauType[] }) => {
     const [dialogOpen, setDialogOpen] = useState(false);
-    const [selectedCommande, setSelectedCommande] = useState({} as CommandesTableau);
+    const [selectedCommande, setSelectedCommande] = useState({} as CommandesTableauType);
 
-    const columns: ColumnDef<CommandesTableau>[] = [
+    const columns: ColumnDef<CommandesTableauType>[] = [
         {
             accessorKey: 'id_commande',
             header: "Numéro de commande",
             id: 'Numéro de commande',
+            cell: ({ row }) => {
+                const commande = row.original;
+                return <span className="break-all font-semibold">{commande.id_commande}</span>
+
+            }
         },
         {
             accessorKey: 'created_at',
             header: ({ column }) => {
                 return (
                     <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-                        Date de la commande
+                        Date
                         <ArrowUpDown className="ml-2 h-4 w-4" />
                     </Button>
                 );
             },
-            id: 'Date de la commande',
+            id: 'Date',
             cell: ({ row }) => {
                 const commande = row.original;
                 return moment(commande.created_at).format('DD/MM/YYYY');
@@ -120,6 +125,7 @@ const CommandesTableau = ({ commandes }: { commandes: CommandesTableau[] }) => {
                 data={commandes}
                 column_filter="Adresse"
                 placeholder_filtre="Rechercher une commande (Adresse)"
+                emptyMessage='Aucune commande'
             />
         </div>
     );
