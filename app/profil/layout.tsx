@@ -6,10 +6,10 @@ const layout = async ({ children }: { children: ReactNode }) => {
   return (
     <div className="flex flex-col w-full h-full max-w-8xl">
       <div className="flex flex-col sm:flex-row w-full mt-8 h-auto gap-4">
-        <div className="w-3/12">
-          <Navigation />
+        <div className="w-full sm:w-3/12">
+          <Navigation user={user} />
         </div>
-        <div className="w-9/12">{children}</div>
+        <div className="w-full sm:w-9/12">{children}</div>
       </div>
     </div>
   );

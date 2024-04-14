@@ -143,7 +143,7 @@ const page = async () => {
           },
         ]
       : []),
-    ...(profileConnected.role !== 'vendeur'
+    ...(profileConnected.role === 'admin'
       ? [
           {
             nom: 'Statistiques',
@@ -160,7 +160,7 @@ const page = async () => {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z" />
               </svg>
             ),
-            path: `/admin/${profileConnected.id_boutique ? profileConnected.id_boutique : 'null'}/statistiques`,
+            path: `/admin/statistiques`,
           },
         ]
       : []),
