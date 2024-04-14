@@ -1,9 +1,8 @@
 'use client';
 import { get_total_item_count_in_all_orders } from '@/utils/statistiques/get_total_item_count_in_all_orders';
 import { Drawer } from 'antd';
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Button } from '../ui/button';
 import { get_total_item_count_for_vendeur_orders } from '@/utils/statistiques/get_total_item_count_for_vendeur_orders';
 import { get_total_item_count_in_boutique_orders } from '@/utils/statistiques/get_total_item_count_in_boutique_orders';
 const ItemStatsDrawer = ({
@@ -15,12 +14,16 @@ const ItemStatsDrawer = ({
 }: {
   open: boolean;
   onClose: () => void;
-  magasins: any;
-  vendeurs: any;
+  magasins: { id_boutique: string; adresse: string; ville: string }[];
+  vendeurs: { id_vendeur: string; nom: string; prenom: string }[];
   selectedPiece: any;
 }) => {
-  const [selectedVendeur, setSelectedVendeur] = useState<any | undefined>();
-  const [selectedMagasin, setSelectedMagasin] = useState<any | undefined>();
+  const [selectedVendeur, setSelectedVendeur] = useState<
+    { id_vendeur: string; nom: string; prenom: string } | undefined
+  >();
+  const [selectedMagasin, setSelectedMagasin] = useState<
+    { id_boutique: string; adresse: string; ville: string } | undefined
+  >();
   const [totalCount, setTotalCount] = useState(0);
   const [vendeurCount, setVendeurCount] = useState<number>();
   const [magasinCount, setMagasinCount] = useState<number>();
@@ -95,7 +98,7 @@ const ItemStatsDrawer = ({
             <SelectValue placeholder="Voir les stats pour une boutique" />
           </SelectTrigger>
           <SelectContent className="z-[500000000]">
-            {magasins.map((magasin: any) => (
+            {magasins.map((magasin) => (
               <SelectItem key={magasin.id_boutique} value={magasin.id_boutique}>
                 {magasin.adresse} - {magasin.ville}
               </SelectItem>
@@ -118,7 +121,7 @@ const ItemStatsDrawer = ({
             <SelectValue placeholder="Voir les stas pour un vendeur" />
           </SelectTrigger>
           <SelectContent className="z-[500000000]">
-            {vendeurs.map((vendeur: any) => (
+            {vendeurs.map((vendeur) => (
               <SelectItem key={vendeur.id_vendeur} value={vendeur.id_vendeur}>
                 {vendeur.nom} {vendeur.prenom}
               </SelectItem>

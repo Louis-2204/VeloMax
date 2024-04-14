@@ -10,5 +10,5 @@ export async function get_all_vendeurs() {
     console.error(error);
     return [];
   }
-  return vendeurs;
+  return vendeurs as { id_vendeur: string; nom: string; prenom: string }[];
 }

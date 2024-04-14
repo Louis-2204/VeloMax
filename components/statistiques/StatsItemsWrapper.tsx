@@ -4,7 +4,15 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import ItemStatsDrawer from './ItemStatsDrawer';
 
-const StatsItemsWrapper = ({ articles, magasins, vendeurs }: { articles: any[]; magasins: any; vendeurs: any }) => {
+const StatsItemsWrapper = ({
+  articles,
+  magasins,
+  vendeurs,
+}: {
+  articles: any[];
+  magasins: { id_boutique: string; adresse: string; ville: string }[];
+  vendeurs: { id_vendeur: string; nom: string; prenom: string }[];
+}) => {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [selectedItem, setSelectedItem] = React.useState({} as any);
 

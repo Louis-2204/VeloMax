@@ -10,5 +10,5 @@ export async function get_all_boutiques() {
     console.error(error);
     return [];
   }
-  return boutiques;
+  return boutiques as { id_boutique: string; adresse: string; ville: string }[];
 }
