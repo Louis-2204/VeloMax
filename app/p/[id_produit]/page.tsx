@@ -1,5 +1,6 @@
 import AddToCartBtn from '@/components/p/AddToCartBtn';
 import { Button } from '@/components/ui/button';
+import { getProfileConnected } from '@/utils/getProfileConnected';
 import { createClient } from '@/utils/supabase/server';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -7,6 +8,7 @@ import { notFound } from 'next/navigation';
 
 const page = async ({ params }: { params: { id_produit: string } }) => {
   const supabase = createClient();
+  const profileConnected = await getProfileConnected();
   let produit = null;
   const { data, error } = await supabase
     .from('vélos')
@@ -25,7 +27,6 @@ const page = async ({ params }: { params: { id_produit: string } }) => {
   } else {
     produit = data;
   }
-
 
   if (!produit) {
     notFound();
@@ -46,7 +47,7 @@ const page = async ({ params }: { params: { id_produit: string } }) => {
               {produit.nom}
             </h1>
             <h2 className="text-2xl lg:text-3xl font-semibold text-vm_secondary">{produit.prix_unitaire}€</h2>
-            <AddToCartBtn item={produit} />
+            <AddToCartBtn item={produit} profileConnected={profileConnected} />
           </div>
         </div>
 
