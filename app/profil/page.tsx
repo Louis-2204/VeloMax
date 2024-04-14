@@ -1,48 +1,21 @@
+import AdminForm from '@/components/profil/AdminForm';
+import ParticulierForm from '@/components/profil/ParticulierForm';
+import ProfessionnelForm from '@/components/profil/ProfessionnelForm';
 import SignOutBtn from '@/components/profil/SignOutBtn';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { getProfileConnected } from '@/utils/getProfileConnected';
 
-const page = () => {
+const page = async () => {
+  const profileConnected = await getProfileConnected();
+  const is_admin = ['admin', 'vendeur', 'gerant'].includes(profileConnected?.role);
+
   return (
     <div className="flex flex-col gap-2 max-w-xl">
-      <div className="flex flex-col gap-1">
-        <label htmlFor="">Nom</label>
-        <Input className='bg-background transition-colors duration-500' placeholder="Entrez votre nom" />
-      </div>
+      {is_admin && <AdminForm profileConnected={profileConnected} />}
+      {profileConnected.role === 'particulier' && <ParticulierForm profileConnected={profileConnected} />}
 
-      <div className="flex flex-col gap-1">
-        <label htmlFor="">Prénom</label>
-        <Input className='bg-background transition-colors duration-500' placeholder="Entrez votre prénom" />
-      </div>
-
-      <div className="flex flex-col gap-1">
-        <label htmlFor="">Téléphone</label>
-        <Input className='bg-background transition-colors duration-500' placeholder="Entrez votre numéro de téléphone" />
-      </div>
-
-      <div className="flex flex-col gap-1">
-        <label htmlFor="">Adresse</label>
-        <Input className='bg-background transition-colors duration-500' placeholder="Entrez votre adresse" />
-      </div>
-
-      <div className="flex w-full gap-2">
-        <div className="flex w-1/2 flex-col gap-1">
-          <label htmlFor="">Code postal</label>
-          <Input className='bg-background transition-colors duration-500' placeholder="Code postal" />
-        </div>
-
-        <div className="flex w-1/2 flex-col gap-1">
-          <label htmlFor="">Ville</label>
-          <Input className='bg-background transition-colors duration-500' placeholder="Entrez votre ville" />
-        </div>
-      </div>
-
-      <div className="flex flex-col gap-1">
-        <label htmlFor="">Province</label>
-        <Input className='bg-background transition-colors duration-500' placeholder="Entrez votre province" />
-      </div>
-
-      <Button className="max-w-xs bg-vm_secondary hover:bg-vm_secondary_2 text-white"> Mettre à jour</Button>
+      {profileConnected.role === 'professionnel' && <ProfessionnelForm profileConnected={profileConnected} />}
       <SignOutBtn />
     </div>
   );
