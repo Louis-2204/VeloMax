@@ -110,11 +110,18 @@ export type ItemCatalogue = {
 };
 export type CommandesTableauType = {
   id_commande: string;
+  created_at: string;
   adresse: string;
   ville: string;
   cp: string;
-  created_at: string;
+  id_boutique?: string;
+  id_vendeur?: string;
+  id_client: string;
   status: 'En attente de traitement' | 'En attente de restockage' | 'En traitement' | 'Envoyée';
+  nom?: string;
+  prenom?: string;
+  avis: { note: number }[] | [];
+  items: any[];
 };
 
 export type PieceStock = {

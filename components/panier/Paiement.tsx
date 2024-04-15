@@ -5,6 +5,7 @@ import { Separator } from "../ui/separator";
 import { Icons } from "../icons/icons";
 import { useState } from "react";
 import { useToast } from '../ui/use-toast';
+import RecapPrix from "../RecapPrix";
 
 const Paiement = ({ items, confirmCommand }: { items: { nom: string, prix: number, image: string, quantite: number }[], confirmCommand: () => void }) => {
 
@@ -120,31 +121,8 @@ const Paiement = ({ items, confirmCommand }: { items: { nom: string, prix: numbe
             </div>
 
             <div className="w-full lg:max-w-xs h-fit flex flex-col gap-4 lg:sticky top-0">
-                <div className="flex flex-col border rounded-md border-vm_bg_lightgray p-4">
-                    <div className="text-center font-bold text-vm_text_gray">Récapitulatif de la commande</div>
-                    <Separator className="mt-2 mb-4 bg-vm_secondary" />
-                    <div className="pb-4">
-                        <div className="flex justify-between items-center">
-                            <div className="text-vm_text_gray font-semibold">Sous-total :</div>
-                            <div className="text-vm_text_gray font-extrabold">{(items.reduce((acc, item) => acc + item.prix * item.quantite, 0)).toFixed(2).toString()} €</div>
-                        </div>
-                        <div className="flex justify-between items-center">
-                            <div className="text-vm_text_gray font-semibold">TVA (20%) :</div>
-                            <div className="text-vm_text_gray font-extrabold">{((items.reduce((acc, item) => acc + item.prix * item.quantite, 0)) * 0.2).toFixed(2).toString()} €</div>
-                        </div>
-                    </div>
 
-                    <div className="flex justify-between p-2 bg-vm_bg_lightgray rounded-md">
-                        <div className="text-vm_text_gray font-semibold">Total :</div>
-                        <div className="text-vm_text_gray font-extrabold">{((items.reduce((acc, item) => acc + item.prix * item.quantite, 0)) * 1.2).toFixed(2).toString()} €</div>
-                    </div>
-
-                    <div className="mt-4">
-                        <button className="w-full bg-vm_secondary rounded-md py-1 text-white font-bold" onClick={() => checkConfirmCommand()}>
-                            Payer
-                        </button>
-                    </div>
-                </div>
+                <RecapPrix items={items} checkConfirmCommand={checkConfirmCommand} />
 
                 <div className="flex flex-col">
                     <div className="text-center font-medium">

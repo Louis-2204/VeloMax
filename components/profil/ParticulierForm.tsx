@@ -9,7 +9,7 @@ const ParticulierForm = ({ profileConnected }: { profileConnected: any }) => {
   const [newPrenom, setNewPrenom] = useState(profileConnected.prenom);
   const [newTelephone, setNewTelephone] = useState(profileConnected.telephone);
   const [newAdresse, setNewAdresse] = useState(profileConnected.adresse);
-  const [newCodePostal, setNewCodePostal] = useState(profileConnected.code_postal);
+  const [newCodePostal, setNewCodePostal] = useState(profileConnected.cp);
   const [newVille, setNewVille] = useState(profileConnected.ville);
   const [newProvince, setNewProvince] = useState(profileConnected.province);
 
@@ -24,7 +24,7 @@ const ParticulierForm = ({ profileConnected }: { profileConnected: any }) => {
       prenom: newPrenom,
       telephone: newTelephone,
       adresse: newAdresse,
-      code_postal: newCodePostal,
+      cp: newCodePostal,
       ville: newVille,
       province: newProvince,
     };

@@ -15,16 +15,30 @@ import { CommandesTableauType } from '@/types/entities';
 import moment from 'moment';
 import { Badge } from '../ui/badge';
 import { useRouter } from 'next/navigation';
+import { Icons } from '../icons/icons';
+import { noterCommande } from '@/utils/commandes/noterCommande';
+import { useToast } from '../ui/use-toast';
+import DialogCommande from '../commandes/DialogCommande';
 
 const CommandesTableau = ({ commandes }: { commandes: CommandesTableauType[] }) => {
     const [dialogOpen, setDialogOpen] = useState(false);
     const [selectedCommande, setSelectedCommande] = useState({} as CommandesTableauType);
+    const [hoveredStars, setHoveredStars] = useState(0);
 
     const router = useRouter();
+    const { toast } = useToast();
 
     useLayoutEffect(() => {
         router.refresh();
     }, []);
+
+
+    const NoterCommande = async (commande: CommandesTableauType, note: number) => {
+        const res = await noterCommande(commande, note);
+        if (res) {
+            router.refresh();
+        }
+    };
 
     const columns: ColumnDef<CommandesTableauType>[] = [
         {
@@ -94,6 +108,50 @@ const CommandesTableau = ({ commandes }: { commandes: CommandesTableauType[] }) 
             }
         },
         {
+            id: 'note',
+            header: "Note",
+            cell: ({ row }) => {
+                const commande = row.original;
+
+                const handleStarHover = (star: number) => {
+                    setHoveredStars(star);
+                };
+
+                const handleStarClick = async (star: number) => {
+                    (commande.avis as { note: number }[]).push({ note: star });
+                    await NoterCommande(commande, star);
+                    toast({
+                        title: 'Commande notée',
+                        description: `Merci d'avoir noté votre commande !`,
+                    });
+                };
+
+                return commande.status === 'Envoyée' ? (
+                    <div className="flex">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                            <Icons.star
+                                key={`star-${star}-${commande.id_commande}`}
+                                onClick={() => {
+                                    if (commande.avis.length === 0) {
+                                        handleStarClick(star)
+                                    }
+                                }
+                                }
+                                onMouseEnter={() => {
+                                    if (commande.avis.length === 0) {
+                                        handleStarHover(star);
+                                    }
+                                }
+                                }
+                                onMouseLeave={() => setHoveredStars(0)}
+                                className={`h-4 w-4 transition-all duration-500 hover:duration-0 ${star <= ((commande.avis.length > 0 && commande.avis[0].note) || hoveredStars || 0) ? 'fill-yellow-500 text-yellow-500' : 'fill-background text-vm_text_gray'} ${commande.avis.length > 0 ? 'cursor-default' : 'cursor-pointer'}`}
+                            />
+                        ))}
+                    </div>
+                ) : <span className="text-vm_text_gray">Pas encore reçu</span>
+            }
+        },
+        {
             id: 'actions',
             enableHiding: false,
             header: '',
@@ -134,6 +192,14 @@ const CommandesTableau = ({ commandes }: { commandes: CommandesTableauType[] }) 
                 placeholder_filtre="Rechercher une commande (Adresse)"
                 emptyMessage='Aucune commande'
             />
+
+            {dialogOpen && (
+                <DialogCommande
+                    commande={selectedCommande}
+                    dialogOpen={dialogOpen}
+                    setDialogOpen={setDialogOpen}
+                />
+            )}
         </div>
     );
 };

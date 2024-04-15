@@ -10,9 +10,8 @@ const Navigation = ({ user }: { user: any }) => {
       <CardContent className="p-0">
         <Link href="/profil">
           <div
-            className={`flex w-full py-2 px-3 gap-2 text-vm_text_gray dark:text-white font-semibold transition-colors duration-500 ${
-              path === '/profil' ? 'bg-[#E4E4E7] dark:bg-[#303030]' : ''
-            } hover:bg-[#E4E4E7] hover:dark:bg-[#303030]`}
+            className={`flex w-full py-2 px-3 gap-2 text-vm_text_gray dark:text-white font-semibold transition-colors duration-500 ${path === '/profil' ? 'bg-[#E4E4E7] dark:bg-[#303030]' : ''
+              } hover:bg-[#E4E4E7] hover:dark:bg-[#303030]`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -35,9 +34,8 @@ const Navigation = ({ user }: { user: any }) => {
         {(user.role === 'professionnel' || user.role === 'particulier') && (
           <Link href="/profil/mes-commandes">
             <div
-              className={`flex w-full py-2 px-3 gap-2 text-vm_text_gray dark:text-white font-semibold transition-colors duration-500 ${
-                path === '/profil/mes-commandes' ? 'bg-[#E4E4E7] dark:bg-[#303030]' : ''
-              } hover:bg-[#E4E4E7] hover:dark:bg-[#303030]`}
+              className={`flex w-full py-2 px-3 gap-2 text-vm_text_gray dark:text-white font-semibold transition-colors duration-500 ${path === '/profil/mes-commandes' ? 'bg-[#E4E4E7] dark:bg-[#303030]' : ''
+                } hover:bg-[#E4E4E7] hover:dark:bg-[#303030]`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -61,9 +59,8 @@ const Navigation = ({ user }: { user: any }) => {
         {user?.role === 'particulier' && (
           <Link href="/profil/fidelo">
             <div
-              className={`flex w-full py-2 px-3 gap-2 text-vm_text_gray dark:text-white font-semibold transition-colors duration-500 ${
-                path === '/profil/fidelo' ? 'bg-[#E4E4E7] dark:bg-[#303030]' : ''
-              } hover:bg-[#E4E4E7] hover:dark:bg-[#303030]`}
+              className={`flex w-full py-2 px-3 gap-2 text-vm_text_gray dark:text-white font-semibold transition-colors duration-500 ${path === '/profil/fidelo' ? 'bg-[#E4E4E7] dark:bg-[#303030]' : ''
+                } hover:bg-[#E4E4E7] hover:dark:bg-[#303030]`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -87,9 +84,8 @@ const Navigation = ({ user }: { user: any }) => {
         {user?.role === 'professionnel' && (
           <Link href="/profil/remise">
             <div
-              className={`flex w-full py-2 px-3 gap-2 text-vm_text_gray dark:text-white font-semibold transition-colors duration-500 ${
-                path === '/profil/remise' ? 'bg-[#E4E4E7] dark:bg-[#303030]' : ''
-              } hover:bg-[#E4E4E7] hover:dark:bg-[#303030]`}
+              className={`flex w-full py-2 px-3 gap-2 text-vm_text_gray dark:text-white font-semibold transition-colors duration-500 ${path === '/profil/remise' ? 'bg-[#E4E4E7] dark:bg-[#303030]' : ''
+                } hover:bg-[#E4E4E7] hover:dark:bg-[#303030]`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
