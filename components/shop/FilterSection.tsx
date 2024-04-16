@@ -4,16 +4,36 @@ import { CheckBoxInRow } from '../ui/CheckBoxInRow';
 import { Separator } from '../ui/separator';
 import { useRouter } from 'next/navigation';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
+import { getItemsBySearchParams } from '@/utils/getItemsBySearchParams';
+
+const DialogAddArticleToStock = dynamic(() => import('../admin/articles/DialogAddArticleToStock'));
+
 const FilterSection = ({
   searchParams,
   content,
   fournisseurs,
+  id_boutique,
 }: {
   searchParams: { prix?: string; pieces?: string; velos?: string; fournisseur?: string };
   content: 'stock' | 'shop';
   fournisseurs?: { nom_entreprise: string; id_fournisseur: string }[];
+  id_boutique?: string;
 }) => {
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [articles, setArticles] = useState<any>([]);
   const router = useRouter();
+
+  useEffect(() => {
+    async function getData() {
+      const data = await getItemsBySearchParams({});
+      setArticles(data);
+    }
+    if (content === 'stock') {
+      getData();
+    }
+  }, []);
 
   const handleSubmit = (formData: FormData) => {
     let velosParams = [];
@@ -74,104 +94,123 @@ const FilterSection = ({
   };
 
   return (
-    <div className="w-full sm:w-4/12 sm:max-w-[250px] h-fit flex flex-col gap-2 rounded-md bg-tempBgLightSecondary dark:bg-tempBgDark border border-tempLightBorder dark:border-tempDarkBorder p-2 transition-all duration-500">
-      <form action={handleSubmit} className="flex flex-col gap-4">
-        <div className="flex flex-col w-full gap-2">
-          <h4 className="text-lg text-vm_text_gray dark:text-white font-semibold transition-colors duration-500">
-            Vélos
-          </h4>
-
-          <CheckBoxInRow defaultChecked={shouldBeChecked('VTT')} id="VTT" text="VTT" />
-          <CheckBoxInRow defaultChecked={shouldBeChecked('Vélo de course')} id="Vélo de course" text="Course" />
-          <CheckBoxInRow defaultChecked={shouldBeChecked('Classique')} id="Classique" text="Classique" />
-          <CheckBoxInRow defaultChecked={shouldBeChecked('BMX')} id="BMX" text="BMX" />
-        </div>
-
-        <h4 className="text-lg text-vm_text_gray dark:text-white font-semibold transition-colors duration-500">
-          Fournisseur
-        </h4>
-
-        <div className="flex flex-col w-full gap-2">
-          <Separator className="bg-vm_secondary" />
-          <h4 className="text-lg text-vm_text_gray dark:text-white font-semibold transition-colors duration-500">
-            Pièces
-          </h4>
-          <CheckBoxInRow defaultChecked={shouldBeChecked('Cadre')} id="Cadre" text="Cadre" />
-          <CheckBoxInRow defaultChecked={shouldBeChecked('Guidon')} id="Guidon" text="Guidon" />
-          <CheckBoxInRow defaultChecked={shouldBeChecked('Freins')} id="Freins" text="Freins" />
-          <CheckBoxInRow defaultChecked={shouldBeChecked('Selle')} id="Selle" text="Selle" />
-          <CheckBoxInRow
-            defaultChecked={shouldBeChecked('Dérailleur Avant')}
-            id="Dérailleur Avant"
-            text="Dérailleur avant"
-          />
-          <CheckBoxInRow
-            defaultChecked={shouldBeChecked('Dérailleur Arrière')}
-            id="Dérailleur Arrière"
-            text="Dérailleur arrière"
-          />
-          <CheckBoxInRow defaultChecked={shouldBeChecked('Roue avant')} id="Roue avant" text="Roue avant" />
-          <CheckBoxInRow defaultChecked={shouldBeChecked('Roue arrière')} id="Roue arrière" text="Roue arrière" />
-          <CheckBoxInRow defaultChecked={shouldBeChecked('Réflecteurs')} id="Réflecteurs" text="Réflecteurs" />
-          <CheckBoxInRow defaultChecked={shouldBeChecked('Pédalier')} id="Pédalier" text="Pédalier" />
-          <CheckBoxInRow defaultChecked={shouldBeChecked('Ordinateur')} id="Ordinateur" text="Ordinateur" />
-          <CheckBoxInRow defaultChecked={shouldBeChecked('Panier')} id="Panier" text="Panier" />
-        </div>
-
-        {content === 'shop' && (
-          <div className="flex flex-col w-full gap-2">
-            <Separator className="bg-vm_secondary" />
-            <h4 className="text-lg text-vm_text_gray dark:text-white font-semibold transition-colors duration-500">
-              Prix
-            </h4>
-            <CheckBoxInRow defaultChecked={shouldBeChecked('0-50')} id="0-50" text="0€ - 50€" />
-            <CheckBoxInRow defaultChecked={shouldBeChecked('50-100')} id="50-100" text="50€ - 100€" />
-            <CheckBoxInRow defaultChecked={shouldBeChecked('100-200')} id="100-200" text="100€ - 200€" />
-            <CheckBoxInRow defaultChecked={shouldBeChecked('200-400')} id="200-400" text="200€ - 400€" />
-            <CheckBoxInRow defaultChecked={shouldBeChecked('400-700')} id="400-700" text="400€ - 700€" />
-            <CheckBoxInRow defaultChecked={shouldBeChecked('700-1000')} id="700-1000" text="700€ - 1000€" />
-            <CheckBoxInRow defaultChecked={shouldBeChecked('1000+')} id="1000+" text="+1000€" />
-          </div>
-        )}
-
-        {content === 'stock' && (
-          <div className="flex flex-col w-full gap-2">
-            <Separator className="bg-vm_secondary" />
-            <h4 className="text-lg text-vm_text_gray dark:text-white font-semibold transition-colors duration-500">
-              Fournisseur
-            </h4>
-            <Select name="fournisseur" defaultValue={searchParams.fournisseur}>
-              <SelectTrigger>
-                <SelectValue placeholder="Selectionner un fournisseur" />
-              </SelectTrigger>
-              <SelectContent>
-                {fournisseurs?.map((fournisseur) => (
-                  <SelectItem key={fournisseur.id_fournisseur} value={fournisseur.id_fournisseur}>
-                    {fournisseur.nom_entreprise}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-        )}
-
-        <div className="flex flex-col w-full gap-2">
+    <>
+      <div className="w-full sm:w-4/12 sm:max-w-[250px] h-fit flex flex-col gap-2 rounded-md bg-tempBgLightSecondary dark:bg-tempBgDark border border-tempLightBorder dark:border-tempDarkBorder p-2 transition-all duration-500">
+        {content === 'stock' && id_boutique && articles && (
           <Button
-            type="submit"
-            className="!w-full bg-vm_secondary hover:bg-vm_secondary_2 border-secondary !text-textLight"
+            variant="outline"
+            onClick={() => setDialogOpen(true)}
+            className="!w-full bg-background text-black dark:text-white transition-colors duration-500"
           >
-            {'Filtrer'}
+            Ajouter un produit au stock
           </Button>
-        </div>
-      </form>
-      <Button
-        variant="outline"
-        onClick={clearFilters}
-        className="!w-full bg-background text-black dark:text-white transition-colors duration-500"
-      >
-        Supprimer les filtres
-      </Button>
-    </div>
+        )}
+        <form action={handleSubmit} className="flex flex-col gap-4">
+          <div className="flex flex-col w-full gap-2">
+            <h4 className="text-lg text-vm_text_gray dark:text-white font-semibold transition-colors duration-500">
+              Vélos
+            </h4>
+
+            <CheckBoxInRow defaultChecked={shouldBeChecked('VTT')} id="VTT" text="VTT" />
+            <CheckBoxInRow defaultChecked={shouldBeChecked('Vélo de course')} id="Vélo de course" text="Course" />
+            <CheckBoxInRow defaultChecked={shouldBeChecked('Classique')} id="Classique" text="Classique" />
+            <CheckBoxInRow defaultChecked={shouldBeChecked('BMX')} id="BMX" text="BMX" />
+          </div>
+
+          <h4 className="text-lg text-vm_text_gray dark:text-white font-semibold transition-colors duration-500">
+            Fournisseur
+          </h4>
+
+          <div className="flex flex-col w-full gap-2">
+            <Separator className="bg-vm_secondary" />
+            <h4 className="text-lg text-vm_text_gray dark:text-white font-semibold transition-colors duration-500">
+              Pièces
+            </h4>
+            <CheckBoxInRow defaultChecked={shouldBeChecked('Cadre')} id="Cadre" text="Cadre" />
+            <CheckBoxInRow defaultChecked={shouldBeChecked('Guidon')} id="Guidon" text="Guidon" />
+            <CheckBoxInRow defaultChecked={shouldBeChecked('Freins')} id="Freins" text="Freins" />
+            <CheckBoxInRow defaultChecked={shouldBeChecked('Selle')} id="Selle" text="Selle" />
+            <CheckBoxInRow
+              defaultChecked={shouldBeChecked('Dérailleur Avant')}
+              id="Dérailleur Avant"
+              text="Dérailleur avant"
+            />
+            <CheckBoxInRow
+              defaultChecked={shouldBeChecked('Dérailleur Arrière')}
+              id="Dérailleur Arrière"
+              text="Dérailleur arrière"
+            />
+            <CheckBoxInRow defaultChecked={shouldBeChecked('Roue avant')} id="Roue avant" text="Roue avant" />
+            <CheckBoxInRow defaultChecked={shouldBeChecked('Roue arrière')} id="Roue arrière" text="Roue arrière" />
+            <CheckBoxInRow defaultChecked={shouldBeChecked('Réflecteurs')} id="Réflecteurs" text="Réflecteurs" />
+            <CheckBoxInRow defaultChecked={shouldBeChecked('Pédalier')} id="Pédalier" text="Pédalier" />
+            <CheckBoxInRow defaultChecked={shouldBeChecked('Ordinateur')} id="Ordinateur" text="Ordinateur" />
+            <CheckBoxInRow defaultChecked={shouldBeChecked('Panier')} id="Panier" text="Panier" />
+          </div>
+
+          {content === 'shop' && (
+            <div className="flex flex-col w-full gap-2">
+              <Separator className="bg-vm_secondary" />
+              <h4 className="text-lg text-vm_text_gray dark:text-white font-semibold transition-colors duration-500">
+                Prix
+              </h4>
+              <CheckBoxInRow defaultChecked={shouldBeChecked('0-50')} id="0-50" text="0€ - 50€" />
+              <CheckBoxInRow defaultChecked={shouldBeChecked('50-100')} id="50-100" text="50€ - 100€" />
+              <CheckBoxInRow defaultChecked={shouldBeChecked('100-200')} id="100-200" text="100€ - 200€" />
+              <CheckBoxInRow defaultChecked={shouldBeChecked('200-400')} id="200-400" text="200€ - 400€" />
+              <CheckBoxInRow defaultChecked={shouldBeChecked('400-700')} id="400-700" text="400€ - 700€" />
+              <CheckBoxInRow defaultChecked={shouldBeChecked('700-1000')} id="700-1000" text="700€ - 1000€" />
+              <CheckBoxInRow defaultChecked={shouldBeChecked('1000+')} id="1000+" text="+1000€" />
+            </div>
+          )}
+
+          {content === 'stock' && (
+            <div className="flex flex-col w-full gap-2">
+              <Separator className="bg-vm_secondary" />
+              <h4 className="text-lg text-vm_text_gray dark:text-white font-semibold transition-colors duration-500">
+                Fournisseur
+              </h4>
+              <Select name="fournisseur" defaultValue={searchParams.fournisseur}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Selectionner un fournisseur" />
+                </SelectTrigger>
+                <SelectContent>
+                  {fournisseurs?.map((fournisseur) => (
+                    <SelectItem key={fournisseur.id_fournisseur} value={fournisseur.id_fournisseur}>
+                      {fournisseur.nom_entreprise}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          )}
+
+          <div className="flex flex-col w-full gap-2">
+            <Button
+              type="submit"
+              className="!w-full bg-vm_secondary hover:bg-vm_secondary_2 border-secondary !text-textLight"
+            >
+              {'Filtrer'}
+            </Button>
+          </div>
+        </form>
+        <Button
+          variant="outline"
+          onClick={clearFilters}
+          className="!w-full bg-background text-black dark:text-white transition-colors duration-500"
+        >
+          Supprimer les filtres
+        </Button>
+      </div>
+      {content === 'stock' && id_boutique && articles && (
+        <DialogAddArticleToStock
+          dialogOpen={dialogOpen}
+          setDialogOpen={setDialogOpen}
+          id_boutique={id_boutique}
+          articles={articles}
+        />
+      )}
+    </>
   );
 };
 

@@ -2,7 +2,6 @@ import FilterSection from '@/components/shop/FilterSection';
 import ItemsWrapper from '@/components/shop/ItemsWrapper';
 import TopRowShopSection from '@/components/shop/TopRowShopSection';
 import { getFournisseursForStockFilter } from '@/utils/getFournisseursForStockFilter';
-import { getItemsBySearchParams } from '@/utils/getItemsBySearchParams';
 import { getStockBySearchParams } from '@/utils/getStockBySearchParams';
 
 const page = async ({
@@ -23,6 +22,7 @@ const page = async ({
           searchParams={searchParams}
           content="stock"
           fournisseurs={fournisseurs}
+          id_boutique={params.id_boutique}
         />
         <div className="rounded-md bg-tempBgLightSecondary dark:bg-tempBgDark border border-tempLightBorder dark:border-tempDarkBorder w-full h-fit flex flex-col">
           <TopRowShopSection />

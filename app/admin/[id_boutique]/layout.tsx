@@ -6,6 +6,11 @@ import { ReactNode } from 'react';
 
 const layout = async ({ children, params }: { children: ReactNode; params: { id_boutique: string } }) => {
   const profileConnected = await getProfileConnected();
+
+  if (!profileConnected) return redirect('/');
+  if (profileConnected.role === 'particulier') return redirect('/');
+  if (profileConnected.role === 'professionnel') return redirect('/');
+
   if (params.id_boutique !== 'null') {
     const supabase = createClient();
     const { data: doesExist, error } = await supabase
