@@ -1,6 +1,6 @@
 import { Separator } from "./ui/separator";
 
-const RecapPrix = ({ items, checkProceedToDelivery, checkProceedToPayment, checkConfirmCommand, type }: { items: any[], checkProceedToDelivery?: () => void, type?: string, checkProceedToPayment?: () => void, checkConfirmCommand?: () => void }) => {
+const RecapPrix = ({ user, items, checkProceedToDelivery, checkProceedToPayment, checkConfirmCommand, type }: { user: any, items: any[], checkProceedToDelivery?: () => void, type?: string, checkProceedToPayment?: () => void, checkConfirmCommand?: () => void }) => {
     return (
         <div className="w-full lg:max-w-xs h-fit flex flex-col lg:sticky top-0 border rounded-md border-vm_bg_lightgray p-4">
             <div className="text-center font-bold text-vm_text_gray">Récapitulatif de la commande</div>

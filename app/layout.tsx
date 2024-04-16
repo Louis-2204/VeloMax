@@ -27,7 +27,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             showSpinner={false}
           />
           <Navbar user={profileConnected} />
-          <main className="h-full w-full px-4 flex flex-col items-center overflow-y-auto">{children}</main>
+          <main className="h-full w-full flex flex-col items-center overflow-y-auto">{children}</main>
           <Toaster />
           <Sonner />
         </body>

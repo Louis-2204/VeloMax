@@ -151,11 +151,12 @@ export function Navbar({ user }: { user: any }) {
             <SheetContent side={'left'} className="w-[300px] !max-w-[100vw] sm:w-[300px] md:w-[400px] transition-all duration-500">
               <SheetHeader>
                 <SheetTitle>
-                  <div
+                  <Link
+                    href={'/'}
                     className="pl-4 md:pl-0 text-4xl h-full font-bold text-vm_text_gray dark:text-white transition-all duration-500 flex items-center"
                   >
                     VeloMax
-                  </div>
+                  </Link>
                 </SheetTitle>
                 <SheetDescription>
                   <Accordion type="single" collapsible>

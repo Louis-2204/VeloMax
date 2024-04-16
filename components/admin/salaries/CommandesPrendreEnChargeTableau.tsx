@@ -16,7 +16,7 @@ import moment from 'moment';
 import { useRouter } from 'next/navigation';
 import DialogCommande from '@/components/commandes/DialogCommande';
 
-const CommandesPrendreEnChargeTableau = ({ commandes, vendeurs }: { commandes: CommandesTableauType[]; vendeurs: any }) => {
+const CommandesPrendreEnChargeTableau = ({ user, commandes, vendeurs }: { user: any, commandes: CommandesTableauType[]; vendeurs: any }) => {
     const [dialogOpen, setDialogOpen] = useState(false);
     const [selectedCommande, setSelectedCommande] = useState({} as CommandesTableauType);
 
@@ -115,6 +115,7 @@ const CommandesPrendreEnChargeTableau = ({ commandes, vendeurs }: { commandes: C
 
             {dialogOpen && (
                 <DialogCommande
+                    user={user}
                     type='commandeAprendreEnCharge'
                     commande={selectedCommande}
                     vendeurs={vendeurs}

@@ -7,12 +7,14 @@ import { CommandesTableauType } from '@/types/entities';
 import RecapPrix from '../RecapPrix';
 import PrendreEnChargeInfos from './PrendreEnChargeInfos';
 const DialogCommande = ({
+    user,
     commande,
     vendeurs,
     dialogOpen,
     setDialogOpen,
     type
 }: {
+    user: any;
     commande: CommandesTableauType;
     vendeurs?: any[];
     dialogOpen: boolean;
@@ -32,7 +34,7 @@ const DialogCommande = ({
                 <div className="flex flex-col-reverse lg:flex-row gap-4 justify-between">
                     <RecapProduits type={type} items={commande.items} />
                     {type === 'detailCommande' ? (
-                        <RecapPrix type={type} items={commande.items} />
+                        <RecapPrix user={user} type={type} items={commande.items} />
                     ) : (
                         <PrendreEnChargeInfos vendeurs={vendeurs} commande={commande} setDialogOpen={setDialogOpen} />
                     )}

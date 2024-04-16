@@ -11,16 +11,16 @@ import { InfiniteMovingCards } from '@/components/ui/infinite-moving-cards';
 export default async function Index() {
   return (
     <div className="flex flex-col w-full h-full">
-      <div className="flex relative min-h-[calc(100vh-5rem)] w-full justify-center bg-background transition-colors duration-500">
+      <div className="flex relative min-h-[calc(100svh-5rem)] w-full justify-center bg-background transition-colors duration-500">
         <div className="absolute w-full h-full">
           <BackgroundBeams />
         </div>
 
         <div className="w-full flex flex-col items-center justify-center max-w-8xl z-10">
-          <h1 className="text-6xl font-bold text-center text-vm_text_gray dark:text-white transition-colors duration-500">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center text-vm_text_gray dark:text-white transition-all duration-500">
             Votre route vers la perfection.
           </h1>
-          <p className="text-2xl max-w-5xl text-center text-vm_secondary transition-colors duration-500">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl max-w-5xl text-center text-vm_secondary transition-all duration-500">
             Chez VeloMax, qualité et confiance sont notre devise. Découvrez notre sélection minutieuse de vélos et
             pièces détachées pour une expérience de cyclisme incomparable.
           </p>
@@ -52,7 +52,7 @@ export default async function Index() {
         </div>
       </div>
 
-      <div className="w-full flex flex-col px-20 max-w-8xl mx-auto mb-80">
+      <div className="w-full flex flex-col px-2 sm:px-8 md:px-14 lg:px-20 max-w-8xl mx-auto mb-80">
         <h1 className="text-[40px] sm:text-[60px] md:text-[100px] lg:text-[140px] xl:text-[180px] h-14 sm:h-20 md:h-32 lg:h-44 xl:h-56 font-semibold text-left text-[#DCDCDC] categories-title-xs sm:categories-title transition-all">CATÉGORIES</h1>
         <BentoGrid className="w-full">
           {items.map((item, i) => (
@@ -67,7 +67,7 @@ export default async function Index() {
         </BentoGrid>
       </div>
 
-      <div className="w-full flex flex-col px-20 max-w-8xl mx-auto">
+      <div className="w-full flex flex-col px-2 sm:px-8 md:px-14 lg:px-20 max-w-8xl mx-auto">
         <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-left text-vm_text_gray dark:text-white pb-4 transition-all duration-500">
           Rejoignez la <u className="underline-offset-8 decoration-vm_secondary">communauté VeloMax !</u>
         </h1>

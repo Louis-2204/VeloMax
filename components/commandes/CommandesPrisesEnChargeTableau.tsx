@@ -18,7 +18,7 @@ import AlertDeleteCommande from './AlertDeleteCommande';
 import DialogUpdateCommande from './DialogUpdateCommande';
 import DialogCommande from './DialogCommande';
 
-const CommandesPrisesEnChargeTableau = ({ clients, commandes, produits, vendeurs, id_boutique }: { clients: any[], commandes: any[], produits: any[], vendeurs: Vendeur[], id_boutique: string }) => {
+const CommandesPrisesEnChargeTableau = ({ user, clients, commandes, produits, vendeurs, id_boutique }: { user: any, clients: any[], commandes: any[], produits: any[], vendeurs: Vendeur[], id_boutique: string }) => {
     const [alertOpen, setAlertOpen] = useState(false);
     const [dialogOpen, setDialogOpen] = useState(false);
     const [dialogUpdateOpen, setDialogUpdateOpen] = useState(false);
@@ -154,6 +154,7 @@ const CommandesPrisesEnChargeTableau = ({ clients, commandes, produits, vendeurs
             )}
             {dialogOpen && (
                 <DialogCommande
+                    user={user}
                     type='detailCommande'
                     commande={selectedCommande}
                     vendeurs={vendeurs}

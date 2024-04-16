@@ -11,7 +11,7 @@ const page = async () => {
 
     return (
         <div className="w-full">
-            <CommandesPrendreEnChargeTableau commandes={commandes} vendeurs={vendeurs} />
+            <CommandesPrendreEnChargeTableau user={user} commandes={commandes} vendeurs={vendeurs} />
         </div>
     );
 };
