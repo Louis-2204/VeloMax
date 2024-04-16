@@ -21,9 +21,9 @@ export async function getPiecesVelo(id_velo: string) {
     }
 
     return data.map((piece: any) => ({
-        id_piece: piece.pieces.fournisseurs_pieces[0].id_piece,
+        id_piece: piece.pieces.fournisseurs_pieces[0] ? piece.pieces.fournisseurs_pieces[0].id_piece : 'aucun fournisseur',
         nom: piece.pieces.nom,
-        delai_approvisionnement: piece.pieces.fournisseurs_pieces[0].delai_approvisionnement,
+        delai_approvisionnement: piece.pieces.fournisseurs_pieces[0] ? piece.pieces.fournisseurs_pieces[0].delai_approvisionnement : 0,
         nb_stock: piece.pieces.boutiques_pieces_fournisseurs.reduce((sum: number, boutique: any) => sum + boutique.quantite, 0),
     }));
 }

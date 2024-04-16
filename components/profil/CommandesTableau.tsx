@@ -52,19 +52,19 @@ const CommandesTableau = ({ commandes }: { commandes: CommandesTableauType[] }) 
             }
         },
         {
-            accessorKey: 'created_at',
+            accessorKey: 'livraison',
             header: ({ column }) => {
                 return (
                     <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-                        Date
+                        Livraison
                         <ArrowUpDown className="ml-2 h-4 w-4" />
                     </Button>
                 );
             },
-            id: 'Date',
+            id: 'Livraison',
             cell: ({ row }) => {
                 const commande = row.original;
-                return moment(commande.created_at).format('DD/MM/YYYY');
+                return moment(commande.livraison).format('DD/MM/YYYY');
             }
         },
         {

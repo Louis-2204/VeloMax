@@ -233,9 +233,7 @@ export function Navbar({ user }: { user: any }) {
               <NavigationMenuContent>
                 <ul className="grid w-[650px] gap-3 p-4 md:grid-cols-4">
                   {pieces.map((piece) => (
-                    <Link key={piece.title} href={piece.href}>
-                      <ListItem title={`• ${piece.title}`} />
-                    </Link>
+                    <ListItem title={`• ${piece.title}`} href={piece.href} />
                   ))}
                 </ul>
               </NavigationMenuContent>

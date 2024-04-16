@@ -29,6 +29,8 @@ const PrendreEnChargeInfos = ({ commande, vendeurs, setDialogOpen }: { commande:
         setDialogOpen(false);
     };
 
+    const oneItemHasAucunFournisseur = commande.items.some((item: any) => item.pieces_velo && item.pieces_velo.some((piece: any) => piece.id_piece === "aucun fournisseur"));
+
     return (
         <div className="w-full">
             <form
@@ -56,12 +58,15 @@ const PrendreEnChargeInfos = ({ commande, vendeurs, setDialogOpen }: { commande:
                         </SelectContent>
                     </Select>
                 </div>
-                {!isStockAvailable && (
+                {!isStockAvailable && !oneItemHasAucunFournisseur ? (
                     <div className="text-red-500 text-xs">
                         En prenant en charge cette commande la date de livraison au plus tôt sera modifiée pour le {moment(commande.livraison).add(MaxDelaiApprovisionnement, 'days').format('DD/MM/YYYY')} en raison du stock disponible.
                     </div>
-                )
-                }
+                ) : oneItemHasAucunFournisseur && (
+                    <div className="text-red-500 text-xs">
+                        <span className="font-semibold">Une ou plusieurs pièces de ce vélo n'ont pas de fournisseur</span>, la date de livraison au plus tôt sera modifiée pour le {moment(commande.livraison).add(MaxDelaiApprovisionnement, 'days').format('DD/MM/YYYY')} sans prendre en compte les pièces sans fournisseur.
+                    </div>
+                )}
                 <Button className="w-full bg-vm_secondary_2 hover:bg-vm_secondary" type="submit">
                     Prendre en charge
                 </Button>

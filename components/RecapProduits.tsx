@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 const RecapProduits = ({ items, addToCart, removeFromCart, type }: { items: any[]; addToCart?: (item: any) => void; removeFromCart?: any, type?: string }) => {
 
     return (
-        <div className={`flex flex-col gap-3 w-full lg:w-7/12 ${type !== 'detailCommande' && type !== 'commandeAprendreEnCharge' ? 'pb-6' : ''}`}>
+        <div className={`flex flex-col gap-3 w-full lg:min-w-7/12 ${type !== 'detailCommande' && type !== 'commandeAprendreEnCharge' ? 'pb-6' : ''}`}>
             {
                 items.map((item, index) => (
                     <div key={index} className="flex justify-between items-center w-full p-3 h-32 border rounded-md border-vm_bg_lightgray">
@@ -36,7 +36,14 @@ const RecapProduits = ({ items, addToCart, removeFromCart, type }: { items: any[
                             </div>
                         </div>
                         <div className="h-full justify-between flex flex-col items-end">
-                            <div className="font-bold text-lg text-vm_secondary">{item.prix} €</div>
+                            <div className="font-bold text-lg text-vm_secondary flex gap-1">
+                                <span>
+                                    {item.prix}
+                                </span>
+                                <span>
+                                    €
+                                </span>
+                            </div>
                             <div className="text-vm_text_gray_secondary w-fit border rounded-md p-1 text-xs">
                                 <div className="flex gap-3 px-1 justify-around items-center">
                                     {type !== 'detailCommande' && type !== 'commandeAprendreEnCharge' ?

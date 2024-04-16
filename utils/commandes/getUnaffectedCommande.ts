@@ -19,7 +19,7 @@ export async function getUnaffectedCommande() {
     try {
         const { data: dataCommande, error: errorCommande } = await supabase
             .from('commandes')
-            .select('*, avis(note), commandes_velos(quantite, id_commande, velo:public_commandes_velos_id_velo_fkey(id_velo, nom, prix_unitaire, image, type)), commandes_pieces(quantite, id_commande, piece:public_commandes_pieces_id_piece_fkey(id_piece, nom, prix_unitaire, image, type))')
+            .select('*, commandes_velos(quantite, id_commande, velo:public_commandes_velos_id_velo_fkey(id_velo, nom, prix_unitaire, image, type)), commandes_pieces(quantite, id_commande, piece:public_commandes_pieces_id_piece_fkey(id_piece, nom, prix_unitaire, image, type))')
             .eq('status', 'En attente de traitement');
 
         if (errorCommande) {
@@ -52,11 +52,6 @@ export async function getUnaffectedCommande() {
 
             items.push(...velos, ...pieces);
         }
-
-        console.log(dataCommande.map((commande: any) => ({
-            ...commande,
-            items: items.filter((item: Item) => commande.commandes_pieces.some((piece: any) => piece.id_piece === item.id && piece.id_commande === item.id_commande) || commande.commandes_velos.some((velo: any) => velo.id_velo === item.id && velo.id_commande === item.id_commande))
-        })));
 
         return dataCommande.map((commande: any) => ({
             ...commande,

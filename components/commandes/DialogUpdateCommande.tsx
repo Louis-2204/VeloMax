@@ -73,7 +73,7 @@ const DialogUpdateCommande = ({
     };
 
     const handleCreateCommande = async () => {
-        if (!newVendeur || !newPrenomClient || !newNomClient || !newAdresse || !newVille || !newCodePostal || !newStatut || !selectedDate) {
+        if (!newVendeur || !newPrenomClient || !newNomClient || !newAdresse || !newVille || !newCodePostal || !newStatut || !selectedDate || !newIdClient || selectedItems.length === 0) {
             toast.error('Veuillez remplir tous les champs');
             return;
         }
@@ -102,7 +102,7 @@ const DialogUpdateCommande = ({
 
     const isDisabled = () => {
         if (typeAction === 'ajout') {
-            return !newVendeur || !newPrenomClient || !newNomClient || !newAdresse || !newVille || !newCodePostal || !newStatut || !selectedDate || !newIdClient;
+            return !newVendeur || !newPrenomClient || !newNomClient || !newAdresse || !newVille || !newCodePostal || !newStatut || !selectedDate || !newIdClient || selectedItems.length === 0;
         } else {
             return !newVendeur || !newPrenomClient || !newNomClient || !newAdresse || !newVille || !newCodePostal || !newStatut || !selectedDate;
         }
