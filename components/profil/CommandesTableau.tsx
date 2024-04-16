@@ -195,6 +195,7 @@ const CommandesTableau = ({ commandes }: { commandes: CommandesTableauType[] }) 
 
             {dialogOpen && (
                 <DialogCommande
+                    type='detailCommande'
                     commande={selectedCommande}
                     dialogOpen={dialogOpen}
                     setDialogOpen={setDialogOpen}

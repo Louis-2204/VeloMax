@@ -21,7 +21,7 @@ const RecapPrix = ({ items, checkProceedToDelivery, checkProceedToPayment, check
                 <div className="text-vm_text_gray font-extrabold">{((items.reduce((acc, item) => acc + item.prix * item.quantite, 0)) * 1.2).toFixed(2).toString()} €</div>
             </div>
 
-            {type !== 'detailCommande' && (
+            {type !== 'detailCommande' && type !== 'commandeAprendreEnCharge' && (
                 checkProceedToDelivery ? (
                     <div className="mt-4">
                         <button className="w-full bg-vm_secondary rounded-md py-1 text-white font-bold" onClick={() => checkProceedToDelivery()}>

@@ -4,10 +4,6 @@ import * as React from 'react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { Icons } from '@/components/icons/icons';
-import BMX from '@/public/BMX.png';
-import Course from '@/public/Course.png';
-import Classique from '@/public/Classique.png';
-import VTT from '@/public/VTT.png';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -34,7 +30,6 @@ import { useContext, useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { ShoppingCartContext } from '@/context/ShoppingCartContext';
 import { Button } from './ui/button';
-import Image from 'next/image';
 
 const pieces: { title: string; href: string }[] = [
   {

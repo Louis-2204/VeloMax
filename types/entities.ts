@@ -9,9 +9,9 @@ export type Particulier = {
   cp: string;
   province: string;
   telephone: string;
-  id_fidelo: string;
-  date_souscription: string;
-  date_fin_souscription: string;
+  id_fidelo?: string;
+  date_souscription?: string;
+  date_fin_souscription?: string;
 };
 
 export type Vendeur = {
