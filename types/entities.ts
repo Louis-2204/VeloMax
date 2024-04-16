@@ -47,6 +47,41 @@ export type Admin = {
   prenom: string;
 };
 
+export type Piece = {
+  id_piece: string;
+  nom: string;
+  description: string;
+  type:
+    | 'Cadre'
+    | 'Guidon'
+    | 'Freins'
+    | 'Selle'
+    | 'Dérailleur Avant'
+    | 'Dérailleur Arrière'
+    | 'Roue avant'
+    | 'Roue arrière'
+    | 'Réflecteurs'
+    | 'Pédalier'
+    | 'Ordinateur'
+    | 'Panier';
+  prix_unitaire: number;
+  date_introduction_marche: string;
+  date_discontinuation_production: string;
+  image: string;
+};
+
+export type Velo = {
+  id_velo: string;
+  nom: string;
+  type: 'VTT' | 'Vélo de course' | 'Classique' | 'BMX';
+  grandeur: string;
+  description: string;
+  prix_unitaire: number;
+  date_introduction_marche: string;
+  date_discontinuation_production?: string;
+  image: string;
+};
+
 // data type for user
 
 export type ParticulierUser = Particulier & { role: 'particulier' };
