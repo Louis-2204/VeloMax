@@ -36,14 +36,19 @@ const RecapProduits = ({ items, addToCart, removeFromCart, type }: { items: any[
                             </div>
                         </div>
                         <div className="h-full justify-between flex flex-col items-end">
-                            <div className="font-bold text-lg text-vm_secondary flex gap-1">
-                                <span>
-                                    {item.prix}
-                                </span>
-                                <span>
-                                    €
-                                </span>
-                            </div>
+                            {type !== 'commandeAprendreEnCharge' ? (
+                                <div className="font-bold text-lg text-vm_secondary flex gap-1">
+                                    <span>
+                                        {item.prix}
+                                    </span>
+                                    <span>
+                                        €
+                                    </span>
+                                </div>
+                            ) : (
+                                <div />
+                            )
+                            }
                             <div className="text-vm_text_gray_secondary w-fit border rounded-md p-1 text-xs">
                                 <div className="flex gap-3 px-1 justify-around items-center">
                                     {type !== 'detailCommande' && type !== 'commandeAprendreEnCharge' ?

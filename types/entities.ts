@@ -156,6 +156,7 @@ export type CommandesTableauType = {
   nom?: string;
   prenom?: string;
   livraison: string;
+  prix_total?: number;
   avis: { note: number }[] | [];
   items: any[];
 };

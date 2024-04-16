@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useToast } from '../ui/use-toast';
 import RecapPrix from "../RecapPrix";
 
-const Paiement = ({ user, items, confirmCommand }: { user: any, items: { nom: string, prix: number, image: string, quantite: number }[], confirmCommand: () => void }) => {
+const Paiement = ({ userFidelo, items, confirmCommand }: { userFidelo: any, items: { nom: string, prix: number, image: string, quantite: number }[], confirmCommand: (total: any) => void }) => {
 
     const { toast } = useToast();
 
@@ -17,14 +17,14 @@ const Paiement = ({ user, items, confirmCommand }: { user: any, items: { nom: st
     const [anneeExpiration, setAnneeExpiration] = useState('');
     const [CVV, setCVV] = useState('');
 
-    const checkConfirmCommand = () => {
+    const checkConfirmCommand = (total: any) => {
         if (nomSurLaCarte === '' || numeroDeCarte === '' || moisExpiration === '' || anneeExpiration === '' || CVV === '') {
             return toast({
                 title: 'Erreur',
                 description: 'Veuillez renseigner tous les champs',
             });
         }
-        confirmCommand();
+        confirmCommand(total);
     }
 
     return (
@@ -122,7 +122,7 @@ const Paiement = ({ user, items, confirmCommand }: { user: any, items: { nom: st
 
             <div className="w-full lg:max-w-xs h-fit flex flex-col gap-4 lg:sticky top-0">
 
-                <RecapPrix user={user} items={items} checkConfirmCommand={checkConfirmCommand} />
+                <RecapPrix userFidelo={userFidelo} items={items} checkConfirmCommand={checkConfirmCommand} />
 
                 <div className="flex flex-col">
                     <div className="text-center font-medium">

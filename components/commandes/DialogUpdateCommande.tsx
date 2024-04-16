@@ -12,6 +12,7 @@ import { useRouter } from 'next/navigation';
 import { createCommande } from '@/utils/commandes/createCommande';
 import { Icons } from '../icons/icons';
 import DialogSelectItems from './DialogSelectItems';
+import { getTotalPrixWithFideloForUser } from '@/utils/commandes/getTotalPrixWithFideloForUser';
 const DialogUpdateCommande = ({
     clients,
     id_boutique,
@@ -85,10 +86,12 @@ const DialogUpdateCommande = ({
             codePostal: newCodePostal,
             items: selectedItems,
         },
+            await getTotalPrixWithFideloForUser(selectedItems, newIdClient),
             newVendeur,
             id_boutique,
             newIdClient,
-            newStatut
+            newStatut,
+            selectedDate
         );
 
         setDialogOpen(false);
@@ -124,7 +127,7 @@ const DialogUpdateCommande = ({
                                 onClick={() => setSubDialogOpen(true)}
                                 variant="outline"
                             >
-                                Ajouter des articles
+                                Ajouter des articles {selectedItems.length > 0 && `(${selectedItems.map(item => item.quantite).reduce((a, b) => a + b)} sélectionnés)`}
                             </Button>
                             <div className="grid grid-cols-4 items-center gap-4">
                                 <Label htmlFor="idClient" className="text-right">

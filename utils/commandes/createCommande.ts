@@ -4,13 +4,13 @@ import { createClient } from '../supabase/server';
 import { getUserConnected } from '../getUserConnected';
 import moment from "moment";
 
-export async function createCommande(infos: { items: { id: string; nom: string; quantite: number; prix: number; image: string; type: "vélo" | "pièce" }[]; nom: string; prenom: string; adresse: string; ville: string; codePostal: string }, id_vendeur?: string, id_boutique?: string, id_user?: string, status?: string) {
+export async function createCommande(infos: { items: { id: string; nom: string; quantite: number; prix: number; image: string; type: "vélo" | "pièce" }[]; nom: string; prenom: string; adresse: string; ville: string; codePostal: string }, total: number, id_vendeur?: string, id_boutique?: string, id_user?: string, status?: string, selectedDate?: string) {
     'use server';
 
     const supabase = createClient();
 
     const user = await getUserConnected();
-    const dateLivraison = moment().add(5, 'days').format('YYYY-MM-DD');
+    const dateLivraison = selectedDate ? moment(selectedDate).format('YYYY-MM-DD') : moment().add(5, 'days').format('YYYY-MM-DD');
 
     const { data: dataCommande, error: errorCommande } = await supabase
         .from('commandes')
@@ -25,7 +25,7 @@ export async function createCommande(infos: { items: { id: string; nom: string; 
                 id_vendeur: id_vendeur || null,
                 id_client: id_user || user?.id,
                 status: status || 'En attente de traitement',
-                prix_total: (infos.items.reduce((acc, item) => acc + item.prix * item.quantite, 0) * 1.2).toFixed(2),
+                prix_total: total,
                 livraison: dateLivraison,
             },
         ])

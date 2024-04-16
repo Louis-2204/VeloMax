@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { useToast } from '../ui/use-toast';
 import RecapPrix from '../RecapPrix';
 
-const Livraison = ({ user, items, proceedToPayment }: { user: any, items: { nom: string, prix: number, image: string, quantite: number }[], proceedToPayment: (nom: string, prenom: string, adresse: string, ville: string, codePostal: string) => void }) => {
+const Livraison = ({ userFidelo, items, proceedToPayment }: { userFidelo: any, items: { nom: string, prix: number, image: string, quantite: number }[], proceedToPayment: (nom: string, prenom: string, adresse: string, ville: string, codePostal: string) => void }) => {
 
     const { toast } = useToast();
 
@@ -116,7 +116,7 @@ const Livraison = ({ user, items, proceedToPayment }: { user: any, items: { nom:
 
             <div className="flex flex-col gap-4 w-full lg:max-w-xs h-fit lg:sticky top-0">
 
-                <RecapPrix user={user} items={items} checkProceedToPayment={checkProceedToPayment} />
+                <RecapPrix userFidelo={userFidelo} items={items} checkProceedToPayment={checkProceedToPayment} />
 
                 <div className="flex flex-col">
                     <div className="text-center font-medium">

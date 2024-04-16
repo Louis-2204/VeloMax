@@ -10,17 +10,20 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { DataTable } from '@/components/DataTable';
-import { useLayoutEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { CommandesTableauType } from '@/types/entities';
 import moment from 'moment';
 import { useRouter } from 'next/navigation';
 import DialogCommande from '@/components/commandes/DialogCommande';
+import { getUserFidelo } from '@/utils/getUserFidelo';
 
-const CommandesPrendreEnChargeTableau = ({ user, commandes, vendeurs }: { user: any, commandes: CommandesTableauType[]; vendeurs: any }) => {
+const CommandesPrendreEnChargeTableau = ({ commandes, vendeurs }: { commandes: CommandesTableauType[]; vendeurs: any }) => {
     const [dialogOpen, setDialogOpen] = useState(false);
     const [selectedCommande, setSelectedCommande] = useState({} as CommandesTableauType);
 
     const router = useRouter();
+
+    const [userFidelo, setUserFidelo] = useState(null);
 
     useLayoutEffect(() => {
         router.refresh();
@@ -115,7 +118,6 @@ const CommandesPrendreEnChargeTableau = ({ user, commandes, vendeurs }: { user: 
 
             {dialogOpen && (
                 <DialogCommande
-                    user={user}
                     type='commandeAprendreEnCharge'
                     commande={selectedCommande}
                     vendeurs={vendeurs}

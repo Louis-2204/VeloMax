@@ -18,7 +18,7 @@ import AlertDeleteCommande from './AlertDeleteCommande';
 import DialogUpdateCommande from './DialogUpdateCommande';
 import DialogCommande from './DialogCommande';
 
-const CommandesPrisesEnChargeTableau = ({ user, clients, commandes, produits, vendeurs, id_boutique }: { user: any, clients: any[], commandes: any[], produits: any[], vendeurs: Vendeur[], id_boutique: string }) => {
+const CommandesPrisesEnChargeTableau = ({ clients, commandes, produits, vendeurs, id_boutique }: { clients: any[], commandes: any[], produits: any[], vendeurs: Vendeur[], id_boutique: string }) => {
     const [alertOpen, setAlertOpen] = useState(false);
     const [dialogOpen, setDialogOpen] = useState(false);
     const [dialogUpdateOpen, setDialogUpdateOpen] = useState(false);
@@ -63,7 +63,7 @@ const CommandesPrisesEnChargeTableau = ({ user, clients, commandes, produits, ve
             id: 'Prix',
             cell: ({ row }) => {
                 const commande = row.original;
-                return <span>{commande.prix_total} €</span>
+                return <span>{commande.prix_total.toFixed(2)} €</span>
             }
         },
         {
@@ -154,7 +154,6 @@ const CommandesPrisesEnChargeTableau = ({ user, clients, commandes, produits, ve
             )}
             {dialogOpen && (
                 <DialogCommande
-                    user={user}
                     type='detailCommande'
                     commande={selectedCommande}
                     vendeurs={vendeurs}

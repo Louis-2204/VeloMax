@@ -10,8 +10,8 @@ const page = async () => {
     const vendeurs = await get_all_vendeurs(user.role === 'admin' ? null : user.id_boutique);
 
     return (
-        <div className="w-full">
-            <CommandesPrendreEnChargeTableau user={user} commandes={commandes} vendeurs={vendeurs} />
+        <div className="w-full p-2">
+            <CommandesPrendreEnChargeTableau commandes={commandes} vendeurs={vendeurs} />
         </div>
     );
 };

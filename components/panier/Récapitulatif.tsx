@@ -4,7 +4,7 @@ import { ShoppingCartContext } from "@/context/ShoppingCartContext";
 import RecapProduits from "../RecapProduits";
 import RecapPrix from "../RecapPrix";
 
-const Récapitulatif = ({ user, items, proceedToDelivery }: { user: any, items: { id: string, nom: string, prix: number, image: string, quantite: number, type: "vélo" | "pièce" }[], proceedToDelivery: () => void }) => {
+const Récapitulatif = ({ userFidelo, items, proceedToDelivery }: { userFidelo: any, items: { id: string, nom: string, prix: number, image: string, quantite: number, type: "vélo" | "pièce" }[], proceedToDelivery: () => void }) => {
 
     const { removeFromCart, addToCart } = useContext(ShoppingCartContext);
 
@@ -17,7 +17,7 @@ const Récapitulatif = ({ user, items, proceedToDelivery }: { user: any, items: 
 
             <RecapProduits items={items} addToCart={addToCart} removeFromCart={removeFromCart} />
 
-            <RecapPrix user={user} items={items} checkProceedToDelivery={checkProceedToDelivery} />
+            <RecapPrix userFidelo={userFidelo} items={items} checkProceedToDelivery={checkProceedToDelivery} />
 
         </div >
     );

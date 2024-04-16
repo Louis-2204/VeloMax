@@ -8,6 +8,7 @@ import { ShoppingCartContext } from '@/context/ShoppingCartContext';
 import { useToast } from '@/components/ui/use-toast';
 import { createCommande } from '@/utils/commandes/createCommande';
 import { useRouter } from 'next/navigation';
+import { getUserFidelo } from '@/utils/getUserFidelo';
 
 const page = () => {
   const { getCart, clearCart } = useContext(ShoppingCartContext);
@@ -17,9 +18,16 @@ const page = () => {
 
   const router = useRouter();
 
+  const [userFidelo, setUserFidelo] = useState<any>(null);
   const [state, setState] = useState('récapitulatif');
   const [infos, setInfos] = useState<{ items: { id: string; nom: string; quantite: number; prix: number; image: string; type: "vélo" | "pièce" }[]; nom: string; prenom: string; adresse: string; ville: string; codePostal: string }>({ items: [], nom: '', prenom: '', adresse: '', ville: '', codePostal: '' });
 
+
+  useEffect(() => {
+    getUserFidelo().then((data) => {
+      setUserFidelo(data);
+    });
+  }, []);
 
   const proceedToDelivery = () => {
     setState('livraison');
@@ -30,8 +38,8 @@ const page = () => {
     setState('paiement');
   };
 
-  const confirmCommand = async () => {
-    const commande = await createCommande(infos);
+  const confirmCommand = async (total: any) => {
+    const commande = await createCommande(infos, total);
     if (!commande) {
       return toast({
         title: 'Erreur',
@@ -74,7 +82,7 @@ const page = () => {
       }, 5000);
   };
 
-  return items.length > 0 ? (
+  return userFidelo && items.length > 0 ? (
     <div className="w-full max-w-8xl h-full flex-col">
       <div className="w-full flex justify-center pb-10 px-6">
         <div className="flex w-full max-w-lg py-5 items-center text-black/75">
@@ -136,12 +144,13 @@ const page = () => {
         </div>
       </div>
 
-      {state === 'récapitulatif' && <Récapitulatif items={items} proceedToDelivery={() => proceedToDelivery()} />}
-      {state === 'livraison' && <Livraison items={items} proceedToPayment={(nom, prenom, adresse, ville, codePostal) => proceedToPayment(nom, prenom, adresse, ville, codePostal)} />}
+      {state === 'récapitulatif' && <Récapitulatif userFidelo={userFidelo} items={items} proceedToDelivery={() => proceedToDelivery()} />}
+      {state === 'livraison' && <Livraison userFidelo={userFidelo} items={items} proceedToPayment={(nom, prenom, adresse, ville, codePostal) => proceedToPayment(nom, prenom, adresse, ville, codePostal)} />}
       {(state === 'paiement' || state === 'done') && (
         <Paiement
+          userFidelo={userFidelo}
           items={items}
-          confirmCommand={() => confirmCommand()}
+          confirmCommand={(total) => confirmCommand(total)}
         />
       )}
     </div>

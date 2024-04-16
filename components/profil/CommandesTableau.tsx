@@ -20,7 +20,7 @@ import { noterCommande } from '@/utils/commandes/noterCommande';
 import { useToast } from '../ui/use-toast';
 import DialogCommande from '../commandes/DialogCommande';
 
-const CommandesTableau = ({ user, commandes }: { user: any, commandes: CommandesTableauType[] }) => {
+const CommandesTableau = ({ commandes }: { commandes: CommandesTableauType[] }) => {
     const [dialogOpen, setDialogOpen] = useState(false);
     const [selectedCommande, setSelectedCommande] = useState({} as CommandesTableauType);
     const [hoveredStars, setHoveredStars] = useState(0);
@@ -195,7 +195,6 @@ const CommandesTableau = ({ user, commandes }: { user: any, commandes: Commandes
 
             {dialogOpen && (
                 <DialogCommande
-                    user={user}
                     type='detailCommande'
                     commande={selectedCommande}
                     dialogOpen={dialogOpen}
