@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { getItemsBySearchParams } from '@/utils/getItemsBySearchParams';
+import DialogRemoveArticleFromStock from '../admin/articles/DialogRemoveArticleFromStock';
 
 const DialogAddArticleToStock = dynamic(() => import('../admin/articles/DialogAddArticleToStock'));
 
@@ -21,7 +22,8 @@ const FilterSection = ({
   fournisseurs?: { nom_entreprise: string; id_fournisseur: string }[];
   id_boutique?: string;
 }) => {
-  const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogAddOpen, setDialogAddOpen] = useState(false);
+  const [dialogRemoveOpen, setDialogRemoveOpen] = useState(false);
   const [articles, setArticles] = useState<any>([]);
   const router = useRouter();
 
@@ -97,13 +99,22 @@ const FilterSection = ({
     <>
       <div className="w-full sm:w-4/12 sm:max-w-[250px] h-fit flex flex-col gap-2 rounded-md bg-tempBgLightSecondary dark:bg-tempBgDark border border-tempLightBorder dark:border-tempDarkBorder p-2 transition-all duration-500">
         {content === 'stock' && id_boutique && articles && (
-          <Button
-            variant="outline"
-            onClick={() => setDialogOpen(true)}
-            className="!w-full bg-background text-black dark:text-white transition-colors duration-500"
-          >
-            Ajouter un produit au stock
-          </Button>
+          <>
+            <Button
+              variant="outline"
+              onClick={() => setDialogAddOpen(true)}
+              className="!w-full bg-background text-black dark:text-white transition-colors duration-500"
+            >
+              Ajouter un produit au stock
+            </Button>
+            <Button
+              variant="outline"
+              onClick={() => setDialogRemoveOpen(true)}
+              className="!w-full bg-background text-black dark:text-white transition-colors duration-500"
+            >
+              Supprimer un produit du stock
+            </Button>
+          </>
         )}
         <form action={handleSubmit} className="flex flex-col gap-4">
           <div className="flex flex-col w-full gap-2">
@@ -203,12 +214,21 @@ const FilterSection = ({
         </Button>
       </div>
       {content === 'stock' && id_boutique && articles && (
-        <DialogAddArticleToStock
-          dialogOpen={dialogOpen}
-          setDialogOpen={setDialogOpen}
-          id_boutique={id_boutique}
-          articles={articles}
-        />
+        <>
+          <DialogAddArticleToStock
+            dialogOpen={dialogAddOpen}
+            setDialogOpen={setDialogAddOpen}
+            id_boutique={id_boutique}
+            articles={articles}
+          />
+
+          <DialogRemoveArticleFromStock
+            dialogOpen={dialogRemoveOpen}
+            setDialogOpen={setDialogRemoveOpen}
+            id_boutique={id_boutique}
+            articles={articles}
+          />
+        </>
       )}
     </>
   );

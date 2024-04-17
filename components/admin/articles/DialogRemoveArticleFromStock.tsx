@@ -7,9 +7,10 @@ import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { getFournisseursByIdItems } from '@/utils/getFournisseursByIdItem';
-import { addPieceToStock } from '@/utils/addPieceToStock';
 import Image from 'next/image';
-const DialogAddArticleToStock = ({
+import { removePieceFromStock } from '@/utils/removePieceFromStock';
+
+const DialogRemoveArticleFromStock = ({
   dialogOpen,
   setDialogOpen,
   id_boutique,
@@ -62,13 +63,13 @@ const DialogAddArticleToStock = ({
       table = 'boutiques_velos';
     }
 
-    const is_created = await addPieceToStock(data, table);
+    const is_created = await removePieceFromStock(data, table);
     setDialogOpen(false);
     if (is_created) {
-      const toastMessage = data.quantite === 1 ? 'Article ajouté avec succès' : 'Articles ajoutés avec succès';
+      const toastMessage = data.quantite === 1 ? 'Article retiré avec succès' : 'Articles retirés avec succès';
       toast.success(toastMessage);
     } else {
-      const toastMessage = data.quantite === 1 ? 'Erreur lors de l\'ajout de l\'article' : 'Erreur lors de l\'ajout des articles';
+      const toastMessage = data.quantite === 1 ? 'Erreur lors de la suppression de l\'article' : 'Erreur lors de la suppression des articles';
       toast.error(toastMessage);
     }
     router.refresh();
@@ -85,7 +86,7 @@ const DialogAddArticleToStock = ({
     <Dialog open={dialogOpen}>
       <DialogContent className="sm:max-w-[425px] overflow-y-auto max-h-screen">
         <DialogHeader>
-          <DialogTitle>Ajouter un article au stock</DialogTitle>
+          <DialogTitle>Retirer un article du stock</DialogTitle>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
@@ -168,7 +169,7 @@ const DialogAddArticleToStock = ({
               handleAddArticle();
             }}
           >
-            Ajouter
+            Retirer
           </Button>
         </DialogFooter>
       </DialogContent>
@@ -176,4 +177,4 @@ const DialogAddArticleToStock = ({
   );
 };
 
-export default DialogAddArticleToStock;
+export default DialogRemoveArticleFromStock;

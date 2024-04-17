@@ -33,7 +33,7 @@ const VelosTableau = ({ velos }: { velos: Velo[] }) => {
       cell: ({ row }) => {
         const piece = row.original;
         return (
-          <Image src={piece.image} alt={piece.nom} width={48} height={48} className="h-12 w-12 object-cover rounded" />
+          <Image src={piece.image} alt={piece.nom} width={100} height={100} className="min-h-12 min-w-12 h-12 w-12 object-scale-down rounded " />
         );
       },
     },
