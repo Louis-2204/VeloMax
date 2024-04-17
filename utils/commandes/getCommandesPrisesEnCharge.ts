@@ -38,7 +38,7 @@ export async function getCommandesPrisesEnCharge(id_boutique: string) {
             quantite: velo.quantite,
             type: 'vélo',
             id_commande: velo.id_commande,
-            nb_stock: await getNbItemInStock(velo.velo.id_velo, 'vélo'),
+            nb_stock: await getNbItemInStock(velo.velo.id_velo, 'vélo', id_boutique),
             pieces_velo: await getPiecesVelo(velo.velo.id_velo)
         })));
 
@@ -48,7 +48,7 @@ export async function getCommandesPrisesEnCharge(id_boutique: string) {
             quantite: piece.quantite,
             type: 'pièce',
             id_commande: piece.id_commande,
-            nb_stock: await getNbItemInStock(piece.piece.id_piece, 'pièce'),
+            nb_stock: await getNbItemInStock(piece.piece.id_piece, 'pièce', id_boutique),
             delai_approvisionnement: await getMinDelaiApprovisionnement(piece.piece.id_piece)
         })));
 
