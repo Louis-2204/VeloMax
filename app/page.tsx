@@ -53,7 +53,9 @@ export default async function Index() {
       </div>
 
       <div className="w-full flex flex-col px-2 sm:px-8 md:px-14 lg:px-20 max-w-8xl mx-auto mb-80">
-        <h1 className="text-[40px] sm:text-[60px] md:text-[100px] lg:text-[140px] xl:text-[180px] h-14 sm:h-20 md:h-32 lg:h-44 xl:h-56 font-semibold text-left text-[#DCDCDC] categories-title-xs sm:categories-title transition-all">CATÉGORIES</h1>
+        <h1 className="text-[40px] sm:text-[60px] md:text-[100px] lg:text-[140px] xl:text-[180px] h-14 sm:h-20 md:h-32 lg:h-44 xl:h-56 font-semibold text-left text-[#DCDCDC] categories-title-xs sm:categories-title transition-all">
+          CATÉGORIES
+        </h1>
         <BentoGrid className="w-full">
           {items.map((item, i) => (
             <BentoGridItem
