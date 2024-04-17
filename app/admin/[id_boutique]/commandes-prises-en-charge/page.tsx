@@ -16,7 +16,7 @@ const page = async ({ params }: { params: { id_boutique: string } }) => {
 
     return (
         <div className="w-full flex justify-center p-2">
-            <CommandesPrisesEnChargeTableau user={user} clients={clients} commandes={commandes} vendeurs={vendeurs} id_boutique={params.id_boutique} produits={produits} />
+            <CommandesPrisesEnChargeTableau clients={clients} commandes={commandes} vendeurs={vendeurs} id_boutique={params.id_boutique} produits={produits} />
         </div>
     );
 };
