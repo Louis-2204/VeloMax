@@ -2,7 +2,8 @@
 import React from 'react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Button } from '../ui/button';
-import { useRouter, usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 const SelectBoutique = ({
   boutiques,
   actual_id_boutique,
@@ -14,15 +15,15 @@ const SelectBoutique = ({
     actual_id_boutique === 'null' ? undefined : actual_id_boutique
   );
   const path = usePathname();
-  const router = useRouter();
+
   const handleSelectBoutique = () => {
     if (!id_boutique_selected) return;
-    const newPath = path.replace('null', id_boutique_selected);
-    router.push(newPath);
+    document.getElementById('changeBoutiqueLink')?.click();
   };
 
   return (
     <>
+      <Link id='changeBoutiqueLink' className='hidden' href={path.replace(actual_id_boutique || 'null', id_boutique_selected || 'null')} />
       <Select
         name="id_boutique"
         value={id_boutique_selected}

@@ -9,6 +9,7 @@ import { useToast } from '@/components/ui/use-toast';
 import { createCommande } from '@/utils/commandes/createCommande';
 import { useRouter } from 'next/navigation';
 import { getUserFidelo } from '@/utils/getUserFidelo';
+import { getCompagnieReduction } from '@/utils/getCompagnieReduction';
 
 const page = () => {
   const { getCart, clearCart } = useContext(ShoppingCartContext);
@@ -19,6 +20,7 @@ const page = () => {
   const router = useRouter();
 
   const [userFidelo, setUserFidelo] = useState<any>(null);
+  const [compagnieReduction, setCompagnieReduction] = useState<any>(null);
   const [state, setState] = useState('récapitulatif');
   const [infos, setInfos] = useState<{ items: { id: string; nom: string; quantite: number; prix: number; image: string; type: "vélo" | "pièce" }[]; nom: string; prenom: string; adresse: string; ville: string; codePostal: string }>({ items: [], nom: '', prenom: '', adresse: '', ville: '', codePostal: '' });
 
@@ -26,6 +28,12 @@ const page = () => {
   useEffect(() => {
     getUserFidelo().then((data) => {
       setUserFidelo(data);
+    });
+  }, []);
+
+  useEffect(() => {
+    getCompagnieReduction().then((data) => {
+      setCompagnieReduction(data);
     });
   }, []);
 
@@ -82,7 +90,7 @@ const page = () => {
       }, 5000);
   };
 
-  return userFidelo && items.length > 0 ? (
+  return userFidelo && compagnieReduction && items.length > 0 ? (
     <div className="w-full max-w-8xl h-full flex-col">
       <div className="w-full flex justify-center pb-10 px-6">
         <div className="flex w-full max-w-lg py-5 items-center text-black/75">
@@ -144,10 +152,11 @@ const page = () => {
         </div>
       </div>
 
-      {state === 'récapitulatif' && <Récapitulatif userFidelo={userFidelo} items={items} proceedToDelivery={() => proceedToDelivery()} />}
-      {state === 'livraison' && <Livraison userFidelo={userFidelo} items={items} proceedToPayment={(nom, prenom, adresse, ville, codePostal) => proceedToPayment(nom, prenom, adresse, ville, codePostal)} />}
+      {state === 'récapitulatif' && <Récapitulatif compagnieReduction={compagnieReduction} userFidelo={userFidelo} items={items} proceedToDelivery={() => proceedToDelivery()} />}
+      {state === 'livraison' && <Livraison compagnieReduction={compagnieReduction} userFidelo={userFidelo} items={items} proceedToPayment={(nom, prenom, adresse, ville, codePostal) => proceedToPayment(nom, prenom, adresse, ville, codePostal)} />}
       {(state === 'paiement' || state === 'done') && (
         <Paiement
+          compagnieReduction={compagnieReduction}
           userFidelo={userFidelo}
           items={items}
           confirmCommand={(total) => confirmCommand(total)}

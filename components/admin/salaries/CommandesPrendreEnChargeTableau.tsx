@@ -62,7 +62,7 @@ const CommandesPrendreEnChargeTableau = ({ commandes, vendeurs }: { commandes: C
             id: 'Prix',
             cell: ({ row }) => {
                 const commande = row.original;
-                return <span>{commande.prix_total} €</span>
+                return <span>{commande.prix_total.toFixed(2)} €</span>
             }
         },
         {
