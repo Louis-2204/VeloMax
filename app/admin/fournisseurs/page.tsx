@@ -15,7 +15,7 @@ const page = async () => {
   });
 
   return (
-    <div className="w-full flex justify-center">
+    <div className="w-full flex justify-center p-2">
       <FournisseursTableau
         fournisseurs={fournisseurs as FournisseurTableau[]}
         is_admin={profileConnected.role === 'admin'}

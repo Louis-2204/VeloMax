@@ -21,7 +21,7 @@ export async function addPieceToStock(data: DataType, table: 'boutiques_pieces_f
 
   const { data: stock, error: stockError } = await supabase
     .from(table)
-    .select('quantite')
+    .select('*')
     .eq('id_boutique', data.id_boutique)
     .eq(data.hasOwnProperty('id_velo') ? 'id_velo' : 'id_piece', data.hasOwnProperty('id_velo')
       ? (data as { id_velo: string; id_boutique: string; quantite: number; id_piece?: never }).id_velo
@@ -32,10 +32,10 @@ export async function addPieceToStock(data: DataType, table: 'boutiques_pieces_f
     return false;
   }
 
-  if (stock.length) {
+  if (stock.length > 0) {
     const { error } = await supabase
       .from(table)
-      .update({ quantite: stock[0].quantite + data.quantite })
+      .update(data.hasOwnProperty('id_piece') ? { quantite: stock.find((s: any) => s.id_fournisseur === (data as { id_piece: string; id_fournisseur: string; id_boutique: string; quantite: number; id_velo?: never }).id_fournisseur).quantite + data.quantite } : { quantite: stock[0].quantite + data.quantite })
       .eq('id_boutique', data.id_boutique)
       .eq(data.hasOwnProperty('id_velo') ? 'id_velo' : 'id_piece', data.hasOwnProperty('id_velo')
         ? (data as { id_velo: string; id_boutique: string; quantite: number; id_piece?: never }).id_velo

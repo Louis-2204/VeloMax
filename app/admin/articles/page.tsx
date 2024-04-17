@@ -18,10 +18,10 @@ const page = async () => {
             <TabsTrigger value="vélos">Vélos</TabsTrigger>
           </TabsList>
         </div>
-        <TabsContent value="pièces" className="w-full flex justify-center">
+        <TabsContent value="pièces" className="w-full flex justify-center p-2">
           <PiecesTableau pieces={pièces} />
         </TabsContent>
-        <TabsContent value="vélos" className="w-full flex justify-center">
+        <TabsContent value="vélos" className="w-full flex justify-center p-2">
           <VelosTableau velos={velos} />
         </TabsContent>
       </Tabs>

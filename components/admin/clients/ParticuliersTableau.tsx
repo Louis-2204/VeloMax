@@ -199,7 +199,7 @@ const ParticuliersTableau = ({ particuliers }: { particuliers: ParticulierTablea
       <DataTable
         columns={columns}
         data={particuliers}
-        column_filter="nom"
+        column_filter="Nom"
         placeholder_filtre="Rechercher un client (nom)"
         additionalButton={
           <Button
