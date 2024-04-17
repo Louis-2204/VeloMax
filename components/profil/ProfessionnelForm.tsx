@@ -121,7 +121,7 @@ const ProfessionnelForm = ({ profileConnected }: { profileConnected: any }) => {
       <Button
         disabled={is_disabled()}
         onClick={() => handleUpdate()}
-        className="max-w-xs bg-vm_secondary hover:bg-vm_secondary_2 text-white"
+        className="w-full md:max-w-xs bg-vm_secondary hover:bg-vm_secondary_2 text-white"
       >
         Mettre à jour
       </Button>

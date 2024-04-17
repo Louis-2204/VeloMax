@@ -32,7 +32,7 @@ const AddToCartBtn = ({ item, profileConnected }: { item: any; profileConnected:
             });
           }
         }}
-        className="w-fit bg-vm_secondary text-white"
+        className="w-fit bg-vm_secondary text-white break-words whitespace-normal"
       >
         {can_buy
           ? 'Ajouter au panier'

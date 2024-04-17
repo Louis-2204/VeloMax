@@ -77,7 +77,7 @@ const AdminForm = ({ profileConnected }: { profileConnected: any }) => {
       <Button
         disabled={!newNom || !newPrenom}
         onClick={() => handleUpdate()}
-        className="max-w-xs bg-vm_secondary hover:bg-vm_secondary_2 text-white"
+        className="w-full md:max-w-xs bg-vm_secondary hover:bg-vm_secondary_2 text-white"
       >
         Mettre à jour
       </Button>
