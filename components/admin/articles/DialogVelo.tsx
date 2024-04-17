@@ -3,25 +3,30 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Dispatch, SetStateAction, useState } from 'react';
-import { Velo } from '@/types/entities';
+import { Piece, Velo } from '@/types/entities';
 import { updateRowWhere } from '@/utils/updateRowWhere';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import { DatePicker } from '@/components/ui/date-picker';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { createVelo } from '@/utils/createVelo';
+import { Select as SelectAntd, SelectProps } from 'antd';
+import { updateVeloPieces } from '@/utils/updateVeloPieces';
 const DialogVelo = ({
   selectedVelo,
   dialogOpen,
   setDialogOpen,
   typeAction,
+  pieces,
 }: {
   selectedVelo: Velo;
   dialogOpen: boolean;
   setDialogOpen: Dispatch<SetStateAction<boolean>>;
   typeAction: 'ajout' | 'modification';
+  pieces: Piece[];
 }) => {
   const [newNom, setNewNom] = useState(selectedVelo.nom);
+  const [newPieces, setNewPieces] = useState<Piece['id_piece'][]>(selectedVelo.pieces);
   const [newDescription, setNewDescription] = useState(selectedVelo.description);
   const [newGrandeur, setNewGrandeur] = useState(selectedVelo.description);
   const [newPrix, setNewPrix] = useState(selectedVelo.prix_unitaire);
@@ -34,8 +39,8 @@ const DialogVelo = ({
   );
 
   const router = useRouter();
-  const handleUpdateParticulier = async () => {
-    if (!newNom || !newDescription || !newPrix || !newType || !newDateIntroMarche) {
+  const handleUpdateVelo = async () => {
+    if (isDisabled()) {
       toast.error('Veuillez remplir tous les champs obligatoires');
       return;
     }
@@ -48,8 +53,9 @@ const DialogVelo = ({
       date_discontinuation_production: newDateDiscontinuation,
     };
     const isUpdated = await updateRowWhere(data, 'vélos', 'id_velo', selectedVelo.id_velo);
+    const isUpadatedPieces = await updateVeloPieces(selectedVelo.id_velo, newPieces);
     setDialogOpen(false);
-    if (isUpdated) {
+    if (isUpdated && isUpadatedPieces) {
       toast.success('Vélo modifié avec succès');
     } else {
       toast.error('Erreur lors de la modification du vélo');
@@ -57,8 +63,8 @@ const DialogVelo = ({
     router.refresh();
   };
 
-  const handleAddParticulier = async () => {
-    if (!newNom || !newDescription || !newPrix || !newType || !newDateIntroMarche || !newGrandeur) {
+  const handleAddVelo = async () => {
+    if (isDisabled()) {
       toast.error('Veuillez remplir tous les champs obligatoires');
       return;
     }
@@ -69,11 +75,11 @@ const DialogVelo = ({
       prix_unitaire: newPrix,
       grandeur: newGrandeur,
       type: newType,
-      date_introduction_marche: newDateIntroMarche,
+      date_introduction_marche: newDateIntroMarche!,
       date_discontinuation_production: newDateDiscontinuation,
     };
 
-    const isCreated = await createVelo(data);
+    const isCreated = await createVelo(data, newPieces);
     setDialogOpen(false);
     if (isCreated) {
       toast.success('Vélo ajouté avec succès');
@@ -84,7 +90,15 @@ const DialogVelo = ({
   };
 
   const isDisabled = () => {
-    return !newNom || !newDescription || !newPrix || !newType || !newDateIntroMarche || !newGrandeur;
+    return (
+      !newNom ||
+      !newDescription ||
+      !newPrix ||
+      !newType ||
+      !newDateIntroMarche ||
+      !newGrandeur ||
+      newPieces.length === 0
+    );
   };
 
   return (
@@ -107,6 +121,21 @@ const DialogVelo = ({
               value={newNom}
               onChange={(e) => setNewNom(e.target.value)}
               className="col-span-3"
+            />
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="pieces" className="text-right">
+              Pièces
+            </Label>
+            <SelectAntd
+              mode="multiple"
+              allowClear
+              rootClassName="col-span-3"
+              getPopupContainer={(triggerNode) => triggerNode.parentNode as HTMLElement}
+              placeholder="Please select"
+              defaultValue={newPieces}
+              onChange={(value) => setNewPieces(value as Piece['id_piece'][])}
+              options={pieces.map((piece) => ({ label: piece.nom, value: piece.id_piece })) as SelectProps['options']}
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
@@ -181,9 +210,9 @@ const DialogVelo = ({
             disabled={isDisabled()}
             onClick={() => {
               if (typeAction === 'ajout') {
-                handleAddParticulier();
+                handleAddVelo();
               } else if (typeAction === 'modification') {
-                handleUpdateParticulier();
+                handleUpdateVelo();
               }
             }}
           >

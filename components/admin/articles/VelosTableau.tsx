@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { DataTable } from '@/components/DataTable';
 import { useState } from 'react';
-import { Velo } from '@/types/entities';
+import { Piece, Velo } from '@/types/entities';
 import dynamic from 'next/dynamic';
 import moment from 'moment';
 import Image from 'next/image';
@@ -19,7 +19,7 @@ import Image from 'next/image';
 const AlertVelo = dynamic(() => import('./AlertVelo'));
 const DialogVelo = dynamic(() => import('./DialogVelo'));
 
-const VelosTableau = ({ velos }: { velos: Velo[] }) => {
+const VelosTableau = ({ velos, pieces }: { velos: Velo[]; pieces: Piece[] }) => {
   const [alertOpen, setAlertOpen] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [selectedVelo, setSelectedVelo] = useState({} as Velo);
@@ -33,7 +33,13 @@ const VelosTableau = ({ velos }: { velos: Velo[] }) => {
       cell: ({ row }) => {
         const piece = row.original;
         return (
-          <Image src={piece.image} alt={piece.nom} width={100} height={100} className="min-h-12 min-w-12 h-12 w-12 object-scale-down rounded " />
+          <Image
+            src={piece.image}
+            alt={piece.nom}
+            width={100}
+            height={100}
+            className="min-h-12 min-w-12 h-12 w-12 object-scale-down rounded "
+          />
         );
       },
     },
@@ -163,6 +169,7 @@ const VelosTableau = ({ velos }: { velos: Velo[] }) => {
           setDialogOpen={setDialogOpen}
           selectedVelo={selectedVelo}
           typeAction={typeDialog}
+          pieces={pieces}
         />
       )}
     </div>

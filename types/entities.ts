@@ -52,18 +52,18 @@ export type Piece = {
   nom: string;
   description: string;
   type:
-  | 'Cadre'
-  | 'Guidon'
-  | 'Freins'
-  | 'Selle'
-  | 'Dérailleur Avant'
-  | 'Dérailleur Arrière'
-  | 'Roue avant'
-  | 'Roue arrière'
-  | 'Réflecteurs'
-  | 'Pédalier'
-  | 'Ordinateur'
-  | 'Panier';
+    | 'Cadre'
+    | 'Guidon'
+    | 'Freins'
+    | 'Selle'
+    | 'Dérailleur Avant'
+    | 'Dérailleur Arrière'
+    | 'Roue avant'
+    | 'Roue arrière'
+    | 'Réflecteurs'
+    | 'Pédalier'
+    | 'Ordinateur'
+    | 'Panier';
   prix_unitaire: number;
   date_introduction_marche: string;
   date_discontinuation_production: string;
@@ -80,6 +80,7 @@ export type Velo = {
   date_introduction_marche: string;
   date_discontinuation_production?: string;
   image: string;
+  pieces: string[];
 };
 
 // data type for user
