@@ -74,6 +74,7 @@ export default async function Index() {
           Rejoignez la <u className="underline-offset-8 decoration-vm_secondary">communauté VeloMax !</u>
         </h1>
         <InfiniteMovingCards
+          className="mb-10"
           speed="slow"
           items={[
             {
