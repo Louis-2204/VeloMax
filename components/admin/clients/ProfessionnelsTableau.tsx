@@ -145,7 +145,7 @@ const ProfessionnelsTableau = ({ professionnels }: { professionnels: Professionn
       <DataTable
         columns={columns}
         data={professionnels}
-        column_filter="nom"
+        column_filter="Nom de la compagnie"
         placeholder_filtre="Rechercher un client (nom compagnie)"
         additionalButton={
           <Button

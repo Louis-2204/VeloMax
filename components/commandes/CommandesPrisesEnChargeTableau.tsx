@@ -17,6 +17,7 @@ import moment from 'moment';
 import AlertDeleteCommande from './AlertDeleteCommande';
 import DialogUpdateCommande from './DialogUpdateCommande';
 import DialogCommande from './DialogCommande';
+import { Badge } from '../ui/badge';
 
 const CommandesPrisesEnChargeTableau = ({ clients, commandes, produits, vendeurs, id_boutique }: { clients: any[], commandes: any[], produits: any[], vendeurs: Vendeur[], id_boutique: string }) => {
     const [alertOpen, setAlertOpen] = useState(false);
@@ -76,6 +77,31 @@ const CommandesPrisesEnChargeTableau = ({ clients, commandes, produits, vendeurs
             }
         },
         {
+            accessorKey: 'status',
+            header: ({ column }) => {
+                return (
+                    <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+                        Statut
+                        <ArrowUpDown className="ml-2 h-4 w-4" />
+                    </Button>
+                );
+            },
+            id: 'Statut',
+            cell: ({ row }) => {
+                const commande = row.original;
+                switch (commande.status) {
+                    case 'En attente de traitement':
+                        return <Badge className="bg-gray-500">En attente de traitement</Badge>;
+                    case 'En attente de restockage':
+                        return <Badge className="bg-orange-500">En attente de restockage</Badge>;
+                    case 'En traitement':
+                        return <Badge className="bg-blue-500">En traitement</Badge>;
+                    case 'Envoyée':
+                        return <Badge className="bg-green-500">Envoyée</Badge>;
+                }
+            }
+        },
+        {
             id: 'actions',
             enableHiding: false,
             header: '',
@@ -101,15 +127,17 @@ const CommandesPrisesEnChargeTableau = ({ clients, commandes, produits, vendeurs
                             >
                                 Afficher la commande
                             </DropdownMenuItem>
-                            <DropdownMenuItem
-                                onClick={() => {
-                                    setSelectedCommande(commandeRow);
-                                    setTypeDialog('modification');
-                                    setDialogUpdateOpen(true);
-                                }}
-                            >
-                                Modifier la commande
-                            </DropdownMenuItem>
+                            {commandeRow.status !== 'Envoyée' && (
+                                <DropdownMenuItem
+                                    onClick={() => {
+                                        setSelectedCommande(commandeRow);
+                                        setTypeDialog('modification');
+                                        setDialogUpdateOpen(true);
+                                    }}
+                                >
+                                    Modifier la commande
+                                </DropdownMenuItem>
+                            )}
                             <DropdownMenuItem
                                 onClick={() => {
                                     setSelectedCommande(commandeRow);

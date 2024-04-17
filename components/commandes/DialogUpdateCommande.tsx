@@ -13,6 +13,7 @@ import { createCommande } from '@/utils/commandes/createCommande';
 import { Icons } from '../icons/icons';
 import DialogSelectItems from './DialogSelectItems';
 import { getTotalPrixWithFideloForUser } from '@/utils/commandes/getTotalPrixWithFideloForUser';
+import { updateStock } from '@/utils/commandes/updateStock';
 const DialogUpdateCommande = ({
     clients,
     id_boutique,
@@ -67,6 +68,15 @@ const DialogUpdateCommande = ({
         setDialogOpen(false);
         if (isUpdated) {
             toast.success('Commande modifiée avec succès');
+            if (newStatut === 'Envoyée') {
+                const isStockUpdated = await updateStock(selectedCommande.id_commande, id_boutique);
+
+                if (isStockUpdated) {
+                    toast.success('Stock mis à jour');
+                } else {
+                    toast.error('Erreur lors de la mise à jour du stock');
+                }
+            }
         } else {
             toast.error('Erreur lors de la modification de la commande');
         }
@@ -113,7 +123,7 @@ const DialogUpdateCommande = ({
 
     return (
         <Dialog open={dialogOpen}>
-            <DialogContent className="sm:max-w-[425px] overflow-y-auto max-h-screen">
+            <DialogContent className="sm:max-w-[425px] overflow-y-auto max-h-[90svh]">
                 <DialogHeader>
                     <DialogTitle>
                         {typeAction === 'modification' && `Modifier la commande`}
@@ -282,19 +292,28 @@ const DialogUpdateCommande = ({
                     </div>
                 </div>
                 <DialogFooter>
-                    <Button onClick={() => setDialogOpen(false)}>Annuler</Button>
-                    <Button
-                        disabled={isDisabled()}
-                        onClick={() => {
-                            if (typeAction === 'ajout') {
-                                handleCreateCommande();
-                            } else {
-                                handleUpdateCommande();
-                            }
-                        }}
-                    >
-                        {typeAction === 'ajout' ? 'Ajouter' : 'Modifier'}
-                    </Button>
+                    <div className="flex flex-col gap-2">
+                        <div className="">
+                            {newStatut === 'Envoyée' && (
+                                <span className="text-red-500 text-sm">Attention, vous ne pourrez plus modifier la commande une fois envoyée et le stock sera mis à jour</span>
+                            )}
+                        </div>
+                        <div className="w-full flex gap-2 justify-end">
+                            <Button onClick={() => setDialogOpen(false)}>Annuler</Button>
+                            <Button
+                                disabled={isDisabled()}
+                                onClick={() => {
+                                    if (typeAction === 'ajout') {
+                                        handleCreateCommande();
+                                    } else {
+                                        handleUpdateCommande();
+                                    }
+                                }}
+                            >
+                                {typeAction === 'ajout' ? 'Ajouter' : 'Modifier'}
+                            </Button>
+                        </div>
+                    </div>
                 </DialogFooter>
             </DialogContent>
             <DialogSelectItems setSubDialogOpen={setSubDialogOpen} subDialogOpen={subDialogOpen} selectedItems={selectedItems} setSelectedItems={setSelectedItems} produits={produits} />
