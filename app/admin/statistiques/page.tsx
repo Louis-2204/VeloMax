@@ -15,17 +15,17 @@ const page = async () => {
     get_all_vendeurs(),
   ]);
   return (
-    <div className="flex flex-col w-full max-w-8xl gap-2 py-4 justify-center items-center">
-      <div className="flex w-full h-10 divide-x-2">
-        <div className="w-2/6 h-full flex flex-col items-center justify-center bg-green-100">
+    <div className="flex flex-col w-full max-w-8xl gap-10 py-4 justify-center items-center">
+      <div className="flex flex-col md:flex-row w-11/12 md:w-full h-auto md:h-20 gap-5 divide-x-2">
+        <div className="w-full md:w-2/6 py-2 md:py-0 text-sm h-full flex rounded-md flex-col items-center justify-center shadow border">
           <p>Montant moyen des commandes :</p>
           <p>{avgPrice + ' €'}</p>
         </div>
-        <div className="w-2/6 h-full flex flex-col items-center justify-center bg-green-400">
+        <div className="w-full md:w-2/6 py-2 md:py-0 text-sm h-full flex rounded-md flex-col items-center justify-center shadow border">
           <p>Moyenne pièces par commande :</p>
           <p>{avgPieces}</p>
         </div>
-        <div className="w-2/6 h-full flex flex-col items-center justify-center bg-green-700">
+        <div className="w-full md:w-2/6 py-2 md:py-0 text-sm h-full flex rounded-md flex-col items-center justify-center shadow border">
           <p>Moyenne vélos par commande :</p>
           <p>{avgVelos}</p>
         </div>
