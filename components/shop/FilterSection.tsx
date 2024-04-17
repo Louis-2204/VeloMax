@@ -8,7 +8,6 @@ import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { getItemsBySearchParams } from '@/utils/getItemsBySearchParams';
 import DialogRemoveArticleFromStock from '../admin/articles/DialogRemoveArticleFromStock';
-import { SelectItemIndicator } from '@radix-ui/react-select';
 
 const DialogAddArticleToStock = dynamic(() => import('../admin/articles/DialogAddArticleToStock'));
 
