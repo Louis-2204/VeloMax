@@ -5,15 +5,21 @@ import Image from 'next/image';
 import loginImage from '@/public/login.png';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { signUp } from '@/utils/signUp';
 import { signIn } from '@/utils/signIn';
 import { Icons } from '@/components/icons/icons';
-
+import { toast } from 'sonner';
 export default function Login({ searchParams }: { searchParams: { message: string } }) {
   const [isProfessionnel, setIsProfessionnel] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
+
+  useEffect(() => {
+    if (searchParams?.message) {
+      toast.error(searchParams.message);
+    }
+  }, [searchParams]);
 
   return (
     <div className="flex w-full h-full">
@@ -356,9 +362,6 @@ export default function Login({ searchParams }: { searchParams: { message: strin
               >
                 Se Connecter
               </SubmitButton>
-              {searchParams?.message && (
-                <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">{searchParams.message}</p>
-              )}
             </form>
           )}
 
