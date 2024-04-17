@@ -1,13 +1,34 @@
 import AddToCartBtn from '@/components/p/AddToCartBtn';
-import { Button } from '@/components/ui/button';
 import { getProfileConnected } from '@/utils/getProfileConnected';
-import { createClient } from '@/utils/supabase/server';
+import { createClient as createServerClient } from '@/utils/supabase/server';
+import { createClient } from '@supabase/supabase-js';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
+export async function generateStaticParams() {
+  const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!);
+  const results = (await supabase.from('vélos').select('id_velo')) as unknown as { data: any[] };
+  const ids_velos = results?.data;
+  const results2 = (await supabase.from('pieces').select('id_piece')) as unknown as { data: any[] };
+  const ids_pieces = results2?.data;
+  const ids_articles = [...ids_velos, ...ids_pieces];
+  ids_articles.map((article) => {
+    if (article.id_velo) {
+      article.id_produit = article.id_velo;
+      delete article.id_velo;
+    } else {
+      article.id_produit = article.id_piece;
+      delete article.id_piece;
+    }
+  });
+  return ids_articles?.map(({ id_produit }) => ({
+    id_produit,
+  }));
+}
+
 const page = async ({ params }: { params: { id_produit: string } }) => {
-  const supabase = createClient();
+  const supabase = createServerClient();
   const profileConnected = await getProfileConnected();
   let produit = null;
   const { data, error } = await supabase
