@@ -1,16 +1,17 @@
 import { Separator } from "./ui/separator";
 
-const RecapPrix = ({ userFidelo, totalCommande, items, checkProceedToDelivery, checkProceedToPayment, checkConfirmCommand, type }: { userFidelo?: any, totalCommande?: any, items: any[], checkProceedToDelivery?: () => void, type?: string, checkProceedToPayment?: () => void, checkConfirmCommand?: (total: any) => void }) => {
+const RecapPrix = ({ compagnieReduction, userFidelo, totalCommande, items, checkProceedToDelivery, checkProceedToPayment, checkConfirmCommand, type }: { compagnieReduction?: any, userFidelo?: any, totalCommande?: any, items: any[], checkProceedToDelivery?: () => void, type?: string, checkProceedToPayment?: () => void, checkConfirmCommand?: (total: any) => void }) => {
 
     userFidelo = userFidelo || {};
+    compagnieReduction = compagnieReduction || {};
 
     const totalWithoutTva = totalCommande ? (totalCommande / 1.2) : Number((items.reduce((acc, item) => acc + item.prix * item.quantite, 0)).toFixed(2));
-    const totalFidelo = userFidelo.id_fidelo ? Number((totalWithoutTva * (userFidelo.remise / 100)).toFixed(2)) : 0;
-    const totalWithoutTvaWithFidelo = Number((totalWithoutTva - totalFidelo).toFixed(2));
+    const totalReduction = userFidelo.id_fidelo ? Number((totalWithoutTva * (userFidelo.remise / 100)).toFixed(2)) : compagnieReduction.id_professionnel ? Number((totalWithoutTva * (compagnieReduction.remise_commerciale / 100)).toFixed(2)) : 0;
+    const totalWithoutTvaWithReduction = Number((totalWithoutTva - totalReduction).toFixed(2));
 
-    const totalTva = totalCommande ? (totalCommande * 0.2) : Number((totalWithoutTvaWithFidelo * 0.2).toFixed(2));
+    const totalTva = totalCommande ? (totalCommande * 0.2) : Number((totalWithoutTvaWithReduction * 0.2).toFixed(2));
 
-    const total = totalCommande ? totalCommande.toFixed(2).toString() : (totalWithoutTva + totalTva - (userFidelo && userFidelo.id_fidelo ? (totalWithoutTva * (userFidelo.remise / 100)) : 0)).toFixed(2).toString();
+    const total = totalCommande ? totalCommande.toFixed(2).toString() : (totalWithoutTva + totalTva - (userFidelo && userFidelo.id_fidelo ? (totalWithoutTva * (userFidelo.remise / 100)) : (compagnieReduction.id_professionnel ? (totalWithoutTva * (compagnieReduction.remise_commerciale / 100)) : 0))).toFixed(2).toString();
 
 
     return (
@@ -22,10 +23,10 @@ const RecapPrix = ({ userFidelo, totalCommande, items, checkProceedToDelivery, c
                     <div className="text-vm_text_gray font-semibold">Sous-total :</div>
                     <div className="text-vm_text_gray font-extrabold">{totalWithoutTva.toFixed(2).toString()} €</div>
                 </div>
-                {userFidelo.id_fidelo && (
+                {userFidelo.id_fidelo || compagnieReduction.id_professionnel && (
                     <div className="flex justify-between items-center">
-                        <div className="text-vm_text_gray font-semibold">Fidélo :</div>
-                        <div className="text-vm_text_gray font-extrabold">- {totalFidelo.toFixed(2).toString()} €</div>
+                        <div className="text-vm_text_gray font-semibold">{userFidelo.id_fidelo ? 'Fidélo' : 'Remise commerciale'} :</div>
+                        <div className="text-vm_text_gray font-extrabold">- {totalReduction.toFixed(2).toString()} €</div>
                     </div>
                 )}
                 <div className="flex justify-between items-center">
