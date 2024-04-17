@@ -39,7 +39,7 @@ const page = async ({ params }: { params: { id_produit: string } }) => {
         <div className="flex w-full gap-8">
           <div className="w-5/12">
             <div className="w-full aspect-square rounded-md bg-vm_text_gray relative border shadow">
-              <Image src={produit.image} fill alt={produit.nom} />
+              <Image className="object-scale-down" src={produit.image} fill alt={produit.nom} />
             </div>
           </div>
           <div className="w-7/12 flex flex-col gap-4">

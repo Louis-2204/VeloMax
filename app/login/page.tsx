@@ -17,7 +17,7 @@ export default function Login({ searchParams }: { searchParams: { message: strin
 
   return (
     <div className="flex w-full h-full">
-      <div className="relative w-1/2 h-full">
+      <div className="relative w-1/2 h-full hidden lg:block">
         <div className="absolute top-10 left-20 z-20 text-5xl font-bold text-white">VeloMax</div>
         <Image
           src={loginImage}
@@ -29,18 +29,18 @@ export default function Login({ searchParams }: { searchParams: { message: strin
         <div className="absolute z-10 bg-black/50 w-full h-full"></div>
       </div>
 
-      <div className="flex flex-col w-1/2 h-full bg-background py-10 px-32 gap-6">
+      <div className="flex flex-col w-full lg:w-1/2 h-full overflow-y-auto max-h-screen bg-background py-10 px-4 lg:px-24 xl:px-32 gap-6">
         <div className="w-full text-end mb-6">
-          <Button variant={'ghost'} className="text-2xl" onClick={() => setIsLogin(!isLogin)}>
+          <Button variant={'ghost'} onClick={() => setIsLogin(!isLogin)}>
             {isLogin ? "S'inscrire" : 'Se connecter'}
           </Button>
         </div>
-        <div className="flex flex-col items-center justify-center gap-8 h-full">
+        <div className="flex flex-col items-center justify-center gap-8">
           <div className="">
-            <h1 className="text-5xl font-bold text-center text-vm_text_gray dark:text-white mb-3">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center text-vm_text_gray dark:text-white mb-3">
               {isLogin ? 'Se connecter' : "S'inscrire"}
             </h1>
-            <h3 className="text-xl font-bold text-center text-vm_text_gray dark:text-white">
+            <h3 className="text-base md:text-lg lg:text-xl font-bold text-center text-vm_text_gray dark:text-white">
               {isLogin
                 ? 'Veuillez remplir le formulaire ci-dessous pour vous connecter.'
                 : 'Veuillez remplir le formulaire ci-dessous pour créer un compte.'}
@@ -49,30 +49,32 @@ export default function Login({ searchParams }: { searchParams: { message: strin
 
           {!isLogin && !isProfessionnel && (
             <form className="animate-in flex flex-col w-full justify-center gap-6 text-foreground max-w-xl">
-              <div className="grid w-full items-center gap-1.5">
-                <Label className="text-lg font-semibold" htmlFor="nom">
-                  Nom
-                </Label>
-                <Input
-                  type="text"
-                  id="nom"
-                  name="nom"
-                  placeholder="Entrez votre nom"
-                  className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
-                />
-              </div>
+              <div className="flex gap-6">
+                <div className="grid w-full items-center gap-1.5">
+                  <Label className="text-lg font-semibold" htmlFor="nom">
+                    Nom
+                  </Label>
+                  <Input
+                    type="text"
+                    id="nom"
+                    name="nom"
+                    placeholder="Entrez votre nom"
+                    className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
+                  />
+                </div>
 
-              <div className="grid w-full items-center gap-1.5">
-                <Label className="text-lg font-semibold" htmlFor="prenom">
-                  Prénom
-                </Label>
-                <Input
-                  type="text"
-                  id="prenom"
-                  name="prenom"
-                  placeholder="Entrez votre prénom"
-                  className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
-                />
+                <div className="grid w-full items-center gap-1.5">
+                  <Label className="text-lg font-semibold" htmlFor="prenom">
+                    Prénom
+                  </Label>
+                  <Input
+                    type="text"
+                    id="prenom"
+                    name="prenom"
+                    placeholder="Entrez votre prénom"
+                    className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
+                  />
+                </div>
               </div>
 
               <div className="grid w-full items-center gap-1.5">
@@ -113,21 +115,19 @@ export default function Login({ searchParams }: { searchParams: { message: strin
                   className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
                 />
               </div>
-
-              <div className="grid w-full items-center gap-1.5">
-                <Label className="text-lg font-semibold" htmlFor="adresse">
-                  Adresse
-                </Label>
-                <Input
-                  type="text"
-                  id="adresse"
-                  name="adresse"
-                  placeholder="Entrez votre adresse"
-                  className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
-                />
-              </div>
-
               <div className="flex gap-6">
+                <div className="grid w-full items-center gap-1.5">
+                  <Label className="text-lg font-semibold" htmlFor="adresse">
+                    Adresse
+                  </Label>
+                  <Input
+                    type="text"
+                    id="adresse"
+                    name="adresse"
+                    placeholder="Entrez votre adresse"
+                    className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
+                  />
+                </div>
                 <div className="grid w-full items-center gap-1.5">
                   <Label className="text-lg font-semibold" htmlFor="ville">
                     Ville
@@ -137,6 +137,21 @@ export default function Login({ searchParams }: { searchParams: { message: strin
                     id="ville"
                     name="ville"
                     placeholder="Entrez votre ville"
+                    className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
+                  />
+                </div>
+              </div>
+
+              <div className="flex gap-6">
+                <div className="grid w-full items-center gap-1.5">
+                  <Label className="text-lg font-semibold" htmlFor="province">
+                    Province
+                  </Label>
+                  <Input
+                    type="text"
+                    id="province"
+                    name="province"
+                    placeholder="Entrez votre province"
                     className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
                   />
                 </div>
@@ -155,25 +170,10 @@ export default function Login({ searchParams }: { searchParams: { message: strin
                 </div>
               </div>
 
-              <div className="grid w-full items-center gap-1.5">
-                <Label className="text-lg font-semibold" htmlFor="province">
-                  Province
-                </Label>
-                <Input
-                  type="text"
-                  id="province"
-                  name="province"
-                  placeholder="Entrez votre province"
-                  className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
-                />
-              </div>
-
               <SubmitButton
                 formAction={signUp}
-                className="flex items-center justify-center text-3xl text-white w-[75%] mx-auto font-semibold rounded-md px-4 py-2 bg-[#7ca92e] my-4"
-                pendingText={
-                  <Icons.spinner className="animate-spin h-9 w-9 text-white" />
-                }
+                className="flex items-center justify-center text-xl text-white w-[75%] mx-auto font-semibold rounded-md px-4 py-2 bg-[#7ca92e] my-4"
+                pendingText={<Icons.spinner className="animate-spin h-9 w-9 text-white" />}
               >
                 Créer son compte
               </SubmitButton>
@@ -185,30 +185,32 @@ export default function Login({ searchParams }: { searchParams: { message: strin
 
           {!isLogin && isProfessionnel && (
             <form className="animate-in flex flex-col w-full justify-center gap-6 text-foreground max-w-xl">
-              <div className="grid w-full items-center gap-1.5">
-                <Label className="text-lg font-semibold" htmlFor="nomDeLaSociete">
-                  Nom de la société
-                </Label>
-                <Input
-                  type="text"
-                  id="nomDeLaSociete"
-                  name="nomDeLaSociete"
-                  placeholder="Entrez le nom de la société"
-                  className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
-                />
-              </div>
+              <div className="flex gap-6">
+                <div className="grid w-full items-center gap-1.5">
+                  <Label className="text-lg font-semibold" htmlFor="nomDeLaSociete">
+                    Nom de la société
+                  </Label>
+                  <Input
+                    type="text"
+                    id="nomDeLaSociete"
+                    name="nomDeLaSociete"
+                    placeholder="Entrez le nom de la société"
+                    className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
+                  />
+                </div>
 
-              <div className="grid w-full items-center gap-1.5">
-                <Label className="text-lg font-semibold" htmlFor="nomDeLaPersonneDeContact">
-                  Nom de la personne de contact
-                </Label>
-                <Input
-                  type="text"
-                  id="nomDeLaPersonneDeContact"
-                  name="nomDeLaPersonneDeContact"
-                  placeholder="Entrez le nom de la personne de contact"
-                  className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
-                />
+                <div className="grid w-full items-center gap-1.5">
+                  <Label className="text-lg font-semibold" htmlFor="nomDeLaPersonneDeContact">
+                    Nom de la personne de contact
+                  </Label>
+                  <Input
+                    type="text"
+                    id="nomDeLaPersonneDeContact"
+                    name="nomDeLaPersonneDeContact"
+                    placeholder="Entrez le nom de la personne de contact"
+                    className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
+                  />
+                </div>
               </div>
 
               <div className="grid w-full items-center gap-1.5">
@@ -250,20 +252,20 @@ export default function Login({ searchParams }: { searchParams: { message: strin
                 />
               </div>
 
-              <div className="grid w-full items-center gap-1.5">
-                <Label className="text-lg font-semibold" htmlFor="adresse">
-                  Adresse
-                </Label>
-                <Input
-                  type="text"
-                  id="adresse"
-                  name="adresse"
-                  placeholder="Entrez votre adresse"
-                  className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
-                />
-              </div>
-
               <div className="flex gap-6">
+                <div className="grid w-full items-center gap-1.5">
+                  <Label className="text-lg font-semibold" htmlFor="adresse">
+                    Adresse
+                  </Label>
+                  <Input
+                    type="text"
+                    id="adresse"
+                    name="adresse"
+                    placeholder="Entrez votre adresse"
+                    className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
+                  />
+                </div>
+
                 <div className="grid w-full items-center gap-1.5">
                   <Label className="text-lg font-semibold" htmlFor="ville">
                     Ville
@@ -273,6 +275,21 @@ export default function Login({ searchParams }: { searchParams: { message: strin
                     id="ville"
                     name="ville"
                     placeholder="Entrez votre ville"
+                    className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
+                  />
+                </div>
+              </div>
+
+              <div className="flex gap-6">
+                <div className="grid w-full items-center gap-1.5">
+                  <Label className="text-lg font-semibold" htmlFor="province">
+                    Province
+                  </Label>
+                  <Input
+                    type="text"
+                    id="province"
+                    name="province"
+                    placeholder="Entrez votre province"
                     className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
                   />
                 </div>
@@ -291,25 +308,10 @@ export default function Login({ searchParams }: { searchParams: { message: strin
                 </div>
               </div>
 
-              <div className="grid w-full items-center gap-1.5">
-                <Label className="text-lg font-semibold" htmlFor="province">
-                  Province
-                </Label>
-                <Input
-                  type="text"
-                  id="province"
-                  name="province"
-                  placeholder="Entrez votre province"
-                  className="placeholder:text-lg placeholder:font-medium placeholder:text-vm_text_gray dark:text-white"
-                />
-              </div>
-
               <SubmitButton
                 formAction={signUp}
                 className="flex items-center justify-center text-3xl text-white w-[75%] mx-auto font-semibold rounded-md px-4 py-2 bg-[#7ca92e] my-4"
-                pendingText={
-                  <Icons.spinner className="animate-spin h-9 w-9 text-white" />
-                }
+                pendingText={<Icons.spinner className="animate-spin h-9 w-9 text-white" />}
               >
                 Créer son compte
               </SubmitButton>
@@ -349,10 +351,8 @@ export default function Login({ searchParams }: { searchParams: { message: strin
 
               <SubmitButton
                 formAction={signIn}
-                className="flex items-center justify-center text-3xl text-white w-[75%] mx-auto font-semibold rounded-md px-4 py-2 bg-[#7ca92e] my-4"
-                pendingText={
-                  <Icons.spinner className="animate-spin h-9 w-9 text-white" />
-                }
+                className="flex items-center justify-center text-xl text-white w-[75%] mx-auto font-semibold rounded-md px-4 py-2 bg-[#7ca92e] my-4"
+                pendingText={<Icons.spinner className="animate-spin h-9 w-9 text-white" />}
               >
                 Se Connecter
               </SubmitButton>
