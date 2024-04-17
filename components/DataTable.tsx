@@ -61,62 +61,66 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-      <div className="flex items-center justify-between gap-2 pb-4">
-        <Input
-          placeholder={placeholder_filtre}
-          value={(table.getColumn(column_filter)?.getFilterValue() as string) ?? ''}
-          onChange={(event) => table.getColumn(column_filter)?.setFilterValue(event.target.value)}
-          className="max-w-sm bg-background transition-colors duration-500"
-        />
+      <div className="flex items-center gap-2 pb-4">
+        <div className="flex flex-col md:flex-row w-full justify-between gap-2">
+          <Input
+            placeholder={placeholder_filtre}
+            value={(table.getColumn(column_filter)?.getFilterValue() as string) ?? ''}
+            onChange={(event) => table.getColumn(column_filter)?.setFilterValue(event.target.value)}
+            className="md:max-w-sm bg-background transition-colors duration-500"
+          />
 
-        <div className="flex gap-2">
-          {additionalButton}
-
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" className='bg-background text-black dark:text-white transition-colors duration-500'>
-                Colonnes <ChevronDown className="ml-2 h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent
-              sideOffset={5}
-              align="end"
-              className="bg-white dark:bg-[#262626] border shadow p-1 rounded-md !z-[10000000000]"
-            >
-              <div className="">
-                {table
-                  .getAllColumns()
-                  .filter((column) => column.getCanHide())
-                  .map((column) => {
-                    return (
-                      <DropdownMenuCheckboxItem
-                        key={column.id}
-                        checked={column.getIsVisible()}
-                        onCheckedChange={(value) => column.toggleVisibility(!!value)}
-                      >
-                        <div className="flex items-center cursor-pointer rounded-md hover:bg-gray-50 dark:hover:bg-[#4c4c4c] py-1 px-2">
-                          <div className="w-6">
-                            {column.getIsVisible() && (
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth={1.5}
-                                stroke="currentColor"
-                                className="w-4 h-4"
-                              >
-                                <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                              </svg>
-                            )}
+          <div className="flex flex-col md:flex-row gap-2">
+            {additionalButton}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="outline"
+                  className="bg-background text-black dark:text-white transition-colors duration-500"
+                >
+                  Colonnes <ChevronDown className="ml-2 h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                sideOffset={5}
+                align="end"
+                className="bg-white dark:bg-[#262626] border shadow p-1 rounded-md !z-[10000000000]"
+              >
+                <div className="">
+                  {table
+                    .getAllColumns()
+                    .filter((column) => column.getCanHide())
+                    .map((column) => {
+                      return (
+                        <DropdownMenuCheckboxItem
+                          key={column.id}
+                          checked={column.getIsVisible()}
+                          onCheckedChange={(value) => column.toggleVisibility(!!value)}
+                        >
+                          <div className="flex items-center cursor-pointer rounded-md hover:bg-gray-50 dark:hover:bg-[#4c4c4c] py-1 px-2">
+                            <div className="w-6">
+                              {column.getIsVisible() && (
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  strokeWidth={1.5}
+                                  stroke="currentColor"
+                                  className="w-4 h-4"
+                                >
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                                </svg>
+                              )}
+                            </div>
+                            <p className="text-sm"> {column.id}</p>
                           </div>
-                          <p className="text-sm"> {column.id}</p>
-                        </div>
-                      </DropdownMenuCheckboxItem>
-                    );
-                  })}
-              </div>
-            </DropdownMenuContent>
-          </DropdownMenu>
+                        </DropdownMenuCheckboxItem>
+                      );
+                    })}
+                </div>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         </div>
       </div>
 
@@ -146,7 +150,10 @@ export function DataTable<TData, TValue>({
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center text-black dark:text-white transition-colors duration-500">
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center text-black dark:text-white transition-colors duration-500"
+                >
                   {emptyMessage ?? 'Aucun résultat'}
                 </TableCell>
               </TableRow>
