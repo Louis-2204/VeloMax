@@ -9,18 +9,18 @@ const page = async () => {
   const [particuliers, professionnels] = await Promise.all([getAllParticuliers(), getAllProfessionnels()]);
 
   return (
-    <div className="w-full flex justify-center">
+    <div className="w-full flex justify-center ">
       <Tabs defaultValue="particuliers" className="w-full flex flex-col items-center" defaultChecked>
-        <div className="flex justify-center w-full">
+        <div className="flex justify-center w-full ">
           <TabsList>
             <TabsTrigger value="particuliers">Particuliers</TabsTrigger>
             <TabsTrigger value="professionnels">Professionnels</TabsTrigger>
           </TabsList>
         </div>
-        <TabsContent value="particuliers">
+        <TabsContent value="particuliers" className="w-full flex justify-center">
           <ParticuliersTableau particuliers={particuliers as unknown as ParticulierTableau[]} />
         </TabsContent>
-        <TabsContent value="professionnels">
+        <TabsContent value="professionnels" className="w-full flex justify-center">
           <ProfessionnelsTableau professionnels={professionnels as unknown as ProfessionnelsTableauType[]} />
         </TabsContent>
       </Tabs>
