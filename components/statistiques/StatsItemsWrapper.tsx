@@ -20,7 +20,7 @@ const StatsItemsWrapper = ({
   const closeDrawer = () => setDrawerOpen(false);
 
   return (
-    <div className="flex flex-wrap gap-4">
+    <div className="flex flex-wrap gap-4 justify-center">
       {articles && articles.length > 0 ? (
         articles.map((item: any) => (
           <div className="w-[140px] bg-white dark:bg-black border rounded-md flex flex-col items-center shadow p-2 transition-colors duration-500">
@@ -30,8 +30,9 @@ const StatsItemsWrapper = ({
             <div className="flex flex-col w-full items-center gap-1">
               <p className="text-black dark:text-white transition-colors duration-500">{item.nom}</p>
               <Button
+                variant="outline"
                 onClick={() => [setSelectedItem(item), openDrawer()]}
-                className="w-full py-2 h-fit gap-1 bg-black dark:bg-white text-white dark:text-black transition-colors duration-500"
+                className="w-full py-2 h-fit gap-1 !transition-colors !duration-500"
               >
                 Infos
               </Button>
