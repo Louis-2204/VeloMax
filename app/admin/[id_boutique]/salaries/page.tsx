@@ -7,7 +7,7 @@ const page = async ({ params }: { params: { id_boutique: string } }) => {
   const { data: salaries, error } = await supabase.from('vendeurs').select('*').eq('id_boutique', params.id_boutique);
 
   return (
-    <div className="w-full flex justify-center">
+    <div className="w-full flex justify-center p-2">
       <SalariesTableau salaries={salaries as Vendeur[]} />
     </div>
   );

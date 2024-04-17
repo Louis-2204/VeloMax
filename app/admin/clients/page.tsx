@@ -17,10 +17,10 @@ const page = async () => {
             <TabsTrigger value="professionnels">Professionnels</TabsTrigger>
           </TabsList>
         </div>
-        <TabsContent value="particuliers" className="w-full flex justify-center">
+        <TabsContent value="particuliers" className="w-full flex justify-center p-2">
           <ParticuliersTableau particuliers={particuliers as unknown as ParticulierTableau[]} />
         </TabsContent>
-        <TabsContent value="professionnels" className="w-full flex justify-center">
+        <TabsContent value="professionnels" className="w-full flex justify-center p-2">
           <ProfessionnelsTableau professionnels={professionnels as unknown as ProfessionnelsTableauType[]} />
         </TabsContent>
       </Tabs>

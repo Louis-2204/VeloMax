@@ -16,7 +16,7 @@ const page = async ({
 
   return (
     <div className="flex flex-col w-full h-full max-w-8xl">
-      <div className="flex flex-col mt-8 sm:flex-row w-full h-auto gap-2">
+      <div className="flex flex-col mt-8 pb-2 px-2 sm:flex-row w-full h-auto gap-2">
         <FilterSection
           key={JSON.stringify(searchParams)}
           searchParams={searchParams}
