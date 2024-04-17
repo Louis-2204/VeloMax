@@ -188,7 +188,7 @@ const page = async () => {
 
   return (
     <div className="flex flex-col w-full h-full max-w-8xl">
-      <div className="bg-vm_secondary p-2 lg:rounded-md">
+      <div className="bg-vm_secondary p-2 lg:rounded-md transition-all duration-500">
         <h1 className="font-bold text-2xl mx-4 text-white">
           Espace {profileConnected.role} - {profileConnected.prenom} {profileConnected.nom}
         </h1>
@@ -198,7 +198,7 @@ const page = async () => {
           <Link href={tab.path} className="w-5/12 md:w-2/12 aspect-square max-w-[250px]">
             <Card
               key={index}
-              className="hover:scale-105 transition-all w-full h-full flex flex-col justify-center items-center"
+              className="hover:scale-105 w-full h-full flex flex-col justify-center items-center bg-background transition-all duration-500 hover:duration-150"
             >
               <CardContent className="flex flex-col gap-2 justify-center items-center text-center p-4">
                 {tab.icon}

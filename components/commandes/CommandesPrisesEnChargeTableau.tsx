@@ -91,13 +91,13 @@ const CommandesPrisesEnChargeTableau = ({ clients, commandes, produits, vendeurs
                 const commande = row.original;
                 switch (commande.status) {
                     case 'En attente de traitement':
-                        return <Badge className="bg-gray-500">En attente de traitement</Badge>;
+                        return <Badge className="bg-gray-500 transition-colors duration-500">En attente de traitement</Badge>;
                     case 'En attente de restockage':
-                        return <Badge className="bg-orange-500">En attente de restockage</Badge>;
+                        return <Badge className="bg-orange-500 transition-colors duration-500">En attente de restockage</Badge>;
                     case 'En traitement':
-                        return <Badge className="bg-blue-500">En traitement</Badge>;
+                        return <Badge className="bg-blue-500 transition-colors duration-500">En traitement</Badge>;
                     case 'Envoyée':
-                        return <Badge className="bg-green-500">Envoyée</Badge>;
+                        return <Badge className="bg-green-500 transition-colors duration-500">Envoyée</Badge>;
                 }
             }
         },
@@ -113,7 +113,7 @@ const CommandesPrisesEnChargeTableau = ({ clients, commandes, produits, vendeurs
                         <DropdownMenuTrigger asChild>
                             <Button variant="ghost" className="h-8 w-8 p-0">
                                 <span className="sr-only">Open menu</span>
-                                <MoreHorizontal className="h-4 w-4" />
+                                <MoreHorizontal className="h-4 w-4 text-black dark:text-white transition-colors duration-500" />
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="center">
@@ -162,6 +162,7 @@ const CommandesPrisesEnChargeTableau = ({ clients, commandes, produits, vendeurs
                 placeholder_filtre="Rechercher une commande (numéro)"
                 additionalButton={
                     <Button
+                        className='bg-background text-black dark:text-white transition-colors duration-500'
                         variant={'outline'}
                         onClick={() => {
                             setSelectedCommande({} as any);

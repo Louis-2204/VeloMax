@@ -8,15 +8,18 @@ import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { getItemsBySearchParams } from '@/utils/getItemsBySearchParams';
 import DialogRemoveArticleFromStock from '../admin/articles/DialogRemoveArticleFromStock';
+import { SelectItemIndicator } from '@radix-ui/react-select';
 
 const DialogAddArticleToStock = dynamic(() => import('../admin/articles/DialogAddArticleToStock'));
 
 const FilterSection = ({
+  user,
   searchParams,
   content,
   fournisseurs,
   id_boutique,
 }: {
+  user: any;
   searchParams: { prix?: string; pieces?: string; velos?: string; fournisseur?: string };
   content: 'stock' | 'shop';
   fournisseurs?: { nom_entreprise: string; id_fournisseur: string }[];
@@ -36,6 +39,8 @@ const FilterSection = ({
       getData();
     }
   }, []);
+
+  const [selectedFournisseur, setSelectedFournisseur] = useState<string>(searchParams.fournisseur || 'all');
 
   const handleSubmit = (formData: FormData) => {
     let velosParams = [];
@@ -68,7 +73,7 @@ const FilterSection = ({
     if (formData.get('1000+')) priceParams.push('1000+');
 
     let fournisseurParams = [];
-    if (formData.get('fournisseur')) fournisseurParams.push(formData.get('fournisseur'));
+    if (formData.get('fournisseur') && formData.get('fournisseur') !== 'all') fournisseurParams.push(formData.get('fournisseur'));
 
     const url = new URL(window.location.href);
     url.searchParams.set('velos', velosParams.join(','));
@@ -98,7 +103,7 @@ const FilterSection = ({
   return (
     <>
       <div className="w-full sm:w-4/12 sm:max-w-[250px] h-fit flex flex-col gap-2 rounded-md bg-tempBgLightSecondary dark:bg-tempBgDark border border-tempLightBorder dark:border-tempDarkBorder p-2 transition-all duration-500">
-        {content === 'stock' && id_boutique && articles && (
+        {content === 'stock' && id_boutique && articles && user.role === 'admin' && (
           <>
             <Button
               variant="outline"
@@ -181,11 +186,14 @@ const FilterSection = ({
               <h4 className="text-lg text-vm_text_gray dark:text-white font-semibold transition-colors duration-500">
                 Fournisseur
               </h4>
-              <Select name="fournisseur" defaultValue={searchParams.fournisseur}>
-                <SelectTrigger>
+              <Select name="fournisseur" defaultValue={searchParams.fournisseur} value={selectedFournisseur} onValueChange={(value) => setSelectedFournisseur(value)}>
+                <SelectTrigger className='bg-background text-black dark:text-white transition-colors duration-500'>
                   <SelectValue placeholder="Selectionner un fournisseur" />
                 </SelectTrigger>
                 <SelectContent>
+                  <SelectItem value="all">
+                    Tous
+                  </SelectItem>
                   {fournisseurs?.map((fournisseur) => (
                     <SelectItem key={fournisseur.id_fournisseur} value={fournisseur.id_fournisseur}>
                       {fournisseur.nom_entreprise}
@@ -199,12 +207,12 @@ const FilterSection = ({
           <div className="flex flex-col w-full gap-2">
             <Button
               type="submit"
-              className="!w-full bg-vm_secondary hover:bg-vm_secondary_2 border-secondary !text-textLight"
+              className="!w-full bg-vm_secondary hover:bg-vm_secondary_2 border-secondary !text-white transition-colors duration-500"
             >
               {'Filtrer'}
             </Button>
           </div>
-        </form>
+        </form >
         <Button
           variant="outline"
           onClick={clearFilters}
@@ -212,7 +220,7 @@ const FilterSection = ({
         >
           Supprimer les filtres
         </Button>
-      </div>
+      </div >
       {content === 'stock' && id_boutique && articles && (
         <>
           <DialogAddArticleToStock

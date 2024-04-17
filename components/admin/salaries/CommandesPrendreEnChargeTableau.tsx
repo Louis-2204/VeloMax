@@ -10,20 +10,17 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { DataTable } from '@/components/DataTable';
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import { CommandesTableauType } from '@/types/entities';
 import moment from 'moment';
 import { useRouter } from 'next/navigation';
 import DialogCommande from '@/components/commandes/DialogCommande';
-import { getUserFidelo } from '@/utils/getUserFidelo';
 
 const CommandesPrendreEnChargeTableau = ({ commandes, vendeurs }: { commandes: CommandesTableauType[]; vendeurs: any }) => {
     const [dialogOpen, setDialogOpen] = useState(false);
     const [selectedCommande, setSelectedCommande] = useState({} as CommandesTableauType);
 
     const router = useRouter();
-
-    const [userFidelo, setUserFidelo] = useState(null);
 
     useLayoutEffect(() => {
         router.refresh();
@@ -86,7 +83,7 @@ const CommandesPrendreEnChargeTableau = ({ commandes, vendeurs }: { commandes: C
                         <DropdownMenuTrigger asChild>
                             <Button variant="ghost" className="h-8 w-8 p-0">
                                 <span className="sr-only">Open menu</span>
-                                <MoreHorizontal className="h-4 w-4" />
+                                <MoreHorizontal className="h-4 w-4 text-black dark:text-white transition-colors duration-500" />
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="center">

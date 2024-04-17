@@ -124,11 +124,11 @@ export function DataTable<TData, TValue>({
         </div>
       </div>
 
-      <div className="rounded-md border">
+      <div className="rounded-md border border-[#e2e8f0] dark:border-[#262626] transition-colors duration-500">
         <Table>
-          <TableHeader>
+          <TableHeader className='border-b-[#e2e8f0] dark:border-b-[#262626] transition-colors duration-500'>
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
+              <TableRow key={headerGroup.id} className='border-b-[#e2e8f0] dark:border-b-[#262626] transition-colors duration-500'>
                 {headerGroup.headers.map((header) => {
                   return (
                     <TableHead key={header.id}>
@@ -142,9 +142,9 @@ export function DataTable<TData, TValue>({
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
+                <TableRow className='border-[#e2e8f0] dark:border-[#262626] transition-colors duration-500' key={row.id} data-state={row.getIsSelected() && 'selected'}>
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+                    <TableCell className='text-black dark:text-white transition-colors duration-500' key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
                   ))}
                 </TableRow>
               ))
