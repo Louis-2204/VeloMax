@@ -3,6 +3,8 @@ import { Vendeur } from '@/types/entities';
 import { createClient } from '@/utils/supabase/server';
 
 const page = async ({ params }: { params: { id_boutique: string } }) => {
+  if (params.id_boutique === 'null') return <></>;
+
   const supabase = createClient();
   const { data: salaries, error } = await supabase.from('vendeurs').select('*').eq('id_boutique', params.id_boutique);
 

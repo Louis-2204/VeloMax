@@ -12,6 +12,8 @@ const page = async ({
   searchParams: { prix?: string; pieces?: string; velos?: string; fournisseur: string };
   params: { id_boutique: string };
 }) => {
+  if (params.id_boutique === 'null') return <></>;
+
   const user = await getProfileConnected();
   const items = await getStockBySearchParams(searchParams, params.id_boutique);
   const fournisseurs = await getFournisseursForStockFilter();
