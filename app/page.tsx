@@ -7,8 +7,11 @@ import VTT from '@/public/VTT.png';
 import Pieces_detachees from '@/public/Pièces détachées.png';
 import Image from 'next/image';
 import { InfiniteMovingCards } from '@/components/ui/infinite-moving-cards';
+import { getTopSalesVelos } from '@/utils/getTopSalesVelos';
+import Link from 'next/link';
 
 export default async function Index() {
+  const topSoldVelos = await getTopSalesVelos();
   return (
     <div className="flex flex-col w-full h-full">
       <div className="flex relative min-h-[calc(100svh-5rem)] w-full justify-center bg-background transition-colors duration-500">
@@ -32,23 +35,27 @@ export default async function Index() {
           Meilleurs ventes
         </h3>
 
-        <div className="w-full flex flex-col md:flex-row justify-between gap-6 md:gap-0  mt-10 max-w-8xl">
-          <div className="w-full md:w-1/2 flex justify-center gap-6">
-            <div className="w--1/2 md:w-[45%] aspect-square rounded-md overflow-hidden bg-gray-500">
-              <Image src="/images/bike1.jpg" width={300} height={300} alt="meilleur vente 1" />
-            </div>
-            <div className="w--1/2 md:w-[45%] aspect-square rounded-md overflow-hidden bg-gray-500">
-              <Image src="/images/bike2.jpg" width={300} height={300} alt="meilleur vente 2" />
-            </div>
-          </div>
-          <div className="w-full md:w-1/2 flex justify-center gap-6">
-            <div className="w--1/2 md:w-[45%] aspect-square rounded-md overflow-hidden bg-gray-500">
-              <Image src="/images/bike3.jpg" width={300} height={300} alt="meilleur vente 3" />
-            </div>
-            <div className="w--1/2 md:w-[45%] aspect-square rounded-md overflow-hidden bg-gray-500">
-              <Image src="/images/bike4.jpg" width={300} height={300} alt="meilleur vente 4" />
-            </div>
-          </div>
+        <div className="w-full flex flex-row flex-wrap justify-between sm:gap-6 mt-10 max-w-8xl">
+          {topSoldVelos.map((velo) => (
+            <Link
+              key={`top-sold-velo-${velo.id_velo}`}
+              className="w-[45%] md:w-[22%] hover:scale-105 rounded-sm overflow-hidden transition-all"
+              href={`/p/${velo.id_velo}`}
+            >
+              <div className="relative w-full aspect-square ">
+                <Image
+                  className="object-contain w-full h-full"
+                  src={velo.image}
+                  alt={velo.nom}
+                  width={400}
+                  height={400}
+                />
+              </div>
+              <h4 className="text-xs sm:text-base md:text-2xl font-semibold text-center text-vm_text_gray dark:text-white transition-colors duration-500">
+                {velo.nom}
+              </h4>
+            </Link>
+          ))}
         </div>
       </div>
 
